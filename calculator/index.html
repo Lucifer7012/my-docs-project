@@ -287,8 +287,7 @@
 
 
 <h1 id="equipment-upgrade-calculator">🔄 Equipment Upgrade Calculator</h1>
-<p>Enter your remaining days to calculate conversion for both <strong>Standard</strong> and <strong>Promotion</strong> periods.
-<strong>Note: Days are rounded up to the nearest tier (e.g., 5d ➔ 7d tier).</strong></p>
+<p>Enter your remaining days. Rules: 5d➔7d, 10d➔15d, 25d➔30d, 35d➔90d tier.</p>
 <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; color: #333;">
     <div style="margin-bottom: 15px;">
         <label>Current Type:</label>
@@ -309,7 +308,7 @@
     </div>
     <div style="margin-bottom: 15px;">
         <label>Remaining Days:</label>
-        <input type="number" id="daysInput" placeholder="e.g. 5" style="padding: 5px; width: 100px;">
+        <input type="number" id="daysInput" placeholder="e.g. 20" style="padding: 5px; width: 100px;">
     </div>
     <button onclick="calculateUpgrade()" style="background-color: #2196F3; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Calculate</button>
     <hr>
@@ -328,12 +327,12 @@ function calculateUpgrade() {
         return;
     }
 
-    // 1. Tier Logic: Rounding up per your instruction
+    // 1. Tier Mapping
     let tier;
     if (inputDays <= 1) tier = 1;
     else if (inputDays <= 7) tier = 7;
     else if (inputDays <= 15) tier = 15;
-    else if (inputDays <= 30) tier = 30;
+    else if (inputDays <= 30) tier = 30; // 20 days maps here
     else if (inputDays <= 90) tier = 90;
     else if (inputDays <= 180) tier = 180;
     else tier = 365;
@@ -341,21 +340,31 @@ function calculateUpgrade() {
     const tierIndex = [1, 7, 15, 30, 90, 180, 365].indexOf(tier);
     const rateKey = current + target;
 
-    // 2. Precise Rates from your image
+    // 2. UPDATED RATES FROM YOUR LATEST TABLE
     const ratesData = {
         "Standard": {
-            "UG": [0.9, 0.9, 0.9, 0.8, 0.8, 0.8, 0.9], "UK": [0.7, 0.6, 0.9, 0.8, 0.7, 0.7, 0.9],
-            "UM": [0.4, 0.4, 0.4, 0.6, 0.5, 0.4, 0.5], "US": [0.3, 0.4, 0.4, 0.4, 0.3, 0.3, 0.3],
-            "GK": [0.8, 0.7, 1.0, 1.0, 0.9, 0.8, 1.0], "GM": [0.4, 0.5, 0.5, 0.7, 0.6, 0.5, 0.5],
-            "GS": [0.3, 0.4, 0.4, 0.5, 0.4, 0.3, 0.3], "KM": [0.6, 0.7, 0.5, 0.7, 0.6, 0.7, 0.5],
-            "KS": [0.4, 0.6, 0.4, 0.5, 0.5, 0.4, 0.3], "MS": [0.7, 0.9, 0.9, 0.7, 0.7, 0.6, 0.6]
+            "UG": [0.9, 0.9, 0.9, 0.8, 0.8, 0.8, 0.9], // Index 3 (30d) is now 0.8
+            "UK": [0.7, 0.6, 0.9, 0.8, 0.7, 0.7, 0.9],
+            "UM": [0.4, 0.4, 0.4, 0.6, 0.5, 0.4, 0.5],
+            "US": [0.3, 0.4, 0.4, 0.4, 0.3, 0.3, 0.3],
+            "GK": [0.8, 0.7, 1.0, 1.0, 0.9, 0.8, 1.0],
+            "GM": [0.4, 0.5, 0.5, 0.7, 0.6, 0.5, 0.5],
+            "GS": [0.3, 0.4, 0.4, 0.5, 0.4, 0.3, 0.3],
+            "KM": [0.6, 0.7, 0.5, 0.7, 0.6, 0.7, 0.5],
+            "KS": [0.4, 0.6, 0.4, 0.5, 0.5, 0.4, 0.3],
+            "MS": [0.7, 0.9, 0.9, 0.7, 0.7, 0.6, 0.6]
         },
         "Promotion": {
-            "UG": [0.9, 0.9, 0.9, 0.9, 0.9, 0.8, 0.9], "UK": [0.7, 0.6, 0.9, 0.9, 0.6, 0.7, 0.9],
-            "UM": [0.4, 0.4, 0.4, 0.8, 0.4, 0.4, 0.5], "US": [0.3, 0.4, 0.4, 0.5, 0.3, 0.3, 0.3],
-            "GK": [0.8, 0.7, 1.0, 0.9, 0.7, 0.8, 1.0], "GM": [0.4, 0.5, 0.5, 0.6, 0.5, 0.5, 0.5],
-            "GS": [0.3, 0.4, 0.4, 0.4, 0.3, 0.3, 0.3], "KM": [0.6, 0.7, 0.5, 0.7, 0.7, 0.7, 0.5],
-            "KS": [0.4, 0.6, 0.4, 0.4, 0.5, 0.4, 0.3], "MS": [0.7, 0.9, 0.9, 0.7, 0.7, 0.6, 0.6]
+            "UG": [0.9, 0.9, 0.9, 0.9, 0.9, 0.8, 0.9], // Index 3 (30d) is now 0.9
+            "UK": [0.7, 0.6, 0.9, 0.9, 0.6, 0.7, 0.9],
+            "UM": [0.4, 0.4, 0.4, 0.8, 0.4, 0.4, 0.5],
+            "US": [0.3, 0.4, 0.4, 0.5, 0.3, 0.3, 0.3],
+            "GK": [0.8, 0.7, 1.0, 0.9, 0.7, 0.8, 1.0],
+            "GM": [0.4, 0.5, 0.5, 0.6, 0.5, 0.5, 0.5],
+            "GS": [0.3, 0.4, 0.4, 0.4, 0.3, 0.3, 0.3],
+            "KM": [0.6, 0.7, 0.5, 0.7, 0.7, 0.7, 0.5],
+            "KS": [0.4, 0.6, 0.4, 0.4, 0.5, 0.4, 0.3],
+            "MS": [0.7, 0.9, 0.9, 0.7, 0.7, 0.6, 0.6]
         }
     };
 
@@ -369,15 +378,15 @@ function calculateUpgrade() {
     };
 
     resultArea.innerHTML = `
-        <p style="font-size: 0.9em; color: #666;">Applied Tier: <b>${tier} Days</b> (Input: ${inputDays}d)</p>
+        <p style="font-size: 0.9em; color: #666;">Tier: <b>${tier} Days</b></p>
         <div style="display: flex; gap: 20px; flex-wrap: wrap;">
             <div style="flex: 1; border-left: 4px solid #2196F3; padding-left: 10px;">
-                <h4 style="margin: 0; color: #2196F3;">Standard Period</h4>
+                <h4 style="margin: 0; color: #2196F3;">Standard</h4>
                 <p style="margin: 5px 0;">Rate: <b>${sRate}</b></p>
                 <p style="font-size: 1.1em; color: #2e7d32; font-weight: bold;">${formatTime(inputDays * sRate)}</p>
             </div>
             <div style="flex: 1; border-left: 4px solid #ff9800; padding-left: 10px;">
-                <h4 style="margin: 0; color: #ff9800;">Promotion Period</h4>
+                <h4 style="margin: 0; color: #ff9800;">Promotion</h4>
                 <p style="margin: 5px 0;">Rate: <b>${pRate}</b></p>
                 <p style="font-size: 1.1em; color: #2e7d32; font-weight: bold;">${formatTime(inputDays * pRate)}</p>
             </div>
