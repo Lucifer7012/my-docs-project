@@ -287,8 +287,8 @@
 
 
 <h1 id="equipment-upgrade-calculator">🔄 Equipment Upgrade Calculator</h1>
-<p>Calculate the converted remaining time for both <strong>Standard</strong> and <strong>Promotion</strong> periods.
-<strong>Note: Subscriptions with less than 2 days remaining cannot be upgraded.</strong></p>
+<p>Enter your remaining days to see the converted time for both <strong>Standard</strong> and <strong>Promotion</strong> periods.
+<strong>Rule: Remaining days are rounded up to the next tier (e.g., 5d ➔ 7d tier).</strong></p>
 <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; color: #333;">
     <div style="margin-bottom: 15px;">
         <label>Current Type:</label>
@@ -309,8 +309,8 @@
     </div>
 
     <div style="margin-bottom: 15px;">
-        <label>Remaining Days (Integer):</label>
-        <input type="number" id="daysInput" placeholder="e.g. 3" style="padding: 5px; width: 100px;">
+        <label>Remaining Days:</label>
+        <input type="number" id="daysInput" placeholder="e.g. 5" style="padding: 5px; width: 100px;">
     </div>
 
     <button onclick="calculateUpgrade()" style="background-color: #2196F3; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Calculate</button>
@@ -326,33 +326,63 @@
 function calculateUpgrade() {
     const current = document.getElementById('currentType').value;
     const target = document.getElementById('targetType').value;
-    const days = parseInt(document.getElementById('daysInput').value);
+    const inputDays = parseInt(document.getElementById('daysInput').value);
 
-    if (isNaN(days)) {
-        alert("Please enter a valid number.");
+    if (isNaN(inputDays) || inputDays <= 0) {
+        alert("Please enter a valid number of days.");
         return;
     }
 
     const resultArea = document.getElementById('resultArea');
-
-    if (days < 2) {
+    if (inputDays < 2) {
         resultArea.innerHTML = "<span style='color: #d32f2f; font-weight: bold;'>❌ Upgrade Failed: Minimum 2 days required.</span>";
         return;
     }
 
+    // 1. Logic: Round up to the next tier based on your instructions
+    let tier;
+    if (inputDays === 1) tier = 1;
+    else if (inputDays <= 7) tier = 7;   // e.g., 5 days -> 7 days
+    else if (inputDays <= 15) tier = 15; // e.g., 10 days -> 15 days
+    else if (inputDays <= 30) tier = 30; // e.g., 25 days -> 30 days
+    else if (inputDays <= 90) tier = 90; // e.g., 35 days -> 90 days
+    else if (inputDays <= 180) tier = 180;
+    else tier = 365;
+
     const rateKey = current + target;
 
-    // Rates based on your latest table
-    const standardRates = {
-        "UG": 0.9, "UK": 0.7, "UM": 0.4, "US": 0.3, "GK": 0.8, "GM": 0.4, "GS": 0.3, "KM": 0.6, "KS": 0.4, "MS": 0.7
+    // 2. Updated Rates Data from your image
+    // Structure: [1d, 7d, 15d, 30d, 90d, 180d, 365d]
+    const ratesData = {
+        "Standard": {
+            "UG": [0.9, 0.9, 0.9, 0.8, 0.8, 0.8, 0.9],
+            "UK": [0.7, 0.6, 0.9, 0.8, 0.7, 0.7, 0.9],
+            "UM": [0.4, 0.4, 0.4, 0.6, 0.5, 0.4, 0.5],
+            "US": [0.3, 0.4, 0.4, 0.4, 0.3, 0.3, 0.3],
+            "GK": [0.8, 0.7, 1.0, 1.0, 0.9, 0.8, 1.0],
+            "GM": [0.4, 0.5, 0.5, 0.7, 0.6, 0.5, 0.5],
+            "GS": [0.3, 0.4, 0.4, 0.5, 0.4, 0.3, 0.3],
+            "KM": [0.6, 0.7, 0.5, 0.7, 0.6, 0.7, 0.5],
+            "KS": [0.4, 0.6, 0.4, 0.5, 0.5, 0.4, 0.3],
+            "MS": [0.7, 0.9, 0.9, 0.7, 0.7, 0.6, 0.6]
+        },
+        "Promotion": {
+            "UG": [0.9, 0.9, 0.9, 0.9, 0.9, 0.8, 0.9],
+            "UK": [0.7, 0.6, 0.9, 0.9, 0.6, 0.7, 0.9],
+            "UM": [0.4, 0.4, 0.4, 0.8, 0.4, 0.4, 0.5],
+            "US": [0.3, 0.4, 0.4, 0.5, 0.3, 0.3, 0.3],
+            "GK": [0.8, 0.7, 1.0, 0.9, 0.7, 0.8, 1.0],
+            "GM": [0.4, 0.5, 0.5, 0.6, 0.5, 0.5, 0.5],
+            "GS": [0.3, 0.4, 0.4, 0.4, 0.3, 0.3, 0.3],
+            "KM": [0.6, 0.7, 0.5, 0.7, 0.7, 0.7, 0.5],
+            "KS": [0.4, 0.6, 0.4, 0.4, 0.5, 0.4, 0.3],
+            "MS": [0.7, 0.9, 0.9, 0.7, 0.7, 0.6, 0.6]
+        }
     };
 
-    const promoRates = {
-        "UG": 0.9, "UK": 0.7, "UM": 0.4, "US": 0.3, "GK": 0.8, "GM": 0.4, "GS": 0.3, "KM": 0.6, "KS": 0.4, "MS": 0.7
-    };
-
-    const sRate = standardRates[rateKey];
-    const pRate = promoRates[rateKey];
+    const tierIndex = [1, 7, 15, 30, 90, 180, 365].indexOf(tier);
+    const sRate = ratesData["Standard"][rateKey][tierIndex];
+    const pRate = ratesData["Promotion"][rateKey][tierIndex];
 
     const formatTime = (totalDays) => {
         const d = Math.floor(totalDays);
@@ -361,14 +391,17 @@ function calculateUpgrade() {
     };
 
     resultArea.innerHTML = `
+        <p style="font-size: 0.9em; color: #555;">Matching Tier: <b>${tier} Days</b> (Input: ${inputDays}d)</p>
         <div style="display: flex; gap: 20px; flex-wrap: wrap;">
             <div style="flex: 1; border-left: 4px solid #2196F3; padding-left: 10px;">
                 <h4 style="margin: 0; color: #2196F3;">Standard Period</h4>
-                <p style="margin: 5px 0;">Converted: <b style="color: #2e7d32;">${formatTime(days * sRate)}</b> (Rate: ${sRate})</p>
+                <p style="margin: 5px 0;">Rate: <b>${sRate}</b></p>
+                <p style="font-size: 1.1em; color: #2e7d32; font-weight: bold;">${formatTime(inputDays * sRate)}</p>
             </div>
             <div style="flex: 1; border-left: 4px solid #ff9800; padding-left: 10px;">
                 <h4 style="margin: 0; color: #ff9800;">Promotion Period</h4>
-                <p style="margin: 5px 0;">Converted: <b style="color: #2e7d32;">${formatTime(days * pRate)}</b> (Rate: ${pRate})</p>
+                <p style="margin: 5px 0;">Rate: <b>${pRate}</b></p>
+                <p style="font-size: 1.1em; color: #2e7d32; font-weight: bold;">${formatTime(inputDays * pRate)}</p>
             </div>
         </div>
     `;
