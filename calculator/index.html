@@ -9,6 +9,8 @@
       
       
       
+        <link rel="prev" href="../rates/">
+      
       
       
         
@@ -19,7 +21,7 @@
     
     
       
-        <title>📈 Equipment Upgrade Rates - 我的技术文档中心</title>
+        <title>⚡ Upgrade Calculator - 我的技术文档中心</title>
       
     
     
@@ -60,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#equipment-upgrade-rates" class="md-skip">
+        <a href="#equipment-upgrade-calculator" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              📈 Equipment Upgrade Rates
+              ⚡ Upgrade Calculator
             
           </span>
         </div>
@@ -165,9 +167,7 @@
           
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -272,10 +272,19 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../calculator/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -291,6 +300,7 @@
   
 
       </a>
+      
     </li>
   
 
@@ -303,9 +313,7 @@
             
             
               
-                
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" hidden>
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -329,324 +337,94 @@
               <article class="md-content__inner md-typeset">
                 
                   
-  
 
 
 
+<h1 id="equipment-upgrade-calculator">🔄 Equipment Upgrade Calculator</h1>
+<p>Please enter your current subscription details to calculate the converted remaining time.
+<strong>Note: Subscriptions with less than 2 days remaining cannot be upgraded.</strong></p>
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; color: #333;">
+    <div style="margin-bottom: 15px;">
+        <label>Current Type:</label>
+        <select id="currentType" style="padding: 5px;">
+            <option value="U">UVIP</option>
+            <option value="G">GVIP</option>
+            <option value="K">KVIP</option>
+            <option value="M">MVIP</option>
+        </select>
+        <span style="margin: 0 10px;">➔</span>
+        <label>Target Type:</label>
+        <select id="targetType" style="padding: 5px;">
+            <option value="G">GVIP</option>
+            <option value="K">KVIP</option>
+            <option value="M">MVIP</option>
+            <option value="S">SVIP</option>
+        </select>
+    </div>
 
-<h1 id="equipment-upgrade-rates">📈 Equipment Upgrade Rates</h1>
-<table>
-<thead>
-<tr>
-<th>Time (excluding promotions)</th>
-<th>UVIP</th>
-<th>GVIP</th>
-<th>KVIP</th>
-<th>MVIP</th>
-<th>SVIP</th>
-<th>UG</th>
-<th>UK</th>
-<th>UM</th>
-<th>US</th>
-<th>GK</th>
-<th>GM</th>
-<th>GS</th>
-<th>KM</th>
-<th>KS</th>
-<th>MS</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1 day</td>
-<td>1.19</td>
-<td>1.29</td>
-<td>1.69</td>
-<td>2.99</td>
-<td>3.99</td>
-<td>0.9</td>
-<td>0.7</td>
-<td>0.4</td>
-<td>0.3</td>
-<td>0.8</td>
-<td>0.4</td>
-<td>0.3</td>
-<td>0.6</td>
-<td>0.4</td>
-<td>0.7</td>
-</tr>
-<tr>
-<td>7 days</td>
-<td>2.69</td>
-<td>2.99</td>
-<td>4.29</td>
-<td>5.99</td>
-<td>6.99</td>
-<td>0.9</td>
-<td>0.6</td>
-<td>0.4</td>
-<td>0.4</td>
-<td>0.7</td>
-<td>0.5</td>
-<td>0.4</td>
-<td>0.7</td>
-<td>0.6</td>
-<td>0.9</td>
-</tr>
-<tr>
-<td>15 days</td>
-<td>5.29</td>
-<td>5.99</td>
-<td>5.99</td>
-<td>12.99</td>
-<td>14.99</td>
-<td>0.9</td>
-<td>0.9</td>
-<td>0.4</td>
-<td>0.4</td>
-<td>1</td>
-<td>0.5</td>
-<td>0.4</td>
-<td>0.5</td>
-<td>0.4</td>
-<td>0.9</td>
-</tr>
-<tr>
-<td>30 days</td>
-<td>9.99</td>
-<td>11.99</td>
-<td>11.99</td>
-<td>17.99</td>
-<td>24.99</td>
-<td>0.8</td>
-<td>0.8</td>
-<td>0.6</td>
-<td>0.4</td>
-<td>1</td>
-<td>0.7</td>
-<td>0.5</td>
-<td>0.7</td>
-<td>0.5</td>
-<td>0.7</td>
-</tr>
-<tr>
-<td>90 days</td>
-<td>22.99</td>
-<td>28.99</td>
-<td>32.99</td>
-<td>50.99</td>
-<td>72.99</td>
-<td>0.8</td>
-<td>0.7</td>
-<td>0.5</td>
-<td>0.3</td>
-<td>0.9</td>
-<td>0.6</td>
-<td>0.4</td>
-<td>0.6</td>
-<td>0.5</td>
-<td>0.7</td>
-</tr>
-<tr>
-<td>180 days</td>
-<td>37.99</td>
-<td>45.99</td>
-<td>56.99</td>
-<td>85.99</td>
-<td>138.99</td>
-<td>0.8</td>
-<td>0.7</td>
-<td>0.4</td>
-<td>0.3</td>
-<td>0.8</td>
-<td>0.5</td>
-<td>0.3</td>
-<td>0.7</td>
-<td>0.4</td>
-<td>0.6</td>
-</tr>
-<tr>
-<td>365 days</td>
-<td>74.99</td>
-<td>82.99</td>
-<td>82.99</td>
-<td>150.99</td>
-<td>254.99</td>
-<td>0.9</td>
-<td>0.9</td>
-<td>0.5</td>
-<td>0.3</td>
-<td>1</td>
-<td>0.5</td>
-<td>0.3</td>
-<td>0.5</td>
-<td>0.3</td>
-<td>0.6</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>Time (Promotion)</td>
-<td>UVIP</td>
-<td>GVIP</td>
-<td>KVIP</td>
-<td>MVIP</td>
-<td>SVIP</td>
-<td>UG</td>
-<td>UK</td>
-<td>UM</td>
-<td>US</td>
-<td>GK</td>
-<td>GM</td>
-<td>GS</td>
-<td>KM</td>
-<td>KS</td>
-<td>MS</td>
-</tr>
-<tr>
-<td>1 day</td>
-<td>1.19</td>
-<td>1.29</td>
-<td>1.69</td>
-<td>2.99</td>
-<td>3.99</td>
-<td>0.9</td>
-<td>0.7</td>
-<td>0.4</td>
-<td>0.3</td>
-<td>0.8</td>
-<td>0.4</td>
-<td>0.3</td>
-<td>0.6</td>
-<td>0.4</td>
-<td>0.7</td>
-</tr>
-<tr>
-<td>7 days</td>
-<td>2.69</td>
-<td>2.99</td>
-<td>4.29</td>
-<td>5.99</td>
-<td>6.99</td>
-<td>0.9</td>
-<td>0.6</td>
-<td>0.4</td>
-<td>0.4</td>
-<td>0.7</td>
-<td>0.5</td>
-<td>0.4</td>
-<td>0.7</td>
-<td>0.6</td>
-<td>0.9</td>
-</tr>
-<tr>
-<td>15 days</td>
-<td>5.29</td>
-<td>5.99</td>
-<td>5.99</td>
-<td>12.99</td>
-<td>14.99</td>
-<td>0.9</td>
-<td>0.9</td>
-<td>0.4</td>
-<td>0.4</td>
-<td>1</td>
-<td>0.5</td>
-<td>0.4</td>
-<td>0.5</td>
-<td>0.4</td>
-<td>0.9</td>
-</tr>
-<tr>
-<td>30 days</td>
-<td>7.99</td>
-<td>8.99</td>
-<td>9.99</td>
-<td>14.99</td>
-<td>22.99</td>
-<td>0.9</td>
-<td>0.8</td>
-<td>0.5</td>
-<td>0.3</td>
-<td>0.9</td>
-<td>0.6</td>
-<td>0.4</td>
-<td>0.7</td>
-<td>0.4</td>
-<td>0.7</td>
-</tr>
-<tr>
-<td>90 days</td>
-<td>18.99</td>
-<td>19.99</td>
-<td>29.99</td>
-<td>43.99</td>
-<td>58.99</td>
-<td>0.9</td>
-<td>0.6</td>
-<td>0.4</td>
-<td>0.3</td>
-<td>0.7</td>
-<td>0.5</td>
-<td>0.3</td>
-<td>0.7</td>
-<td>0.5</td>
-<td>0.7</td>
-</tr>
-<tr>
-<td>180 days</td>
-<td>37.99</td>
-<td>45.99</td>
-<td>56.99</td>
-<td>85.99</td>
-<td>138.99</td>
-<td>0.8</td>
-<td>0.7</td>
-<td>0.4</td>
-<td>0.3</td>
-<td>0.8</td>
-<td>0.5</td>
-<td>0.3</td>
-<td>0.7</td>
-<td>0.4</td>
-<td>0.6</td>
-</tr>
-<tr>
-<td>365 days</td>
-<td>74.99</td>
-<td>82.99</td>
-<td>82.99</td>
-<td>150.99</td>
-<td>254.99</td>
-<td>0.9</td>
-<td>0.9</td>
-<td>0.5</td>
-<td>0.3</td>
-<td>1</td>
-<td>0.5</td>
-<td>0.3</td>
-<td>0.5</td>
-<td>0.3</td>
-<td>0.6</td>
-</tr>
-</tbody>
-</table>
+    <div style="margin-bottom: 15px;">
+        <label>Remaining Days (Integer):</label>
+        <input type="number" id="daysInput" placeholder="e.g. 3" style="padding: 5px; width: 100px;">
+    </div>
+
+    <button onclick="calculateUpgrade()" style="background-color: #2196F3; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Calculate</button>
+
+    <hr>
+
+    <div id="resultArea" style="margin-top: 15px; font-weight: bold; color: #d32f2f; font-size: 1.2em;">
+        Results will appear here
+    </div>
+</div>
+
+<script>
+function calculateUpgrade() {
+    const current = document.getElementById('currentType').value;
+    const target = document.getElementById('targetType').value;
+    const days = parseInt(document.getElementById('daysInput').value);
+    // 1. Validate input exists
+    if (isNaN(days)) {
+        alert("Please enter a valid number of days.");
+        return;
+    }
+
+    // 2. New Logic: Check for minimum 2 days requirement
+    if (days < 2) {
+        document.getElementById('resultArea').innerHTML = "❌ Upgrade Failed: Subscriptions with less than 2 days remaining cannot be upgraded.";
+        document.getElementById('resultArea').style.color = "#d32f2f";
+        return;
+    }
+
+    // 3. Determine conversion key (e.g., UG, UK)
+    const rateKey = current + target;
+    // 4. Define conversion rates (based on 7-day bracket)
+    const rates = {
+        "UG": 0.9, "UK": 0.7, "UM": 0.4, "US": 0.3,
+        "GK": 0.8, "GM": 0.4, "GS": 0.3,
+        "KM": 0.6, "KS": 0.4,
+        "MS": 0.7
+    };
+
+    const rate = rates[rateKey];
+
+    if (!rate) {
+        document.getElementById('resultArea').innerHTML = "⚠️ This upgrade path is not supported.";
+        return;
+    }
+
+    // 5. Perform calculation
+    const totalDays = days * rate;
+
+    // 6. Convert decimal days to Days and Hours
+    const d = Math.floor(totalDays);
+    const h = Math.round((totalDays - d) * 24);
+
+    // 7. Display output
+    document.getElementById('resultArea').style.color = "#2e7d32"; // Green for success
+    document.getElementById('resultArea').innerHTML =
+        `Conversion Rate: ${rate}<br>` +
+        `Remaining Time: ${d} Day(s) ${h} Hour(s)`;
+}
+</script>
 
 
 
@@ -654,13 +432,8 @@
 
 
 
-  
-  
 
 
-
-
-  
 
 
 
