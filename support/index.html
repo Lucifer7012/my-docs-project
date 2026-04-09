@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#game-support-configuration" class="md-skip">
+        <a href="#game-support-vmid-guide" class="md-skip">
           Skip to content
         </a>
       
@@ -257,6 +257,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Game Support
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -273,6 +291,58 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-search-game-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Search Game Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-what-is-device-id-vmid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. What is Device ID (VMID)?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-supported-games-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Supported Games List
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -298,6 +368,47 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-search-game-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Search Game Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-what-is-device-id-vmid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. What is Device ID (VMID)?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-supported-games-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Supported Games List
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -313,20 +424,34 @@
 
 
 
-<h1 id="game-support-configuration">🎮 Game Support &amp; Configuration</h1>
-<p>Enter the game name below to check compatibility. If your game requires special configuration or is not listed, please follow the instructions to contact our team.</p>
-<div style="background-color: #f8f9fa; padding: 25px; border-radius: 12px; color: #333; font-family: sans-serif; border: 1px solid #e0e0e0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+<h1 id="game-support-vmid-guide">🎮 Game Support &amp; VMID Guide</h1>
+<p>Check game compatibility and find your Device ID (VMID) for configuration.</p>
+<hr />
+<h2 id="1-search-game-compatibility">1. Search Game Compatibility</h2>
+<div style="background-color: #f8f9fa; padding: 20px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
     <div style="margin-bottom: 20px;">
-        <label style="font-weight: bold; display: block; margin-bottom: 10px; font-size: 1.1em;">Search Game Compatibility:</label>
         <input type="text" id="gameSearch" onkeyup="checkGame()" placeholder="Type game name (e.g. night crows, Once Human...)"
-               style="width: 100%; padding: 14px; border: 2px solid #2196F3; border-radius: 8px; font-size: 16px; outline: none; transition: border 0.3s;">
+               style="width: 100%; padding: 14px; border: 2px solid #2196F3; border-radius: 8px; font-size: 16px; outline: none;">
     </div>
-
     <div id="resultMessage" style="min-height: 100px;">
         <div style="padding: 20px; border-radius: 8px; background: white; border: 1px dashed #ccc; text-align: center; color: #888;">
-            Start typing a game name to see support status...
+            Results will appear here...
         </div>
     </div>
+</div>
+
+<hr />
+<h2 id="2-what-is-device-id-vmid">2. What is Device ID (VMID)?</h2>
+<p>To configure your games, we need your unique <strong>VMID</strong>.
+You can find it at the <strong>top left corner</strong> of your device screen as shown below:</p>
+<p><img alt="VMID Location Example" src="../images/image_74a93d.jpg" />
+<em>(Please provide this ID when contacting the administrator.)</em></p>
+<hr />
+<h2 id="3-supported-games-list">3. Supported Games List</h2>
+<p>Below are all the games currently supported by our devices. If a game is on this list but not working, it may require admin configuration.</p>
+<div style="column-count: 2; column-gap: 20px; background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+    <ul id="fullGameList" style="margin: 0; padding-left: 15px; font-size: 0.9em; color: #444; line-height: 1.6;">
+        </ul>
 </div>
 
 <script>
@@ -336,49 +461,40 @@ const supportedGames = [
 
 const discordLink = "https://discord.gg/HKaKdA5ChG";
 
+// Populate the full list at the bottom
+const fullListEl = document.getElementById('fullGameList');
+fullListEl.innerHTML = supportedGames.sort().map(game => `<li>${game}</li>`).join('');
+
 function checkGame() {
     const input = document.getElementById('gameSearch').value.trim();
     const resultArea = document.getElementById('resultMessage');
 
     if (input.length === 0) {
-        resultArea.innerHTML = '<div style="padding: 20px; border-radius: 8px; background: white; border: 1px dashed #ccc; text-align: center; color: #888;">Start typing a game name to see support status...</div>';
+        resultArea.innerHTML = '<div style="padding: 20px; border-radius: 8px; background: white; border: 1px dashed #ccc; text-align: center; color: #888;">Results will appear here...</div>';
         return;
     }
 
-    // 查找所有包含关键词的游戏 (Find ALL matches)
     const matchedGames = supportedGames.filter(game =>
         game.toLowerCase().includes(input.toLowerCase())
     );
 
     if (matchedGames.length > 0) {
-        // 情况 A: 搜到了结果（可能是一条或多条）
-        let htmlContent = `<div style="padding: 15px; background: white; border-radius: 8px; border: 1px solid #e0e0e0;">
-            <p style="color: #2e7d32; font-weight: bold; margin-bottom: 10px;">✅ We support the following matches:</p>
-            <ul style="margin-bottom: 15px; padding-left: 20px; line-height: 1.6;">`;
-
-        matchedGames.forEach(game => {
-            htmlContent += `<li style="color: #333; font-weight: 500;">${game}</li>`;
-        });
-
+        let htmlContent = `<div style="padding: 15px; background: #e8f5e9; border-radius: 8px; border: 1px solid #c8e6c9;">
+            <p style="color: #2e7d32; font-weight: bold; margin-bottom: 10px;">✅ Supported Matches:</p>
+            <ul style="margin-bottom: 15px; padding-left: 20px;">`;
+        matchedGames.forEach(game => { htmlContent += `<li>${game}</li>`; });
         htmlContent += `</ul>
-            <div style="text-align: center; border-top: 1px solid #eee; padding-top: 15px;">
-                <p>Please provide your <b>Game Error Screenshot</b> and <b>Device ID (VMID)</b>.</p>
-                <p>An administrator will configure it for you as soon as possible.</p>
-                <a href="${discordLink}" target="_blank" style="display: inline-block; background: #5865F2; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 10px;">Submit to Discord</a>
-            </div>
+            <p>Please provide your <b>Game Error Screenshot</b> and <b>Device ID (VMID)</b>.</p>
+            <a href="${discordLink}" target="_blank" style="display: inline-block; background: #5865F2; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Submit to Discord</a>
         </div>`;
         resultArea.innerHTML = htmlContent;
     } else {
-        // 情况 B: 完全搜不到
         resultArea.innerHTML = `
-            <div style="padding: 20px; background: white; border-radius: 8px; border: 1px solid #e0e0e0; text-align: center; color: #d32f2f;">
-                <h3 style="margin-top: 0;">❓ Status Unclear</h3>
-                <p>We are not sure if <b>"${input}"</b> is supported yet.</p>
-                <p>Please provide your <b>Game Error Screenshot</b> and <b>Device ID (VMID)</b>.</p>
-                <p>Administrators will report this to our technical team directly.</p>
-                <a href="${discordLink}" target="_blank" style="display: inline-block; background: #5865F2; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 10px;">Contact Tech Support</a>
-            </div>
-        `;
+            <div style="padding: 15px; background: #ffebee; border-radius: 8px; border: 1px solid #ffcdd2; text-align: center;">
+                <p style="color: #c62828; font-weight: bold;">❓ Status Unclear</p>
+                <p>We are not sure if <b>"${input}"</b> is supported yet. Please provide your <b>Error Screenshot</b> and <b>VMID</b>.</p>
+                <a href="${discordLink}" target="_blank" style="display: inline-block; background: #5865F2; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none; font-weight: bold;">Contact Tech Support</a>
+            </div>`;
     }
 }
 </script>
