@@ -318,17 +318,18 @@
 <div style="background-color: #f8f9fa; padding: 25px; border-radius: 12px; color: #333; font-family: sans-serif; border: 1px solid #e0e0e0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
     <div style="margin-bottom: 20px;">
         <label style="font-weight: bold; display: block; margin-bottom: 10px; font-size: 1.1em;">Search Game Compatibility:</label>
-        <input type="text" id="gameSearch" onkeyup="checkGame()" placeholder="Type game name (e.g. Once Human, Night Crows...)"
+        <input type="text" id="gameSearch" onkeyup="checkGame()" placeholder="Type game name (e.g. night crows, Once Human...)"
                style="width: 100%; padding: 14px; border: 2px solid #2196F3; border-radius: 8px; font-size: 16px; outline: none; transition: border 0.3s;">
     </div>
 
-    <div id="resultMessage" style="padding: 20px; border-radius: 8px; background: white; border: 1px dashed #ccc; min-height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-        <p style="color: #888; margin: 0;">Start typing a game name to see support status...</p>
+    <div id="resultMessage" style="min-height: 100px;">
+        <div style="padding: 20px; border-radius: 8px; background: white; border: 1px dashed #ccc; text-align: center; color: #888;">
+            Start typing a game name to see support status...
+        </div>
     </div>
 </div>
 
 <script>
-// Your complete supported games list
 const supportedGames = [
     "七龙珠爆裂激战(ドッカン)", "RagnarokVReturns", "eosblack", "Primitive Brothers", "grandchase", "puni", "12skyreborn", "odin", "god of high school", "avatara", "Three Kingdoms All-star : Idle", "Ares: Rise of Guardians", "Limbus company", "ymir", "Rumble Heroes", "archeage war", "Gransagaidle", "menu", "poring-rush", "Midgard Heroes: Ragnarok Idle", "Luna Origin", "PokemonGO", "raven2", "The world of magic", "Immortal Rising 2", "ROM", "Slayer Legend", "Cookierun：tower of adventures/CookieRun india/Cookie Run: Kingdom", "12sky/TwelveskyM", "12SKY: LAST Ember", "night crows---VM", "night crows---API", "night crows---ROOTED", "ONEPIECEバウンティラッシュ", "play together", "taming master", "Moonlight Sculptor: DarkGamer", "siege rumble", "Pixel Heroes ldle", "Free fire", "ログウィズ（Rogue with the Dead）", "GoGoWolf", "Rom golden age", "阿瑞斯: 命運的選擇者", "oldschool ragnarok online revo classic(osro revo)", "Good Old Days", "Forsaken Legacy", "World Classlc", "Ghost M Global", "blue protocol star resonance", "TOSM Extreme(Tree of Savior M Extreme)", "Rise Online World Mobile", "Philippines RO", "12skym global", "Legend Slime", "Topfollow", "roblox vn/roblox", "night crows---颠倒", "tiktok", "서머너즈워 러쉬요/Summoners war: Rush", "world of miracle/WOM", "RF ONLINE NEXT/RF 온라인 넥스트", "Once Human", "Infinity Nikki(无限暖暖)", "Arknight:endfield(明日方舟：终末地)"
 ];
@@ -340,29 +341,37 @@ function checkGame() {
     const resultArea = document.getElementById('resultMessage');
 
     if (input.length === 0) {
-        resultArea.innerHTML = '<p style="color: #888; margin: 0;">Start typing a game name to see support status...</p>';
+        resultArea.innerHTML = '<div style="padding: 20px; border-radius: 8px; background: white; border: 1px dashed #ccc; text-align: center; color: #888;">Start typing a game name to see support status...</div>';
         return;
     }
 
-    // Search for a match (Case-insensitive)
-    const matchedGame = supportedGames.find(game =>
+    // 查找所有包含关键词的游戏 (Find ALL matches)
+    const matchedGames = supportedGames.filter(game =>
         game.toLowerCase().includes(input.toLowerCase())
     );
 
-    if (matchedGame) {
-        // CASE: FOUND
-        resultArea.innerHTML = `
-            <div style="color: #2e7d32;">
-                <h3 style="margin-top: 0;">✅ We support <b>${matchedGame}</b></h3>
+    if (matchedGames.length > 0) {
+        // 情况 A: 搜到了结果（可能是一条或多条）
+        let htmlContent = `<div style="padding: 15px; background: white; border-radius: 8px; border: 1px solid #e0e0e0;">
+            <p style="color: #2e7d32; font-weight: bold; margin-bottom: 10px;">✅ We support the following matches:</p>
+            <ul style="margin-bottom: 15px; padding-left: 20px; line-height: 1.6;">`;
+
+        matchedGames.forEach(game => {
+            htmlContent += `<li style="color: #333; font-weight: 500;">${game}</li>`;
+        });
+
+        htmlContent += `</ul>
+            <div style="text-align: center; border-top: 1px solid #eee; padding-top: 15px;">
                 <p>Please provide your <b>Game Error Screenshot</b> and <b>Device ID (VMID)</b>.</p>
                 <p>An administrator will configure it for you as soon as possible.</p>
                 <a href="${discordLink}" target="_blank" style="display: inline-block; background: #5865F2; color: white; padding: 12px 25px; border-radius: 5px; text-decoration: none; font-weight: bold; margin-top: 10px;">Submit to Discord</a>
             </div>
-        `;
+        </div>`;
+        resultArea.innerHTML = htmlContent;
     } else {
-        // CASE: NOT FOUND
+        // 情况 B: 完全搜不到
         resultArea.innerHTML = `
-            <div style="color: #d32f2f;">
+            <div style="padding: 20px; background: white; border-radius: 8px; border: 1px solid #e0e0e0; text-align: center; color: #d32f2f;">
                 <h3 style="margin-top: 0;">❓ Status Unclear</h3>
                 <p>We are not sure if <b>"${input}"</b> is supported yet.</p>
                 <p>Please provide your <b>Game Error Screenshot</b> and <b>Device ID (VMID)</b>.</p>
