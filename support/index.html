@@ -495,7 +495,8 @@ document.getElementById('fullGameList').innerHTML = supportedGames.sort().map(g 
 
 function checkGame() {
     const inputRaw = document.getElementById('gameSearch').value;
-    const inputClean = inputRaw.replace(/\s+/g, '').toLowerCase();
+    // 升级版过滤：同时去除空格 (\s)、单引号 (') 和双引号 (")
+    const inputClean = inputRaw.replace(/[\s'"]+/g, '').toLowerCase();
     const resultArea = document.getElementById('resultMessage');
 
     if (inputClean.length === 0) {
@@ -504,7 +505,8 @@ function checkGame() {
     }
 
     const matches = supportedGames.filter(game => {
-        const gameClean = game.replace(/\s+/g, '').toLowerCase();
+        // 数据库里的游戏名也同步去除空格和引号，确保匹配一致
+        const gameClean = game.replace(/[\s'"]+/g, '').toLowerCase();
         return gameClean.includes(inputClean);
     });
 
