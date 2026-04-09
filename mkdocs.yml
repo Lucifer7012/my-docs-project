@@ -1,0 +1,8 @@
+site_name: UgPhone Help Center
+theme:
+  name: material
+
+nav:
+  - Rate Table: rates-en.md
+  - Upgrade Calculator: calculator.md
+  - Game Support: support.md
