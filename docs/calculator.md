@@ -1,6 +1,6 @@
 # 🔄 Equipment Upgrade Calculator
 
-Enter your remaining days or the current expiry time. Minimum remaining time: 2 days. Rules: 5d→7d, 10d→15d, 25d→30d, 35d→90d tier, 120d→180d tier, 200d→365d, 366d→365d.
+Enter your remaining days or the current expiry time. Minimum remaining time: 2 days. In expiry mode, you can also add an existing target expiry time to merge both devices into one target device. Rules: 5d→7d, 10d→15d, 25d→30d, 35d→90d tier, 120d→180d tier, 200d→365d, 366d→365d.
 
 <style>
     .upgrade-calculator {
@@ -77,6 +77,12 @@ Enter your remaining days or the current expiry time. Minimum remaining time: 2 
         font-weight: 700;
         line-height: 1.5;
     }
+
+    .merge-note {
+        color: #666;
+        font-size: 0.9em;
+        margin: -8px 0 15px;
+    }
 </style>
 
 <div class="upgrade-calculator">
@@ -123,6 +129,14 @@ Enter your remaining days or the current expiry time. Minimum remaining time: 2 
         </label>
     </div>
 
+    <div class="upgrade-row" id="existingTargetInputRow" style="display: none;">
+        <label>Existing Target Expiry Time:
+            <input type="text" id="existingTargetExpiryInput" placeholder="optional, e.g. 2026-06-20 12:00:00">
+        </label>
+    </div>
+
+    <p class="merge-note" id="mergeNote" style="display: none;">Leave existing target expiry blank if you only need the upgraded expiry time.</p>
+
     <button class="calculate-button" onclick="calculateUpgrade()">Calculate</button>
     <hr>
     <div id="resultArea" style="margin-top: 15px;"><p style="color: #666;">Results will appear here...</p></div>
@@ -162,6 +176,8 @@ function toggleCalculationMode() {
     const mode = getCalculationMode();
     document.getElementById('daysInputRow').style.display = mode === 'days' ? 'flex' : 'none';
     document.getElementById('expiryInputRow').style.display = mode === 'expiry' ? 'flex' : 'none';
+    document.getElementById('existingTargetInputRow').style.display = mode === 'expiry' ? 'flex' : 'none';
+    document.getElementById('mergeNote').style.display = mode === 'expiry' ? 'block' : 'none';
     document.getElementById('resultArea').innerHTML = "<p style='color: #666;'>Results will appear here...</p>";
 }
 
@@ -237,6 +253,16 @@ function formatDateTime(date) {
     ].join(':');
 }
 
+function getTypeLabel(type) {
+    return {
+        U: 'UVIP',
+        G: 'GVIP',
+        K: 'KVIP',
+        M: 'MVIP',
+        S: 'SVIP'
+    }[type] || type;
+}
+
 function getInputState() {
     const mode = getCalculationMode();
 
@@ -267,19 +293,63 @@ function getInputState() {
         return { error: "❌ Error: Minimum 2 days remaining required." };
     }
 
-    return { mode, inputDays, now, expiryDate };
+    const existingTargetValue = document.getElementById('existingTargetExpiryInput').value.trim();
+
+    if (!existingTargetValue) {
+        return { mode, inputDays, now, expiryDate };
+    }
+
+    const existingTargetExpiryDate = parseExpiryDate(existingTargetValue);
+
+    if (!existingTargetExpiryDate) {
+        return { error: "❌ Error: Enter a valid existing target expiry time, such as 2026-06-20 12:00:00." };
+    }
+
+    const existingTargetDays = (existingTargetExpiryDate.getTime() - now.getTime()) / 86400000;
+
+    if (existingTargetDays <= 0) {
+        return { error: "❌ Error: The existing target expiry time must be later than the current time." };
+    }
+
+    return { mode, inputDays, now, expiryDate, existingTargetExpiryDate, existingTargetDays };
 }
 
-function renderResultCard(label, rate, convertedDays, baseDate, accentColor, mode) {
-    const targetDate = new Date(baseDate.getTime() + convertedDays * 86400000);
-    const mainValue = mode === 'expiry' ? formatDateTime(targetDate) : formatDuration(convertedDays);
-    const subValue = mode === 'expiry' ? `<p>Duration: <b>${formatDuration(convertedDays)}</b></p>` : "";
+function renderResultCard(label, rate, convertedDays, inputState, accentColor) {
+    const upgradedExpiryDate = new Date(inputState.now.getTime() + convertedDays * 86400000);
+
+    if (inputState.mode !== 'expiry') {
+        return `
+            <div class="result-card" style="--accent-color: ${accentColor};">
+                <h4>${label}</h4>
+                <p>Rate: <b>${rate}</b></p>
+                <p class="result-value">${formatDuration(convertedDays)}</p>
+            </div>
+        `;
+    }
+
+    const upgradedExpiryRow = inputState.existingTargetDays
+        ? `<p>Upgraded expiry: <b>${formatDateTime(upgradedExpiryDate)}</b></p>`
+        : "";
+    const mergeRows = inputState.existingTargetDays
+        ? `
+            <p>Existing target remaining: <b>${formatDuration(inputState.existingTargetDays)}</b></p>
+            <p>Existing target expiry: <b>${formatDateTime(inputState.existingTargetExpiryDate)}</b></p>
+            <p>Merged duration: <b>${formatDuration(inputState.existingTargetDays + convertedDays)}</b></p>
+        `
+        : "";
+    const mainValue = inputState.existingTargetDays
+        ? formatDateTime(new Date(inputState.now.getTime() + (inputState.existingTargetDays + convertedDays) * 86400000))
+        : formatDateTime(upgradedExpiryDate);
+    const mainLabel = inputState.existingTargetDays ? "Merged expiry" : "Upgraded expiry";
 
     return `
         <div class="result-card" style="--accent-color: ${accentColor};">
             <h4>${label}</h4>
             <p>Rate: <b>${rate}</b></p>
-            ${subValue}
+            <p>Upgraded duration: <b>${formatDuration(convertedDays)}</b></p>
+            ${upgradedExpiryRow}
+            ${mergeRows}
+            <p>${mainLabel}:</p>
             <p class="result-value">${mainValue}</p>
         </div>
     `;
@@ -309,16 +379,20 @@ function calculateUpgrade() {
     const pRate = ratesData.Promotion[rateKey][tierIndex];
     const standardDays = inputState.inputDays * sRate;
     const promotionDays = inputState.inputDays * pRate;
+    const targetLabel = getTypeLabel(target);
+    const mergeMeta = inputState.existingTargetDays
+        ? `<br>Existing ${targetLabel} expiry: <b>${formatDateTime(inputState.existingTargetExpiryDate)}</b><br>Existing ${targetLabel} remaining: <b>${formatDuration(inputState.existingTargetDays)}</b>`
+        : "";
     const expiryMeta = inputState.mode === 'expiry'
-        ? `<p style="font-size: 0.9em; color: #666;">Current time: <b>${formatDateTime(inputState.now)}</b><br>Current expiry: <b>${formatDateTime(inputState.expiryDate)}</b><br>Remaining: <b>${formatDuration(inputState.inputDays)}</b></p>`
+        ? `<p style="font-size: 0.9em; color: #666;">Current time: <b>${formatDateTime(inputState.now)}</b><br>Current expiry: <b>${formatDateTime(inputState.expiryDate)}</b><br>Remaining before upgrade: <b>${formatDuration(inputState.inputDays)}</b>${mergeMeta}</p>`
         : "";
 
     resultArea.innerHTML = `
         <p style="font-size: 0.9em; color: #666;">Tier: <b>${tier} Days</b></p>
         ${expiryMeta}
         <div class="result-grid">
-            ${renderResultCard('Standard', sRate, standardDays, inputState.now, '#2196F3', inputState.mode)}
-            ${renderResultCard('Promotion', pRate, promotionDays, inputState.now, '#ff9800', inputState.mode)}
+            ${renderResultCard('Standard', sRate, standardDays, inputState, '#2196F3')}
+            ${renderResultCard('Promotion', pRate, promotionDays, inputState, '#ff9800')}
         </div>
     `;
 }
