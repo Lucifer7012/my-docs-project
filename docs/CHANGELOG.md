@@ -42,3 +42,19 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 - `96686bd` - Deploy calculator expiry mode
 - `53182fd` - Add target expiry merge calculator
 - `3a451ee` - Deploy target expiry merge calculator
+
+## 2026-05-27
+
+### Added
+
+- Added supported games to the Game Support compatibility list:
+  - `Let's Go Legends(레츠고레전드)`
+  - `Zeny Classic`
+  - `rasalas/라살라스`
+  - `Royale`
+
+### Verification
+
+- Confirmed the supported games array syntax is valid.
+- Rebuilt the MkDocs site so the generated support page and search index include the updated game list.
+- Excluded project maintenance records from the public MkDocs build with `exclude_docs`.

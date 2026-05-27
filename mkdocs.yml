@@ -1,4 +1,7 @@
 site_name: UgPhone Help Center
+exclude_docs: |
+  CHANGELOG.md
+  PROJECT_STATUS.md
 theme:
   name: material
 

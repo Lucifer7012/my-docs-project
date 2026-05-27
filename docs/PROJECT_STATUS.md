@@ -25,11 +25,12 @@
 - Calculator source and generated site files are committed on `main`.
 - Calculator public site files are deployed to `gh-pages`.
 - Latest deployed calculator feature: merge upgraded target expiry with existing target expiry.
+- Latest support update: added supported games `Let's Go Legends(레츠고레전드)`, `Zeny Classic`, `rasalas/라살라스`, and `Royale`.
+- Project maintenance docs are stored in `docs/` but excluded from the public MkDocs site build.
 
 ## Known Local State
 
-- `docs/support.md` and `site/support/index.html` have local uncommitted changes that are unrelated to the calculator work.
-- These support changes were intentionally not included in calculator commits or `gh-pages` deployment.
+- No unrelated local project changes are expected after the latest support-game upload.
 
 ## Maintenance Rules
 
