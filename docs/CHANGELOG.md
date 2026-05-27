@@ -58,3 +58,8 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 - Confirmed the supported games array syntax is valid.
 - Rebuilt the MkDocs site so the generated support page and search index include the updated game list.
 - Excluded project maintenance records from the public MkDocs build with `exclude_docs`.
+
+### Commits
+
+- `4c7dc7c` - Update supported games list
+- `615644b` - Deploy supported games update
