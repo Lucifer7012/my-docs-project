@@ -18,7 +18,13 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
 - Extracted the existing supported games list and migrated it into `docs/data/supported-games.json`.
 - Confirmed the support page script now renders the full list from the JSON data source and searches against the loaded entries.
-- Pending: rebuild/deploy the MkDocs site when ready to publish this refactor.
+- Synced the generated static support page and JSON data under `site/` for deployment.
+- Deployed the updated support page and JSON data file to `gh-pages` for public testing.
+
+### Commits
+
+- `dec36a9` - Refactor game support data source
+- `794ae37` - Deploy game support JSON data source
 
 ## 2026-05-20
 

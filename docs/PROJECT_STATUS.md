@@ -25,15 +25,17 @@
 - Calculator source and generated site files are committed on `main`.
 - Calculator public site files are deployed to `gh-pages`.
 - Latest deployed calculator feature: merge upgraded target expiry with existing target expiry.
-- Latest deployed support update: added supported games `Let's Go Legends(霠堨笭瓿犽爤鞝勲摐)`, `Zeny Classic`, `rasalas/霛检偞霛检姢`, and `Royale`.
-- The supported-games data-source refactor is currently a local source change until the site is rebuilt and deployed.
+- Latest deployed support refactor: the support page now loads games from `docs/data/supported-games.json` in source and `data/supported-games.json` in the published site.
+- Latest related commits:
+  - `dec36a9` on `main` - refactor game support data source
+  - `794ae37` on `gh-pages` - deploy game support JSON data source
 - Project maintenance docs are stored in `docs/` but excluded from the public MkDocs site build.
 
 ## Known Local State
 
 - The supported games list now lives in `docs/data/supported-games.json`.
 - `docs/support.md` now contains only the page UI and search logic.
-- No unrelated local project changes are expected after the latest support-page refactor.
+- No unrelated local project changes are expected after the latest support-page deployment.
 
 ## Maintenance Rules
 
