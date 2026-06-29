@@ -18,19 +18,22 @@
   - supports Standard and Promotion rates
   - enforces minimum 2 days remaining before upgrade
   - can merge upgraded target-device time with an existing target-device expiry time
-- Game Support page with searchable compatibility list.
+- Game Support page with a searchable compatibility list loaded from a dedicated JSON data file.
 
 ## Current Deployment State
 
 - Calculator source and generated site files are committed on `main`.
 - Calculator public site files are deployed to `gh-pages`.
 - Latest deployed calculator feature: merge upgraded target expiry with existing target expiry.
-- Latest support update: added supported games `Let's Go Legends(레츠고레전드)`, `Zeny Classic`, `rasalas/라살라스`, and `Royale`.
+- Latest deployed support update: added supported games `Let's Go Legends(霠堨笭瓿犽爤鞝勲摐)`, `Zeny Classic`, `rasalas/霛检偞霛检姢`, and `Royale`.
+- The supported-games data-source refactor is currently a local source change until the site is rebuilt and deployed.
 - Project maintenance docs are stored in `docs/` but excluded from the public MkDocs site build.
 
 ## Known Local State
 
-- No unrelated local project changes are expected after the latest support-game upload.
+- The supported games list now lives in `docs/data/supported-games.json`.
+- `docs/support.md` now contains only the page UI and search logic.
+- No unrelated local project changes are expected after the latest support-page refactor.
 
 ## Maintenance Rules
 

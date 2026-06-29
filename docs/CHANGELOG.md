@@ -4,6 +4,22 @@ This file records feature changes, fixes, verification, and deployment notes for
 
 Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
+## 2026-06-25
+
+### Changed
+
+- Refactored the Game Support page so the searchable game list is loaded from `docs/data/supported-games.json` instead of being hardcoded inside `docs/support.md`.
+- Kept the page search logic in `docs/support.md` and made the data format extensible:
+  - plain string entries work for simple game names
+  - object entries with `name` and optional `aliases` can be added later without changing page code
+- Improved matching so searches ignore spacing and punctuation more reliably.
+
+### Verification
+
+- Extracted the existing supported games list and migrated it into `docs/data/supported-games.json`.
+- Confirmed the support page script now renders the full list from the JSON data source and searches against the loaded entries.
+- Pending: rebuild/deploy the MkDocs site when ready to publish this refactor.
+
 ## 2026-05-20
 
 ### Added
