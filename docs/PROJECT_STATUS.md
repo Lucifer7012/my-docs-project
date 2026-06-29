@@ -26,6 +26,7 @@
 - Calculator public site files are deployed to `gh-pages`.
 - Latest deployed calculator feature: merge upgraded target expiry with existing target expiry.
 - Latest deployed support refactor: the support page now loads games from `docs/data/supported-games.json` in source and `data/supported-games.json` in the published site.
+- Latest support list change: removed `Free fire` and added `Pokémon Champions`.
 - Latest related commits:
   - `dec36a9` on `main` - refactor game support data source
   - `794ae37` on `gh-pages` - deploy game support JSON data source
