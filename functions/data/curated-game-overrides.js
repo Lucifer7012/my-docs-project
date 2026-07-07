@@ -324,6 +324,7 @@ export const CURATED_GAME_OVERRIDES = [
             }
         ],
         aliases: [
+            "ragnarokvreturns",
             "ragnarokv returns",
             "ragnarok v returns",
             "ragnarok v: returns"

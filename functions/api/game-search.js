@@ -375,24 +375,31 @@ function buildPlayDetailsUrl(packageName) {
 
 function findCuratedOverride(query) {
     const normalizedQuery = normalizeText(query);
+    const collapsedQuery = collapseNormalizedText(normalizedQuery);
     let bestMatch = null;
 
     for (const entry of CURATED_GAME_OVERRIDES) {
         for (const alias of entry.aliases) {
             const normalizedAlias = normalizeText(alias);
+            const collapsedAlias = collapseNormalizedText(normalizedAlias);
             if (!normalizedAlias) {
                 continue;
             }
 
-            const isMatch = normalizedQuery === normalizedAlias || normalizedQuery.includes(normalizedAlias);
+            const isMatch = (
+                normalizedQuery === normalizedAlias ||
+                normalizedQuery.includes(normalizedAlias) ||
+                (collapsedAlias && (collapsedQuery === collapsedAlias || collapsedQuery.includes(collapsedAlias)))
+            );
             if (!isMatch) {
                 continue;
             }
 
-            if (!bestMatch || normalizedAlias.length > bestMatch.aliasLength) {
+            const aliasLength = Math.max(normalizedAlias.length, collapsedAlias.length);
+            if (!bestMatch || aliasLength > bestMatch.aliasLength) {
                 bestMatch = {
                     entry,
-                    aliasLength: normalizedAlias.length
+                    aliasLength
                 };
             }
         }
@@ -408,8 +415,8 @@ function scoreTokens(tokens, candidate) {
     }
 
     let score = 0;
-    const collapsedQuery = tokens.join("");
-    const collapsedCandidate = normalizedCandidate.replace(/\s+/g, "");
+    const collapsedQuery = collapseNormalizedText(tokens.join(" "));
+    const collapsedCandidate = collapseNormalizedText(normalizedCandidate);
 
     if (collapsedQuery && collapsedCandidate.includes(collapsedQuery)) {
         score += 60;
@@ -439,6 +446,10 @@ function countMatchedTokens(tokens, candidate) {
     }
 
     return count;
+}
+
+function collapseNormalizedText(value) {
+    return String(value || "").replace(/\s+/g, "");
 }
 
 const GENERIC_SEARCH_TOKENS = new Set([
