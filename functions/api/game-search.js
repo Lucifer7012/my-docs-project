@@ -24,6 +24,21 @@ export async function onRequestGet(context) {
     }
 
     try {
+        const curatedOverride = findCuratedOverride(query);
+        if (curatedOverride) {
+            const curatedResult = await resolveCuratedResult(curatedOverride, query);
+
+            return json(
+                {
+                    query,
+                    generatedAt: new Date().toISOString(),
+                    message: `Best match found for "${query}".`,
+                    result: curatedResult
+                },
+                200
+            );
+        }
+
         const candidates = await searchGooglePlayCandidates(query);
 
         if (!candidates.length) {
@@ -111,6 +126,53 @@ export async function onRequestGet(context) {
             500
         );
     }
+}
+
+async function resolveCuratedResult(override, query) {
+    const playUrl = `https://${GOOGLE_PLAY_HOST}/store/apps/details?id=${encodeURIComponent(override.packageName)}&hl=en_US&gl=US`;
+    const playMeta = await fetchPlayMetadata(playUrl);
+    const title = cleanPlayTitle(playMeta.title || override.title || query);
+    const channels = dedupeChannels([
+        {
+            name: "Google Play",
+            url: playUrl,
+            note: `Package: ${override.packageName}`
+        },
+        override.officialSite
+            ? {
+                name: "Official Site",
+                url: override.officialSite,
+                note: "Official brand site"
+            }
+            : null,
+        override.appStoreUrl
+            ? {
+                name: "App Store",
+                url: override.appStoreUrl,
+                note: override.appStoreNote || "Official iOS page"
+            }
+            : null,
+        {
+            name: "TapTap Search",
+            url: `https://www.taptap.io/search/${encodeURIComponent(title)}?region=us`,
+            note: "Search results page"
+        },
+        {
+            name: "APKPure Search",
+            url: `https://apkpure.com/search?q=${encodeURIComponent(override.packageName)}`,
+            note: "Search results page"
+        }
+    ]);
+
+    return {
+        title,
+        packageName: override.packageName,
+        icon: playMeta.icon || override.icon || null,
+        summary: summarizeText(playMeta.description || override.summary || ""),
+        matchSource: "Curated Alias Match",
+        channels,
+        related: override.related || []
+    };
 }
 
 async function searchGooglePlayCandidates(query) {
@@ -273,6 +335,17 @@ function normalizeText(value) {
         .trim();
 }
 
+function findCuratedOverride(query) {
+    const normalizedQuery = normalizeText(query);
+
+    return CURATED_GAME_OVERRIDES.find((entry) =>
+        entry.aliases.some((alias) => {
+            const normalizedAlias = normalizeText(alias);
+            return normalizedQuery === normalizedAlias || normalizedQuery.includes(normalizedAlias);
+        })
+    ) || null;
+}
+
 function scoreTokens(tokens, candidate) {
     const normalizedCandidate = normalizeText(candidate);
     if (!normalizedCandidate) {
@@ -322,6 +395,28 @@ const GENERIC_SEARCH_TOKENS = new Set([
     "online",
     "rpg"
 ]);
+
+const CURATED_GAME_OVERRIDES = [
+    {
+        title: "SOL: enchant",
+        packageName: "com.netmarble.sol",
+        officialSite: "https://sol.netmarble.com/",
+        appStoreUrl: "https://apps.apple.com/kr/app/sol-enchant/id6748004690",
+        appStoreNote: "Netmarble Corporation · Korea App Store",
+        aliases: [
+            "sol enchant",
+            "sol: enchant",
+            "sol-enchant"
+        ],
+        related: [
+            {
+                title: "Netmarble Support",
+                packageName: "help.netmarble.com/game/sol",
+                url: "https://help.netmarble.com/game/sol"
+            }
+        ]
+    }
+];
 
 function dedupeChannels(channels) {
     const seen = new Set();
