@@ -54,6 +54,24 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
+        title: "Call Of Duty: Mobile VN",
+        packageName: "com.vng.codmvn",
+        aliases: [
+            "codm vn",
+            "cod mobile vn",
+            "call of duty mobile vn",
+            "call of duty mobile vietnam",
+            "codm vietnam"
+        ],
+        related: [
+            {
+                title: "Global Version",
+                packageName: "com.activision.callofduty.shooter",
+                url: "https://play.google.com/store/apps/details?id=com.activision.callofduty.shooter&hl=en_US&gl=US"
+            }
+        ]
+    },
+    {
         title: "PUBG Mobile KR",
         packageName: "com.pubg.krmobile",
         aliases: [
@@ -68,6 +86,22 @@ export const CURATED_GAME_OVERRIDES = [
                 title: "Global Version",
                 packageName: "com.tencent.ig",
                 url: "https://play.google.com/store/apps/details?id=com.tencent.ig&hl=en_US&gl=US"
+            }
+        ]
+    },
+    {
+        title: "Play Together VNG",
+        packageName: "com.vng.playtogether",
+        aliases: [
+            "play together vn",
+            "play together vng",
+            "play together vietnam"
+        ],
+        related: [
+            {
+                title: "Global Version",
+                packageName: "com.haegin.playtogether",
+                url: "https://play.google.com/store/apps/details?id=com.haegin.playtogether&hl=en_US&gl=US"
             }
         ]
     },
@@ -87,6 +121,23 @@ export const CURATED_GAME_OVERRIDES = [
                 title: "Global AOV-style Listing",
                 packageName: "com.levelinfinite.sgameGlobal",
                 url: "https://play.google.com/store/apps/details?id=com.levelinfinite.sgameGlobal&hl=en_US&gl=US"
+            }
+        ]
+    },
+    {
+        title: "Free Fire Thailand",
+        packageName: "com.dts.freefireth",
+        aliases: [
+            "free fire th",
+            "free fire thailand",
+            "garena free fire th",
+            "garena free fire thailand"
+        ],
+        related: [
+            {
+                title: "Free Fire MAX",
+                packageName: "com.dts.freefiremax",
+                url: "https://play.google.com/store/apps/details?id=com.dts.freefiremax&hl=en_US&gl=US"
             }
         ]
     },
@@ -124,6 +175,17 @@ export const CURATED_GAME_OVERRIDES = [
                 packageName: "com.ncsoft.lineagew",
                 url: "https://play.google.com/store/apps/details?id=com.ncsoft.lineagew&hl=en_US&gl=US"
             }
+        ]
+    },
+    {
+        title: "Lineage2M",
+        packageName: "com.vng.lineage2mvn",
+        aliases: [
+            "lineage2m vn",
+            "lineage2m vng",
+            "lineage 2m vn",
+            "lineage 2m vng",
+            "lineage2m vietnam"
         ]
     },
     {
