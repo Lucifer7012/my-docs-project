@@ -1,8 +1,5 @@
 const GOOGLE_PLAY_HOST = "play.google.com";
-const TAPTAP_HOST = "taptap.io";
-const APKPURE_HOST = "apkpure.com";
 const APPLE_SEARCH_URL = "https://itunes.apple.com/search";
-const CSE_URL = "https://customsearch.googleapis.com/customsearch/v1";
 
 export async function onRequestGet(context) {
     const requestUrl = new URL(context.request.url);
@@ -26,31 +23,10 @@ export async function onRequestGet(context) {
         );
     }
 
-    if (!context.env.GOOGLE_CSE_API_KEY || !context.env.GOOGLE_CSE_CX) {
-        return json(
-            {
-                error: "Missing Cloudflare env vars: GOOGLE_CSE_API_KEY and GOOGLE_CSE_CX.",
-                setup: {
-                    buildCommand: "mkdocs build",
-                    outputDirectory: "site",
-                    requiredEnvVars: ["GOOGLE_CSE_API_KEY", "GOOGLE_CSE_CX"]
-                }
-            },
-            500
-        );
-    }
-
     try {
-        const playSearch = await searchCse(context.env, {
-            query,
-            siteSearch: GOOGLE_PLAY_HOST,
-            num: 5
-        });
+        const candidates = await searchGooglePlayCandidates(query);
 
-        const playItems = Array.isArray(playSearch.items) ? playSearch.items : [];
-        const bestPlayItem = pickBestSearchResult(playItems, query, cleanPlayTitle);
-
-        if (!bestPlayItem) {
+        if (!candidates.length) {
             return json(
                 {
                     query,
@@ -62,24 +38,27 @@ export async function onRequestGet(context) {
             );
         }
 
-        const playUrl = normalizePlayLink(bestPlayItem.link);
-        const playMeta = await fetchPlayMetadata(playUrl);
-        const playTitle = cleanPlayTitle(playMeta.title || bestPlayItem.title || query);
-        const packageName = extractPackageName(playUrl);
-        const icon = playMeta.icon || getSearchImage(bestPlayItem);
-        const summary = summarizeText(playMeta.description || bestPlayItem.snippet || "");
+        const bestResult = await resolveBestGooglePlayResult(query, candidates);
 
-        const [appStoreMatch, tapTapMatch, apkPureMatch] = await Promise.all([
-            searchAppStore(query, playTitle),
-            searchBestDomainMatch(context.env, TAPTAP_HOST, query, playTitle, packageName),
-            searchBestDomainMatch(context.env, APKPURE_HOST, query, playTitle, packageName)
-        ]);
+        if (!bestResult) {
+            return json(
+                {
+                    query,
+                    generatedAt: new Date().toISOString(),
+                    message: "No valid Google Play result could be resolved.",
+                    result: null
+                },
+                200
+            );
+        }
 
+        const title = cleanPlayTitle(bestResult.title || query);
+        const appStoreMatch = await searchAppStore(title);
         const channels = dedupeChannels([
             {
                 name: "Google Play",
-                url: playUrl,
-                note: packageName ? `Package: ${packageName}` : "Official Android page"
+                url: bestResult.url,
+                note: bestResult.packageName ? `Package: ${bestResult.packageName}` : "Official Android page"
             },
             appStoreMatch
                 ? {
@@ -88,37 +67,24 @@ export async function onRequestGet(context) {
                     note: appStoreMatch.bundleId || appStoreMatch.trackName
                 }
                 : null,
-            appStoreMatch && appStoreMatch.sellerUrl
+            bestResult.website
                 ? {
                     name: "Official Site",
-                    url: appStoreMatch.sellerUrl,
+                    url: bestResult.website,
                     note: "Developer website"
                 }
                 : null,
-            tapTapMatch
-                ? {
-                    name: "TapTap",
-                    url: tapTapMatch.link,
-                    note: cleanGenericTitle(tapTapMatch.title, "TapTap")
-                }
-                : null,
-            apkPureMatch
-                ? {
-                    name: "APKPure",
-                    url: apkPureMatch.link,
-                    note: cleanGenericTitle(apkPureMatch.title, "APKPure")
-                }
-                : null
+            {
+                name: "TapTap Search",
+                url: `https://www.taptap.io/search/${encodeURIComponent(title)}?region=us`,
+                note: "Search results page"
+            },
+            {
+                name: "APKPure Search",
+                url: `https://apkpure.com/search?q=${encodeURIComponent(bestResult.packageName || title)}`,
+                note: "Search results page"
+            }
         ]);
-
-        const related = playItems
-            .filter((item) => item.link !== bestPlayItem.link)
-            .slice(0, 3)
-            .map((item) => ({
-                title: cleanPlayTitle(item.title || ""),
-                packageName: extractPackageName(item.link),
-                url: normalizePlayLink(item.link)
-            }));
 
         return json(
             {
@@ -126,13 +92,13 @@ export async function onRequestGet(context) {
                 generatedAt: new Date().toISOString(),
                 message: `Best match found for "${query}".`,
                 result: {
-                    title: playTitle,
-                    packageName,
-                    icon: icon || (appStoreMatch ? appStoreMatch.artworkUrl512 : null),
-                    summary,
-                    matchSource: "Google Play",
+                    title,
+                    packageName: bestResult.packageName,
+                    icon: bestResult.icon || (appStoreMatch ? appStoreMatch.artworkUrl512 : null),
+                    summary: summarizeText(bestResult.description || ""),
+                    matchSource: "Google Play Web Search",
                     channels,
-                    related
+                    related: bestResult.related
                 }
             },
             200
@@ -147,38 +113,106 @@ export async function onRequestGet(context) {
     }
 }
 
-async function searchCse(env, options) {
-    const requestUrl = new URL(CSE_URL);
-    requestUrl.searchParams.set("key", env.GOOGLE_CSE_API_KEY);
-    requestUrl.searchParams.set("cx", env.GOOGLE_CSE_CX);
-    requestUrl.searchParams.set("q", options.query);
-    requestUrl.searchParams.set("num", String(options.num || 3));
-    requestUrl.searchParams.set("hl", "en");
-    requestUrl.searchParams.set("gl", "us");
-    requestUrl.searchParams.set("safe", "off");
-    requestUrl.searchParams.set("fields", "items(title,link,snippet,pagemap,displayLink)");
-
-    if (options.siteSearch) {
-        requestUrl.searchParams.set("siteSearch", options.siteSearch);
-        requestUrl.searchParams.set("siteSearchFilter", "i");
-    }
-
-    const response = await fetch(requestUrl.toString(), {
+async function searchGooglePlayCandidates(query) {
+    const searchUrl = `https://${GOOGLE_PLAY_HOST}/store/search?q=${encodeURIComponent(query)}&c=apps&hl=en_US&gl=US`;
+    const response = await fetch(searchUrl, {
         headers: {
-            "Accept": "application/json"
+            "accept-language": "en-US,en;q=0.9"
         }
     });
 
     if (!response.ok) {
-        throw new Error(`Google Custom Search request failed: ${response.status}`);
+        throw new Error(`Google Play search request failed: ${response.status}`);
     }
 
-    return response.json();
+    const html = await response.text();
+    const ids = extractPlayPackageIds(html).slice(0, 6);
+
+    return ids.map((packageName) => ({
+        packageName,
+        url: `https://${GOOGLE_PLAY_HOST}/store/apps/details?id=${encodeURIComponent(packageName)}&hl=en_US&gl=US`
+    }));
 }
 
-async function searchAppStore(query, titleHint) {
+function extractPlayPackageIds(html) {
+    const ids = [];
+    const seen = new Set();
+    const regex = /\/store\/apps\/details\?id=([a-zA-Z0-9._]+)/g;
+    let match;
+
+    while ((match = regex.exec(html)) !== null) {
+        const packageName = match[1];
+        if (!packageName || seen.has(packageName)) {
+            continue;
+        }
+        seen.add(packageName);
+        ids.push(packageName);
+    }
+
+    return ids;
+}
+
+async function resolveBestGooglePlayResult(query, candidates) {
+    const detailResults = await Promise.all(
+        candidates.map(async (candidate) => {
+            const details = await fetchPlayMetadata(candidate.url);
+            const title = cleanPlayTitle(details.title || candidate.packageName);
+            const score = scoreTokens(normalizeText(query).split(" ").filter(Boolean), `${title} ${details.description || ""} ${candidate.packageName}`);
+
+            return {
+                title,
+                packageName: candidate.packageName,
+                url: candidate.url,
+                icon: details.icon,
+                website: details.website,
+                description: details.description,
+                score
+            };
+        })
+    );
+
+    const ranked = detailResults
+        .filter((entry) => entry.score > 0 && entry.title)
+        .sort((left, right) => right.score - left.score);
+
+    if (!ranked.length) {
+        return null;
+    }
+
+    const best = ranked[0];
+    best.related = ranked.slice(1, 4).map((entry) => ({
+        title: entry.title,
+        packageName: entry.packageName,
+        url: entry.url
+    }));
+    return best;
+}
+
+async function fetchPlayMetadata(playUrl) {
+    const response = await fetch(playUrl, {
+        headers: {
+            "accept-language": "en-US,en;q=0.9"
+        }
+    });
+
+    if (!response.ok) {
+        return {};
+    }
+
+    const html = await response.text();
+    return {
+        title: readMetaContent(html, "property", "og:title") || readMetaContent(html, "name", "twitter:title"),
+        icon: readMetaContent(html, "property", "og:image") || readMetaContent(html, "name", "twitter:image"),
+        description: readMetaContent(html, "name", "description") || readMetaContent(html, "property", "og:description"),
+        website: readMetaContent(html, "property", "og:see_also")
+    };
+}
+
+async function searchAppStore(query) {
+    const queryTokens = normalizeText(query).split(" ").filter(Boolean);
+    const significantTokens = queryTokens.filter((token) => !GENERIC_SEARCH_TOKENS.has(token));
     const requestUrl = new URL(APPLE_SEARCH_URL);
-    requestUrl.searchParams.set("term", titleHint || query);
+    requestUrl.searchParams.set("term", query);
     requestUrl.searchParams.set("entity", "software");
     requestUrl.searchParams.set("country", "us");
     requestUrl.searchParams.set("limit", "5");
@@ -198,61 +232,21 @@ async function searchAppStore(query, titleHint) {
     const best = results
         .map((entry) => ({
             entry,
-            score: scoreMatch([query, titleHint].filter(Boolean).join(" "), `${entry.trackName || ""} ${entry.bundleId || ""}`)
+            score: scoreTokens(queryTokens, `${entry.trackName || ""} ${entry.bundleId || ""}`),
+            matchedTokenCount: countMatchedTokens(queryTokens, `${entry.trackName || ""} ${entry.bundleId || ""}`)
         }))
         .sort((left, right) => right.score - left.score)[0];
 
-    return best && best.score > 0 ? best.entry : null;
-}
-
-async function searchBestDomainMatch(env, host, query, titleHint, packageName) {
-    const preferredQuery = host === APKPURE_HOST
-        ? packageName || titleHint || query
-        : titleHint || query;
-    const response = await searchCse(env, {
-        query: preferredQuery,
-        siteSearch: host,
-        num: 3
-    });
-    const items = Array.isArray(response.items) ? response.items : [];
-    return pickBestSearchResult(items, preferredQuery, (value) => cleanGenericTitle(value, host));
-}
-
-function pickBestSearchResult(items, query, titleCleaner) {
-    const normalizedQuery = normalizeText(query);
-    const queryTokens = normalizedQuery.split(" ").filter(Boolean);
-
-    const ranked = items
-        .map((item) => {
-            const cleanedTitle = titleCleaner(item.title || "");
-            const haystack = `${cleanedTitle} ${item.snippet || ""} ${item.link || ""}`;
-            return {
-                item,
-                score: scoreTokens(queryTokens, haystack)
-            };
-        })
-        .sort((left, right) => right.score - left.score);
-
-    return ranked.length && ranked[0].score > 0 ? ranked[0].item : null;
-}
-
-async function fetchPlayMetadata(playUrl) {
-    const response = await fetch(playUrl, {
-        headers: {
-            "accept-language": "en-US,en;q=0.9"
-        }
-    });
-
-    if (!response.ok) {
-        return {};
+    if (!best) {
+        return null;
     }
 
-    const html = await response.text();
-    return {
-        title: readMetaContent(html, "property", "og:title") || readMetaContent(html, "name", "twitter:title"),
-        icon: readMetaContent(html, "property", "og:image") || readMetaContent(html, "name", "twitter:image"),
-        description: readMetaContent(html, "name", "description") || readMetaContent(html, "property", "og:description")
-    };
+    const requiredMatches = significantTokens.length
+        ? significantTokens.length
+        : Math.max(1, Math.min(3, queryTokens.length - 1));
+    const significantMatches = countMatchedTokens(significantTokens, `${best.entry.trackName || ""} ${best.entry.bundleId || ""}`);
+
+    return best.score > 0 && significantMatches >= requiredMatches ? best.entry : null;
 }
 
 function readMetaContent(html, attrName, attrValue) {
@@ -266,42 +260,9 @@ function readMetaContent(html, attrName, attrValue) {
 }
 
 function cleanPlayTitle(value) {
-    return cleanGenericTitle(value, "Apps on Google Play");
-}
-
-function cleanGenericTitle(value, suffix) {
     return String(value || "")
-        .replace(new RegExp(`\\s*[-|]\\s*${escapeRegex(suffix)}\\s*$`, "i"), "")
+        .replace(/\s*-\s*Apps on Google Play\s*$/i, "")
         .trim();
-}
-
-function extractPackageName(link) {
-    try {
-        const url = new URL(link);
-        return url.searchParams.get("id");
-    } catch (error) {
-        return null;
-    }
-}
-
-function normalizePlayLink(link) {
-    try {
-        const url = new URL(link);
-        const id = url.searchParams.get("id");
-        if (!id) {
-            return link;
-        }
-        return `https://${GOOGLE_PLAY_HOST}/store/apps/details?id=${encodeURIComponent(id)}`;
-    } catch (error) {
-        return link;
-    }
-}
-
-function getSearchImage(item) {
-    const pagemap = item && item.pagemap ? item.pagemap : {};
-    const cseImage = Array.isArray(pagemap.cse_image) ? pagemap.cse_image[0] : null;
-    const metaTag = Array.isArray(pagemap.metatags) ? pagemap.metatags[0] : null;
-    return cseImage?.src || metaTag?.["og:image"] || metaTag?.["twitter:image"] || null;
 }
 
 function normalizeText(value) {
@@ -310,10 +271,6 @@ function normalizeText(value) {
         .toLowerCase()
         .replace(/[^\p{L}\p{N}]+/gu, " ")
         .trim();
-}
-
-function scoreMatch(query, candidate) {
-    return scoreTokens(normalizeText(query).split(" ").filter(Boolean), candidate);
 }
 
 function scoreTokens(tokens, candidate) {
@@ -342,6 +299,29 @@ function scoreTokens(tokens, candidate) {
 
     return score;
 }
+
+function countMatchedTokens(tokens, candidate) {
+    const normalizedCandidate = normalizeText(candidate);
+    let count = 0;
+
+    for (const token of tokens) {
+        if (token && normalizedCandidate.includes(token)) {
+            count += 1;
+        }
+    }
+
+    return count;
+}
+
+const GENERIC_SEARCH_TOKENS = new Set([
+    "app",
+    "game",
+    "games",
+    "idle",
+    "mobile",
+    "online",
+    "rpg"
+]);
 
 function dedupeChannels(channels) {
     const seen = new Set();

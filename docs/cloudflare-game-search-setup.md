@@ -17,33 +17,21 @@ Cloudflare will automatically detect the `functions/` directory and deploy the A
 
 ## 2. Required Environment Variables
 
-Add these environment variables in the Cloudflare Pages dashboard:
+The live search function does not require Google API keys anymore.
 
-* `GOOGLE_CSE_API_KEY`
-* `GOOGLE_CSE_CX`
+You only need this build variable in Cloudflare Pages:
 
-## 3. Google Programmable Search Engine
+* `PYTHON_VERSION=3.11`
 
-Create a Google Programmable Search Engine and get:
-
-* API key
-* Search engine ID (`cx`)
-
-Recommended setup:
-
-* Search the entire web
-* Use the API from the Cloudflare Function
-* Let the function narrow specific domains with `siteSearch`
-
-## 4. Current Search Sources
+## 3. Current Search Sources
 
 The backend currently aggregates from:
 
-* Google Play via Google Custom Search JSON API
+* Google Play via direct web search parsing
 * Apple App Store via iTunes Search API
-* TapTap via Google Custom Search JSON API domain filtering
-* APKPure via Google Custom Search JSON API domain filtering
+* TapTap via search results link
+* APKPure via search results link
 
-## 5. Important Note
+## 4. Important Note
 
-If Google changes Custom Search availability later, the Cloudflare Function is the only place you need to swap the provider. The frontend page can stay the same.
+If Google Play changes their page structure later, the Cloudflare Function is the only place you need to update. The frontend page can stay the same.

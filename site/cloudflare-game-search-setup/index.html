@@ -342,10 +342,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-google-programmable-search-engine" class="md-nav__link">
+  <a href="#3-current-search-sources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Google Programmable Search Engine
+        3. Current Search Sources
       
     </span>
   </a>
@@ -353,21 +353,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-current-search-sources" class="md-nav__link">
+  <a href="#4-important-note" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Current Search Sources
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-important-note" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Important Note
+        4. Important Note
       
     </span>
   </a>
@@ -406,33 +395,21 @@
 </ul>
 <p>Cloudflare will automatically detect the <code>functions/</code> directory and deploy the API route.</p>
 <h2 id="2-required-environment-variables">2. Required Environment Variables</h2>
-<p>Add these environment variables in the Cloudflare Pages dashboard:</p>
+<p>The live search function does not require Google API keys anymore.</p>
+<p>You only need this build variable in Cloudflare Pages:</p>
 <ul>
-<li><code>GOOGLE_CSE_API_KEY</code></li>
-<li><code>GOOGLE_CSE_CX</code></li>
+<li><code>PYTHON_VERSION=3.11</code></li>
 </ul>
-<h2 id="3-google-programmable-search-engine">3. Google Programmable Search Engine</h2>
-<p>Create a Google Programmable Search Engine and get:</p>
-<ul>
-<li>API key</li>
-<li>Search engine ID (<code>cx</code>)</li>
-</ul>
-<p>Recommended setup:</p>
-<ul>
-<li>Search the entire web</li>
-<li>Use the API from the Cloudflare Function</li>
-<li>Let the function narrow specific domains with <code>siteSearch</code></li>
-</ul>
-<h2 id="4-current-search-sources">4. Current Search Sources</h2>
+<h2 id="3-current-search-sources">3. Current Search Sources</h2>
 <p>The backend currently aggregates from:</p>
 <ul>
-<li>Google Play via Google Custom Search JSON API</li>
+<li>Google Play via direct web search parsing</li>
 <li>Apple App Store via iTunes Search API</li>
-<li>TapTap via Google Custom Search JSON API domain filtering</li>
-<li>APKPure via Google Custom Search JSON API domain filtering</li>
+<li>TapTap via search results link</li>
+<li>APKPure via search results link</li>
 </ul>
-<h2 id="5-important-note">5. Important Note</h2>
-<p>If Google changes Custom Search availability later, the Cloudflare Function is the only place you need to swap the provider. The frontend page can stay the same.</p>
+<h2 id="4-important-note">4. Important Note</h2>
+<p>If Google Play changes their page structure later, the Cloudflare Function is the only place you need to update. The frontend page can stay the same.</p>
 
 
 

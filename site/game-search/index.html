@@ -798,7 +798,7 @@
 <div class="search-shell">
     <section class="search-hero">
         <h1 class="search-title">Game Search Tool</h1>
-        <p class="search-subtitle">这个页面现在是 Cloudflare 后端驱动的实时搜索页。输入游戏名后，它会尽量聚合出 Google Play、App Store、TapTap、APKPure 等渠道结果，并展示图标、包名和链接。</p>
+        <p class="search-subtitle">这个页面现在是 Cloudflare 后端驱动的实时搜索页。输入游戏名后，它会直接搜索 Google Play 网页结果，并补充 App Store、TapTap、APKPure 等渠道入口，再展示图标、包名和链接。</p>
         <div class="search-badges">
             <span class="search-badge">Google Play</span>
             <span class="search-badge">Package Name</span>
@@ -813,7 +813,7 @@
             <button class="search-button" type="submit">Search</button>
             <button id="clearSearchButton" class="ghost-button" type="button">Clear</button>
         </form>
-        <p class="search-helper">搜索逻辑会先找 Google Play 最佳匹配，再补充其他渠道。图标复制优先复制图片本体，如果浏览器不支持，会自动回退成复制图标链接。</p>
+        <p class="search-helper">搜索逻辑会先找 Google Play 最佳匹配，再补充其他渠道。这个版本不需要你额外配置 Google 付费 API；图标复制优先复制图片本体，如果浏览器不支持，会自动回退成复制图标链接。</p>
         <div class="example-row">
             <button class="example-chip" type="button" data-example="sol enchant">sol enchant</button>
             <button class="example-chip" type="button" data-example="genshin impact">genshin impact</button>
@@ -841,13 +841,13 @@
             <article class="note-card">
                 <h3>Required Env Vars</h3>
                 <ul>
-                    <li><code>GOOGLE_CSE_API_KEY</code></li>
-                    <li><code>GOOGLE_CSE_CX</code></li>
+                    <li>No extra env vars needed for basic search</li>
+                    <li><code>PYTHON_VERSION</code> is only used for MkDocs build</li>
                 </ul>
             </article>
             <article class="note-card">
                 <h3>How It Works</h3>
-                <p>Google Play uses Google Custom Search JSON API for discovery. App Store comes from Apple iTunes Search API. TapTap and APKPure are best-effort supplemental matches.</p>
+                <p>Google Play comes from direct web search parsing. App Store comes from Apple iTunes Search API. TapTap and APKPure are best-effort supplemental channel entries.</p>
             </article>
         </div>
     </section>
@@ -1030,7 +1030,7 @@ async function runSearch(query) {
         console.error(error);
         resultMeta.textContent = "The backend search route returned an error.";
         setStatus("error", error.message || "Search failed.");
-        setEmptyState("Search failed. Check your Cloudflare env vars and API configuration.");
+        setEmptyState("Search failed. Please retry in a moment or check the Cloudflare function logs.");
     }
 }
 
