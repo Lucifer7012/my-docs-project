@@ -618,10 +618,11 @@ function setEmptyState(message) {
 
 function updateQueryString(query) {
     const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.delete("q");
     if (query) {
-        nextUrl.searchParams.set("q", query);
+        nextUrl.searchParams.set("game", query);
     } else {
-        nextUrl.searchParams.delete("q");
+        nextUrl.searchParams.delete("game");
     }
     window.history.replaceState({}, "", nextUrl.toString());
 }
@@ -844,8 +845,12 @@ resultMount.addEventListener("click", async (event) => {
     }
 });
 
-const initialQuery = new URLSearchParams(window.location.search).get("q") || "";
+const initialParams = new URLSearchParams(window.location.search);
+const initialQuery = initialParams.get("game") || initialParams.get("q") || "";
 if (initialQuery) {
+    if (initialParams.get("q")) {
+        updateQueryString(initialQuery);
+    }
     searchInput.value = initialQuery;
     runSearch(initialQuery);
 }
