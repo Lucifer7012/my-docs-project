@@ -189,6 +189,24 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
+        title: "EOS BLACK",
+        packageName: "com.BluePotionCompany.EosBlack",
+        officialSite: "https://www.eos-black.com/",
+        appStoreUrl: "https://apps.apple.com/kr/app/%EC%97%90%EC%98%A4%EC%8A%A4-%EB%B8%94%EB%9E%99/id6463600523",
+        appStoreNote: "Korea App Store",
+        icon: "https://play-lh.googleusercontent.com/4bxk5xIAtBrtrj7Nzz82aRizrhvQgCz3EtDJgy2SD11pLscI9T3Xx-U3iXIdKNewALRs7DqJEn2PKfMcz7EGLA",
+        summary: "EOS BLACK Korea version by Blue Potion Games.",
+        skipPlayMetadata: true,
+        aliases: [
+            "eosblack",
+            "eos black",
+            "eos black kr",
+            "eos black korea",
+            "eos black korean",
+            "에오스 블랙"
+        ]
+    },
+    {
         title: "Ragnarok V: Returns",
         packageName: "com.ggt.rov.aos",
         officialSite: "https://rov-global.com/",
