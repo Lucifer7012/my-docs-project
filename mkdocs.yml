@@ -8,4 +8,5 @@ theme:
 nav:
   - Rate Table: rates-en.md
   - Upgrade Calculator: calculator.md
+  - Game Search Tool: game-search.md
   - Game Support: support.md
