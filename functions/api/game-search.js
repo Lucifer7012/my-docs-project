@@ -26,6 +26,36 @@ export async function onRequestGet(context) {
     }
 
     try {
+        if (isLikelyPackageName(query)) {
+            const curatedPackageOverride = findCuratedOverrideByPackage(query);
+            if (curatedPackageOverride) {
+                const curatedPackageResult = await resolveCuratedResult(curatedPackageOverride, query);
+
+                return json(
+                    {
+                        query,
+                        generatedAt: new Date().toISOString(),
+                        message: `Best match found for "${query}".`,
+                        result: curatedPackageResult
+                    },
+                    200
+                );
+            }
+
+            const directPackageResult = await resolveDirectPackageLookup(query);
+            if (directPackageResult) {
+                return json(
+                    {
+                        query,
+                        generatedAt: new Date().toISOString(),
+                        message: `Best match found for "${query}".`,
+                        result: directPackageResult
+                    },
+                    200
+                );
+            }
+        }
+
         const curatedOverride = findCuratedOverride(query);
         if (curatedOverride) {
             const curatedResult = await resolveCuratedResult(curatedOverride, query);
@@ -221,6 +251,59 @@ async function searchGooglePlayCandidates(query) {
     }));
 }
 
+async function resolveDirectPackageLookup(packageName) {
+    const playUrl = buildPlayDetailsUrl(packageName);
+    const playMeta = await fetchPlayMetadata(playUrl);
+    const title = cleanPlayTitle(playMeta.title || packageName);
+
+    if (!playMeta.title && !playMeta.icon && !playMeta.description) {
+        return null;
+    }
+
+    const appStoreMatch = await searchAppStore(title);
+    const channels = dedupeChannels([
+        {
+            name: "Google Play",
+            url: playUrl,
+            note: `Package: ${packageName}`
+        },
+        appStoreMatch
+            ? {
+                name: "App Store",
+                url: appStoreMatch.trackViewUrl,
+                note: appStoreMatch.bundleId || appStoreMatch.trackName
+            }
+            : null,
+        playMeta.website
+            ? {
+                name: "Official Site",
+                url: playMeta.website,
+                note: "Developer website"
+            }
+            : null,
+        {
+            name: "TapTap Search",
+            url: `https://www.taptap.io/search/${encodeURIComponent(title)}?region=us`,
+            note: "Search results page"
+        },
+        {
+            name: "APKPure Search",
+            url: `https://apkpure.com/search?q=${encodeURIComponent(packageName)}`,
+            note: "Search results page"
+        }
+    ]);
+
+    return {
+        title,
+        packageName,
+        icon: playMeta.icon || (appStoreMatch ? appStoreMatch.artworkUrl512 : null),
+        summary: summarizeText(playMeta.description || ""),
+        matchSource: "Direct Package Lookup",
+        channels,
+        related: []
+    };
+}
+
 function extractPlayPackageIds(html) {
     const ids = [];
     const seen = new Set();
@@ -408,6 +491,11 @@ function findCuratedOverride(query) {
     return bestMatch ? bestMatch.entry : null;
 }
 
+function findCuratedOverrideByPackage(query) {
+    const normalizedQuery = String(query || "").trim().toLowerCase();
+    return CURATED_GAME_OVERRIDES.find((entry) => String(entry.packageName || "").trim().toLowerCase() === normalizedQuery) || null;
+}
+
 function scoreTokens(tokens, candidate) {
     const normalizedCandidate = normalizeText(candidate);
     if (!normalizedCandidate) {
@@ -450,6 +538,10 @@ function countMatchedTokens(tokens, candidate) {
 
 function collapseNormalizedText(value) {
     return String(value || "").replace(/\s+/g, "");
+}
+
+function isLikelyPackageName(value) {
+    return /^[A-Za-z][A-Za-z0-9_]*(\.[A-Za-z0-9_]+)+$/.test(String(value || "").trim());
 }
 
 const GENERIC_SEARCH_TOKENS = new Set([

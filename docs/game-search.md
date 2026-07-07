@@ -503,11 +503,11 @@ Search a game name and get a result card with the game icon, package name, and d
 
     <section class="search-panel">
         <form id="gameSearchForm" class="search-form">
-            <input id="gameSearchInput" class="search-input" type="text" placeholder="Try: sol enchant, genshin, night crows" autocomplete="off">
+            <input id="gameSearchInput" class="search-input" type="text" placeholder="Try: sol enchant, com.goh.daya.ydonline, night crows" autocomplete="off">
             <button class="search-button" type="submit">Search</button>
             <button id="clearSearchButton" class="ghost-button" type="button">Clear</button>
         </form>
-        <p class="search-helper">搜索逻辑会先找 Google Play 最佳匹配，再补充其他渠道。这个版本不需要你额外配置 Google 付费 API；图标复制优先复制图片本体，如果浏览器不支持，会自动回退成复制图标链接。</p>
+        <p class="search-helper">搜索逻辑会先找 Google Play 最佳匹配，再补充其他渠道。现在也支持直接输入包名，例如 <code>com.goh.daya.ydonline</code>。这个版本不需要你额外配置 Google 付费 API；图标复制优先复制图片本体，如果浏览器不支持，会自动回退成复制图标链接。</p>
         <div class="example-row">
             <button class="example-chip" type="button" data-example="sol enchant">sol enchant</button>
             <button class="example-chip" type="button" data-example="genshin impact">genshin impact</button>
