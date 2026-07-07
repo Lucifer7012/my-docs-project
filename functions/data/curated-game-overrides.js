@@ -127,6 +127,25 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
+        title: "Cabal: Infinite Combo (SEA)",
+        packageName: "com.estgames.cm.sa",
+        aliases: [
+            "cabal infinite combo",
+            "cabal : infinite combo",
+            "cabal infinite combo sea",
+            "cabal infinite combo th",
+            "cabal infinite combo thailand",
+            "cabal th"
+        ],
+        related: [
+            {
+                title: "Return of Action",
+                packageName: "com.estgames.cm.us",
+                url: "https://play.google.com/store/apps/details?id=com.estgames.cm.us&hl=en_US&gl=US"
+            }
+        ]
+    },
+    {
         title: "Fate/Grand Order",
         packageName: "com.aniplex.fategrandorder",
         aliases: [
