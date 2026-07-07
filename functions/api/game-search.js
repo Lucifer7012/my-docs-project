@@ -415,6 +415,23 @@ const CURATED_GAME_OVERRIDES = [
                 url: "https://help.netmarble.com/game/sol"
             }
         ]
+    },
+    {
+        title: "Roblox VN",
+        packageName: "com.roblox.client.vnggames",
+        aliases: [
+            "roblox vn",
+            "roblox vng",
+            "roblox vietnam",
+            "roblox viet nam"
+        ],
+        related: [
+            {
+                title: "Global Version",
+                packageName: "com.roblox.client",
+                url: `https://${GOOGLE_PLAY_HOST}/store/apps/details?id=com.roblox.client&hl=en_US&gl=US`
+            }
+        ]
     }
 ];
 
