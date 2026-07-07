@@ -299,6 +299,20 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
+        title: "Ares: Rise of Guardians",
+        packageName: "com.kakaogames.ares",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.kakaogames.ares",
+        googlePlayNote: "Package: com.kakaogames.ares",
+        aliases: [
+            "ares rise of guardians",
+            "ares: rise of guardians",
+            "ares rise guardians",
+            "com.kakaogames.ares",
+            "\uC544\uB808\uC2A4",
+            "\uC544\uB808\uC2A4 \uB77C\uC774\uC988 \uC624\uBE0C \uAC00\uB514\uC5B8\uC988"
+        ]
+    },
+    {
         title: "12SKY REBORN",
         packageName: "com.ntori.tsreborn",
         officialSite: "https://12skymreborn.ntori.com/",
