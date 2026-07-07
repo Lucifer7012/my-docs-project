@@ -327,6 +327,21 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
+        title: "DK Mobile: Reborn",
+        packageName: "com.ntrance.dkr.and",
+        officialSite: "https://dkreborn.com/sea",
+        googlePlayUrl: "https://play.google.com/store/apps/details?hl=en_US&id=com.ntrance.dkr.and",
+        googlePlayNote: "Package: com.ntrance.dkr.and",
+        aliases: [
+            "dk mobile reborn",
+            "dk mobile: reborn",
+            "dkmobile reborn",
+            "dkmobile: reborn",
+            "dkmobilereborn",
+            "com.ntrance.dkr.and"
+        ]
+    },
+    {
         title: "12SKY REBORN",
         packageName: "com.ntori.tsreborn",
         officialSite: "https://12skymreborn.ntori.com/",
