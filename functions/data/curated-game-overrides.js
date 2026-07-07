@@ -4,7 +4,7 @@ export const CURATED_GAME_OVERRIDES = [
         packageName: "com.netmarble.sol",
         officialSite: "https://sol.netmarble.com/",
         appStoreUrl: "https://apps.apple.com/kr/app/sol-enchant/id6748004690",
-        appStoreNote: "Netmarble Corporation · Korea App Store",
+        appStoreNote: "Netmarble Corporation Korea App Store",
         aliases: [
             "sol enchant",
             "sol: enchant",
@@ -22,6 +22,7 @@ export const CURATED_GAME_OVERRIDES = [
         title: "Roblox VN",
         packageName: "com.roblox.client.vnggames",
         aliases: [
+            "robloxvn",
             "roblox vn",
             "roblox vng",
             "roblox vietnam",
@@ -39,6 +40,8 @@ export const CURATED_GAME_OVERRIDES = [
         title: "PUBG Mobile VN",
         packageName: "com.vng.pubgmobile",
         aliases: [
+            "pubgvn",
+            "pubgmobilevn",
             "pubg vn",
             "pubg mobile vn",
             "pubg vietnam",
@@ -57,6 +60,7 @@ export const CURATED_GAME_OVERRIDES = [
         title: "Call Of Duty: Mobile VN",
         packageName: "com.vng.codmvn",
         aliases: [
+            "codmvn",
             "codm vn",
             "cod mobile vn",
             "call of duty mobile vn",
@@ -75,6 +79,8 @@ export const CURATED_GAME_OVERRIDES = [
         title: "PUBG Mobile KR",
         packageName: "com.pubg.krmobile",
         aliases: [
+            "pubgkr",
+            "pubgmobilekr",
             "pubg kr",
             "pubg korea",
             "pubg mobile kr",
@@ -93,6 +99,8 @@ export const CURATED_GAME_OVERRIDES = [
         title: "Play Together VNG",
         packageName: "com.vng.playtogether",
         aliases: [
+            "ptvng",
+            "playtogethervng",
             "play together vn",
             "play together vng",
             "play together vietnam"
@@ -106,7 +114,7 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
-        title: "Garena Liên Quân Mobile",
+        title: "Garena Li\u00ean Qu\u00e2n Mobile",
         packageName: "com.garena.game.kgvn",
         aliases: [
             "lien quan",
@@ -128,6 +136,7 @@ export const CURATED_GAME_OVERRIDES = [
         title: "Free Fire Thailand",
         packageName: "com.dts.freefireth",
         aliases: [
+            "ffth",
             "free fire th",
             "free fire thailand",
             "garena free fire th",
@@ -145,6 +154,7 @@ export const CURATED_GAME_OVERRIDES = [
         title: "Blue Archive JP",
         packageName: "com.YostarJP.BlueArchive",
         aliases: [
+            "bluearchivejp",
             "blue archive jp",
             "blue archive japan",
             "blue archive yostar jp",
@@ -163,6 +173,7 @@ export const CURATED_GAME_OVERRIDES = [
         packageName: "com.vng.lineagewvn",
         officialSite: "https://lineagew.plaync.com/",
         aliases: [
+            "lineagewvn",
             "lineage w vng",
             "lineage w vn",
             "lineage w vietnam",
@@ -181,11 +192,64 @@ export const CURATED_GAME_OVERRIDES = [
         title: "Lineage2M",
         packageName: "com.vng.lineage2mvn",
         aliases: [
+            "lineage2mvn",
+            "l2mvn",
             "lineage2m vn",
             "lineage2m vng",
             "lineage 2m vn",
             "lineage 2m vng",
             "lineage2m vietnam"
+        ]
+    },
+    {
+        title: "Yo-kai Watch Puni Puni",
+        packageName: "com.Level5.YWP",
+        officialSite: "https://yokai-punipuni.jp/",
+        appStoreUrl: "https://apps.apple.com/jp/app/id1032346221",
+        appStoreNote: "Japan App Store",
+        aliases: [
+            "\u3077\u306b\u3077\u306b",
+            "puni puni",
+            "punipuni",
+            "yokai puni",
+            "yo kai puni",
+            "yokai watch puni puni"
+        ]
+    },
+    {
+        title: "Monster Strike",
+        packageName: "jp.co.mixi.monsterstrike",
+        officialSite: "https://www.monster-strike.com/",
+        aliases: [
+            "\u30e2\u30f3\u30b9\u30c8",
+            "monster strike jp",
+            "monsterstrike jp",
+            "monsterstrikejp",
+            "monst jp"
+        ]
+    },
+    {
+        title: "Puzzle & Dragons",
+        packageName: "jp.gungho.pad",
+        officialSite: "https://pad.gungho.jp/member/",
+        aliases: [
+            "\u30d1\u30ba\u30c9\u30e9",
+            "pazudora",
+            "puzzle dragons jp",
+            "puzzle and dragons jp"
+        ]
+    },
+    {
+        title: "Umamusume Pretty Derby",
+        packageName: "jp.co.cygames.umamusume",
+        officialSite: "https://umamusume.jp/",
+        aliases: [
+            "\u30a6\u30de\u5a18",
+            "umamusume",
+            "uma musume",
+            "umamusume jp",
+            "uma musume jp",
+            "pretty derby jp"
         ]
     },
     {
@@ -199,11 +263,39 @@ export const CURATED_GAME_OVERRIDES = [
         skipPlayMetadata: true,
         aliases: [
             "eosblack",
+            "eosblackkr",
             "eos black",
             "eos black kr",
             "eos black korea",
             "eos black korean",
-            "에오스 블랙"
+            "\uC5D0\uC624\uC2A4 \uBE14\uB799"
+        ]
+    },
+    {
+        title: "Odin: Valhalla Rising",
+        packageName: "com.kakaogames.odin",
+        officialSite: "https://odin.kakaogames.com/",
+        aliases: [
+            "\uC624\uB518",
+            "odin kr",
+            "odin korea",
+            "odin valhalla",
+            "odin valhalla rising",
+            "odin valhalla rising kr"
+        ]
+    },
+    {
+        title: "Lineage M",
+        packageName: "com.ncsoft.lineagem19",
+        officialSite: "https://lineagem.plaync.com/",
+        aliases: [
+            "\uB9AC\uB2C8\uC9C0m",
+            "\uB9AC\uB2C8\uC9C0 m",
+            "lineagem",
+            "lineage m",
+            "lineagem kr",
+            "lineage m kr",
+            "lineage m korea"
         ]
     },
     {
@@ -241,6 +333,8 @@ export const CURATED_GAME_OVERRIDES = [
         title: "Cabal: Infinite Combo (SEA)",
         packageName: "com.estgames.cm.sa",
         aliases: [
+            "cabalsea",
+            "cabal sea",
             "cabal infinite combo",
             "cabal : infinite combo",
             "cabal infinite combo sea"
@@ -262,6 +356,7 @@ export const CURATED_GAME_OVERRIDES = [
         title: "Cabal : Infinite Combo",
         packageName: "com.estgames.cm.tha",
         aliases: [
+            "cabalth",
             "cabal infinite combo th",
             "cabal infinite combo thailand",
             "cabal th",
@@ -284,6 +379,7 @@ export const CURATED_GAME_OVERRIDES = [
         title: "Fate/Grand Order",
         packageName: "com.aniplex.fategrandorder",
         aliases: [
+            "fgojp",
             "fgo jp",
             "fgo japan",
             "fate grand order jp",
@@ -301,6 +397,7 @@ export const CURATED_GAME_OVERRIDES = [
         title: "Fate/Grand Order (English)",
         packageName: "com.aniplex.fategrandorder.en",
         aliases: [
+            "fgoen",
             "fgo en",
             "fgo english",
             "fgo global",
