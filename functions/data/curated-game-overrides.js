@@ -299,6 +299,37 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
+        title: "12SKY REBORN",
+        packageName: "com.ntori.tsreborn",
+        officialSite: "https://12skymreborn.ntori.com/",
+        appStoreUrl: "https://apps.apple.com/sg/app/12sky-reborn/id6505045703",
+        appStoreNote: "Singapore App Store",
+        icon: "https://image.winudf.com/p/aHR0cHM6Ly9wbGF5LWxoLmdvb2dsZXVzZXJjb250ZW50LmNvbS9rNENDWnJObGNrV1d5VEtEY0djOUdzY0E4QklSaW9TRXBlYmY0TkNRbjVWcGtxTG1KVGFIcWVxWUE5UjJxazZRMzZVPWg4MDA?k=d904e7a766af7e76b067904b7c0298246a59f75d&.jpg",
+        summary: "Continuing the nostalgia of the original martial MMORPG.",
+        hideGooglePlay: true,
+        skipPlayMetadata: true,
+        channels: [
+            {
+                name: "APKPure",
+                url: "https://apkpure.com/12sky-reborn/com.ntori.tsreborn",
+                note: "Android package archive page"
+            },
+            {
+                name: "Aptoide",
+                url: "https://12sky-reborn.en.aptoide.com/app",
+                note: "Alternative Android listing"
+            }
+        ],
+        aliases: [
+            "12skyreborn",
+            "12sky reborn",
+            "12 sky reborn",
+            "12sky reborn global",
+            "12skymreborn",
+            "twelvesky reborn"
+        ]
+    },
+    {
         title: "Ragnarok V: Returns",
         packageName: "com.ggt.rov.aos",
         officialSite: "https://rov-global.com/",
