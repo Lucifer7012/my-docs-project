@@ -634,6 +634,13 @@ async function copyText(value, successMessage, button) {
     flashButton(button);
 }
 
+async function copyTextWithLabel(value, successMessage, button, label) {
+    await navigator.clipboard.writeText(value);
+    setStatus("ok", successMessage);
+    showToast(successMessage);
+    flashButton(button, label);
+}
+
 async function copyImage(imageUrl, successMessage, fallbackMessage, button) {
     try {
         if (!window.ClipboardItem || !navigator.clipboard || typeof navigator.clipboard.write !== "function") {
@@ -655,7 +662,7 @@ async function copyImage(imageUrl, successMessage, fallbackMessage, button) {
         showToast(successMessage);
         flashButton(button);
     } catch (error) {
-        await copyText(imageUrl, fallbackMessage, button);
+        await copyTextWithLabel(imageUrl, fallbackMessage, button, "Link copied");
         console.warn(error);
     }
 }
@@ -814,7 +821,12 @@ resultMount.addEventListener("click", async (event) => {
                 showToast("This result does not include an icon.");
                 return;
             }
-            await copyImage(currentResult.icon, "Icon copied to clipboard.", "Icon link copied to clipboard.", trigger);
+            await copyImage(
+                currentResult.icon,
+                "Icon copied to clipboard.",
+                "The browser blocked direct image copy, so the icon link was copied instead.",
+                trigger
+            );
             return;
         }
 
