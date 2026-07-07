@@ -1,3 +1,5 @@
+import { CURATED_GAME_OVERRIDES } from "../data/curated-game-overrides.js";
+
 const GOOGLE_PLAY_HOST = "play.google.com";
 const APPLE_SEARCH_URL = "https://itunes.apple.com/search";
 
@@ -396,44 +398,6 @@ const GENERIC_SEARCH_TOKENS = new Set([
     "rpg"
 ]);
 
-const CURATED_GAME_OVERRIDES = [
-    {
-        title: "SOL: enchant",
-        packageName: "com.netmarble.sol",
-        officialSite: "https://sol.netmarble.com/",
-        appStoreUrl: "https://apps.apple.com/kr/app/sol-enchant/id6748004690",
-        appStoreNote: "Netmarble Corporation · Korea App Store",
-        aliases: [
-            "sol enchant",
-            "sol: enchant",
-            "sol-enchant"
-        ],
-        related: [
-            {
-                title: "Netmarble Support",
-                packageName: "help.netmarble.com/game/sol",
-                url: "https://help.netmarble.com/game/sol"
-            }
-        ]
-    },
-    {
-        title: "Roblox VN",
-        packageName: "com.roblox.client.vnggames",
-        aliases: [
-            "roblox vn",
-            "roblox vng",
-            "roblox vietnam",
-            "roblox viet nam"
-        ],
-        related: [
-            {
-                title: "Global Version",
-                packageName: "com.roblox.client",
-                url: `https://${GOOGLE_PLAY_HOST}/store/apps/details?id=com.roblox.client&hl=en_US&gl=US`
-            }
-        ]
-    }
-];
 
 function dedupeChannels(channels) {
     const seen = new Set();
