@@ -339,13 +339,30 @@ function normalizeText(value) {
 
 function findCuratedOverride(query) {
     const normalizedQuery = normalizeText(query);
+    let bestMatch = null;
 
-    return CURATED_GAME_OVERRIDES.find((entry) =>
-        entry.aliases.some((alias) => {
+    for (const entry of CURATED_GAME_OVERRIDES) {
+        for (const alias of entry.aliases) {
             const normalizedAlias = normalizeText(alias);
-            return normalizedQuery === normalizedAlias || normalizedQuery.includes(normalizedAlias);
-        })
-    ) || null;
+            if (!normalizedAlias) {
+                continue;
+            }
+
+            const isMatch = normalizedQuery === normalizedAlias || normalizedQuery.includes(normalizedAlias);
+            if (!isMatch) {
+                continue;
+            }
+
+            if (!bestMatch || normalizedAlias.length > bestMatch.aliasLength) {
+                bestMatch = {
+                    entry,
+                    aliasLength: normalizedAlias.length
+                };
+            }
+        }
+    }
+
+    return bestMatch ? bestMatch.entry : null;
 }
 
 function scoreTokens(tokens, candidate) {

@@ -132,12 +132,36 @@ export const CURATED_GAME_OVERRIDES = [
         aliases: [
             "cabal infinite combo",
             "cabal : infinite combo",
-            "cabal infinite combo sea",
-            "cabal infinite combo th",
-            "cabal infinite combo thailand",
-            "cabal th"
+            "cabal infinite combo sea"
         ],
         related: [
+            {
+                title: "Thailand Version",
+                packageName: "com.estgames.cm.tha",
+                url: "https://play.google.com/store/apps/details?id=com.estgames.cm.tha&hl=en_US&gl=US"
+            },
+            {
+                title: "Return of Action",
+                packageName: "com.estgames.cm.us",
+                url: "https://play.google.com/store/apps/details?id=com.estgames.cm.us&hl=en_US&gl=US"
+            }
+        ]
+    },
+    {
+        title: "Cabal : Infinite Combo",
+        packageName: "com.estgames.cm.tha",
+        aliases: [
+            "cabal infinite combo th",
+            "cabal infinite combo thailand",
+            "cabal th",
+            "cabal thailand"
+        ],
+        related: [
+            {
+                title: "SEA Version",
+                packageName: "com.estgames.cm.sa",
+                url: "https://play.google.com/store/apps/details?id=com.estgames.cm.sa&hl=en_US&gl=US"
+            },
             {
                 title: "Return of Action",
                 packageName: "com.estgames.cm.us",
