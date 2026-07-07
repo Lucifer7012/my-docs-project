@@ -108,6 +108,25 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
+        title: "Lineage W",
+        packageName: "com.vng.lineagewvn",
+        officialSite: "https://lineagew.plaync.com/",
+        aliases: [
+            "lineage w vng",
+            "lineage w vn",
+            "lineage w vietnam",
+            "lineage w sea",
+            "lineagew vng"
+        ],
+        related: [
+            {
+                title: "Global Version",
+                packageName: "com.ncsoft.lineagew",
+                url: "https://play.google.com/store/apps/details?id=com.ncsoft.lineagew&hl=en_US&gl=US"
+            }
+        ]
+    },
+    {
         title: "Fate/Grand Order",
         packageName: "com.aniplex.fategrandorder",
         aliases: [
