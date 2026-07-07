@@ -189,6 +189,37 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
+        title: "Ragnarok V: Returns",
+        packageName: "com.ggt.rov.aos",
+        officialSite: "https://rov-global.com/",
+        icon: "https://img.gnjoy.in.th/rov/icon/ROV-Poring-001.png",
+        summary: "Join the adventure in this 3D MMORPG now!",
+        hideGooglePlay: true,
+        skipPlayMetadata: true,
+        channels: [
+            {
+                name: "Official Android Link",
+                url: "https://ragnarokvreturns.go.link/fOLxb",
+                note: "Official install link for package com.ggt.rov.aos"
+            },
+            {
+                name: "Uptodown",
+                url: "https://ragnarok-v-returns.en.uptodown.com/android",
+                note: "Alternative Android listing"
+            },
+            {
+                name: "AppBrain",
+                url: "https://www.appbrain.com/app/ragnarok-v-returns/com.ggt.rov.aos",
+                note: "Package archive page"
+            }
+        ],
+        aliases: [
+            "ragnarokv returns",
+            "ragnarok v returns",
+            "ragnarok v: returns"
+        ]
+    },
+    {
         title: "Cabal: Infinite Combo (SEA)",
         packageName: "com.estgames.cm.sa",
         aliases: [

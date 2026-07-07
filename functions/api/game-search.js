@@ -131,15 +131,17 @@ export async function onRequestGet(context) {
 }
 
 async function resolveCuratedResult(override, query) {
-    const playUrl = `https://${GOOGLE_PLAY_HOST}/store/apps/details?id=${encodeURIComponent(override.packageName)}&hl=en_US&gl=US`;
-    const playMeta = await fetchPlayMetadata(playUrl);
+    const playUrl = override.googlePlayUrl || buildPlayDetailsUrl(override.packageName);
+    const playMeta = override.skipPlayMetadata ? {} : await fetchPlayMetadata(playUrl);
     const title = cleanPlayTitle(playMeta.title || override.title || query);
     const channels = dedupeChannels([
-        {
-            name: "Google Play",
-            url: playUrl,
-            note: `Package: ${override.packageName}`
-        },
+        override.hideGooglePlay
+            ? null
+            : {
+                name: override.googlePlayLabel || "Google Play",
+                url: playUrl,
+                note: override.googlePlayNote || `Package: ${override.packageName}`
+            },
         override.officialSite
             ? {
                 name: "Official Site",
@@ -154,6 +156,7 @@ async function resolveCuratedResult(override, query) {
                 note: override.appStoreNote || "Official iOS page"
             }
             : null,
+        ...(Array.isArray(override.channels) ? override.channels : []),
         {
             name: "TapTap Search",
             url: `https://www.taptap.io/search/${encodeURIComponent(title)}?region=us`,
@@ -178,23 +181,43 @@ async function resolveCuratedResult(override, query) {
 }
 
 async function searchGooglePlayCandidates(query) {
-    const searchUrl = `https://${GOOGLE_PLAY_HOST}/store/search?q=${encodeURIComponent(query)}&c=apps&hl=en_US&gl=US`;
-    const response = await fetch(searchUrl, {
-        headers: {
-            "accept-language": "en-US,en;q=0.9"
+    const ids = [];
+    const seen = new Set();
+
+    for (const searchTerm of buildSearchQueryVariants(query)) {
+        const searchUrl = `https://${GOOGLE_PLAY_HOST}/store/search?q=${encodeURIComponent(searchTerm)}&c=apps&hl=en_US&gl=US`;
+        const response = await fetch(searchUrl, {
+            headers: {
+                "accept-language": "en-US,en;q=0.9"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Google Play search request failed: ${response.status}`);
         }
-    });
 
-    if (!response.ok) {
-        throw new Error(`Google Play search request failed: ${response.status}`);
+        const html = await response.text();
+        for (const packageName of extractPlayPackageIds(html)) {
+            if (seen.has(packageName)) {
+                continue;
+            }
+
+            seen.add(packageName);
+            ids.push(packageName);
+
+            if (ids.length >= 6) {
+                break;
+            }
+        }
+
+        if (ids.length >= 6) {
+            break;
+        }
     }
-
-    const html = await response.text();
-    const ids = extractPlayPackageIds(html).slice(0, 6);
 
     return ids.map((packageName) => ({
         packageName,
-        url: `https://${GOOGLE_PLAY_HOST}/store/apps/details?id=${encodeURIComponent(packageName)}&hl=en_US&gl=US`
+        url: buildPlayDetailsUrl(packageName)
     }));
 }
 
@@ -332,9 +355,22 @@ function cleanPlayTitle(value) {
 function normalizeText(value) {
     return String(value || "")
         .normalize("NFKC")
+        .replace(/([a-z])([A-Z])/g, "$1 $2")
+        .replace(/([A-Za-z])(\d)/g, "$1 $2")
+        .replace(/(\d)([A-Za-z])/g, "$1 $2")
         .toLowerCase()
         .replace(/[^\p{L}\p{N}]+/gu, " ")
         .trim();
+}
+
+function buildSearchQueryVariants(query) {
+    const raw = String(query || "").trim();
+    const normalized = normalizeText(raw);
+    return [...new Set([raw, normalized].filter(Boolean))];
+}
+
+function buildPlayDetailsUrl(packageName) {
+    return `https://${GOOGLE_PLAY_HOST}/store/apps/details?id=${encodeURIComponent(packageName)}&hl=en_US&gl=US`;
 }
 
 function findCuratedOverride(query) {
