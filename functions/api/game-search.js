@@ -54,6 +54,37 @@ export async function onRequestGet(context) {
                     200
                 );
             }
+
+            const normalizedPackageQuery = normalizePackageName(query);
+            if (normalizedPackageQuery !== query) {
+                const normalizedCuratedOverride = findCuratedOverrideByPackage(normalizedPackageQuery);
+                if (normalizedCuratedOverride) {
+                    const normalizedCuratedResult = await resolveCuratedResult(normalizedCuratedOverride, normalizedPackageQuery);
+
+                    return json(
+                        {
+                            query,
+                            generatedAt: new Date().toISOString(),
+                            message: `Best match found for "${query}".`,
+                            result: normalizedCuratedResult
+                        },
+                        200
+                    );
+                }
+
+                const normalizedPackageResult = await resolveDirectPackageLookup(normalizedPackageQuery);
+                if (normalizedPackageResult) {
+                    return json(
+                        {
+                            query,
+                            generatedAt: new Date().toISOString(),
+                            message: `Best match found for "${query}".`,
+                            result: normalizedPackageResult
+                        },
+                        200
+                    );
+                }
+            }
         }
 
         const curatedOverride = findCuratedOverride(query);
@@ -245,10 +276,64 @@ async function searchGooglePlayCandidates(query) {
         }
     }
 
+    if (ids.length < 8) {
+        const webIds = await searchWebDiscoveredPlayPackageIds(query);
+        for (const packageName of webIds) {
+            if (seen.has(packageName)) {
+                continue;
+            }
+
+            seen.add(packageName);
+            ids.push(packageName);
+
+            if (ids.length >= 8) {
+                break;
+            }
+        }
+    }
+
     return ids.map((packageName) => ({
         packageName,
         url: buildPlayDetailsUrl(packageName)
     }));
+}
+
+async function searchWebDiscoveredPlayPackageIds(query) {
+    const discoveredIds = [];
+    const seen = new Set();
+
+    for (const searchTerm of buildSearchQueryVariants(query)) {
+        const webSearchUrl = `https://duckduckgo.com/html/?q=${encodeURIComponent(searchTerm)}`;
+        const response = await fetch(webSearchUrl, {
+            headers: {
+                "accept-language": "en-US,en;q=0.9",
+                "user-agent": "Mozilla/5.0"
+            }
+        });
+
+        if (!response.ok) {
+            continue;
+        }
+
+        const html = await response.text();
+        const urls = extractUrlsFromDuckDuckGoHtml(html);
+
+        for (const url of urls) {
+            const packageName = extractPackageNameFromUrl(url);
+            if (!packageName || seen.has(packageName)) {
+                continue;
+            }
+
+            seen.add(packageName);
+            discoveredIds.push(packageName);
+
+            if (discoveredIds.length >= 8) {
+                return discoveredIds;
+            }
+        }
+    }
+
+    return discoveredIds;
 }
 
 async function resolveDirectPackageLookup(packageName) {
@@ -320,6 +405,42 @@ function extractPlayPackageIds(html) {
     }
 
     return ids;
+}
+
+function extractUrlsFromDuckDuckGoHtml(html) {
+    const urls = [];
+    const seen = new Set();
+    const regex = /uddg=([^"'<>\\s]+)/g;
+    let match;
+
+    while ((match = regex.exec(html)) !== null) {
+        const encodedUrl = String(match[1] || "")
+            .split("&amp;rut=")[0]
+            .split("&rut=")[0]
+            .trim();
+        const rawUrl = decodeURIComponent(encodedUrl).replace(/&amp;/g, "&").trim();
+        if (!rawUrl || seen.has(rawUrl)) {
+            continue;
+        }
+
+        seen.add(rawUrl);
+        urls.push(rawUrl);
+    }
+
+    return urls;
+}
+
+function extractPackageNameFromUrl(value) {
+    try {
+        const url = new URL(value);
+        if (url.hostname !== GOOGLE_PLAY_HOST || !url.pathname.startsWith("/store/apps/details")) {
+            return "";
+        }
+
+        return url.searchParams.get("id") || "";
+    } catch {
+        return "";
+    }
 }
 
 async function resolveBestGooglePlayResult(query, candidates) {
@@ -542,6 +663,10 @@ function collapseNormalizedText(value) {
 
 function isLikelyPackageName(value) {
     return /^[A-Za-z][A-Za-z0-9_]*(\.[A-Za-z0-9_]+)+$/.test(String(value || "").trim());
+}
+
+function normalizePackageName(value) {
+    return String(value || "").trim().toLowerCase();
 }
 
 const GENERIC_SEARCH_TOKENS = new Set([

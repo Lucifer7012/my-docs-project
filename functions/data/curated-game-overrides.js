@@ -313,6 +313,20 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
+        title: "ArcheAge WAR",
+        packageName: "com.kakaogames.aaw",
+        officialSite: "https://aw.kakaogames.com/",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.kakaogames.aaw",
+        googlePlayNote: "Package: com.kakaogames.aaw",
+        aliases: [
+            "archeage war",
+            "archeagewar",
+            "com.kakaogames.aaw",
+            "com.kakaogames.aaW",
+            "\uC544\uD0A4\uC5D0\uC774\uC9C0 \uC6CC"
+        ]
+    },
+    {
         title: "12SKY REBORN",
         packageName: "com.ntori.tsreborn",
         officialSite: "https://12skymreborn.ntori.com/",
