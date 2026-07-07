@@ -304,9 +304,10 @@ export const CURATED_GAME_OVERRIDES = [
         officialSite: "https://12skymreborn.ntori.com/",
         appStoreUrl: "https://apps.apple.com/sg/app/12sky-reborn/id6505045703",
         appStoreNote: "Singapore App Store",
-        icon: "https://image.winudf.com/p/aHR0cHM6Ly9wbGF5LWxoLmdvb2dsZXVzZXJjb250ZW50LmNvbS9rNENDWnJObGNrV1d5VEtEY0djOUdzY0E4QklSaW9TRXBlYmY0TkNRbjVWcGtxTG1KVGFIcWVxWUE5UjJxazZRMzZVPWg4MDA?k=d904e7a766af7e76b067904b7c0298246a59f75d&.jpg",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.ntori.tsreborn",
+        googlePlayNote: "Package: com.ntori.tsreborn (visibility may vary by region)",
+        icon: "https://cdn.aptoide.com/imgs/6/b/0/6b0c5139eda4ec33d6768d2594f7f6d7_icon.jpg",
         summary: "Continuing the nostalgia of the original martial MMORPG.",
-        hideGooglePlay: true,
         skipPlayMetadata: true,
         channels: [
             {
