@@ -448,6 +448,7 @@ async function resolveBestGooglePlayResult(query, candidates) {
         candidates.map(async (candidate) => {
             const details = await fetchPlayMetadata(candidate.url);
             const title = cleanPlayTitle(details.title || candidate.packageName);
+            const strongTitleMatch = isStrongTitleMatch(query, title);
             const score = scoreTokens(normalizeText(query).split(" ").filter(Boolean), `${title} ${details.description || ""} ${candidate.packageName}`);
 
             return {
@@ -457,13 +458,14 @@ async function resolveBestGooglePlayResult(query, candidates) {
                 icon: details.icon,
                 website: details.website,
                 description: details.description,
-                score
+                score,
+                strongTitleMatch
             };
         })
     );
 
     const ranked = detailResults
-        .filter((entry) => entry.score > 0 && entry.title)
+        .filter((entry) => entry.score > 0 && entry.title && entry.strongTitleMatch)
         .sort((left, right) => right.score - left.score);
 
     if (!ranked.length) {
@@ -657,6 +659,48 @@ function countMatchedTokens(tokens, candidate) {
     return count;
 }
 
+function isStrongTitleMatch(query, title) {
+    const normalizedQuery = normalizeText(query);
+    const normalizedTitle = normalizeText(title);
+
+    if (!normalizedQuery || !normalizedTitle) {
+        return false;
+    }
+
+    const collapsedQuery = collapseNormalizedText(normalizedQuery);
+    const collapsedTitle = collapseNormalizedText(normalizedTitle);
+
+    if (
+        normalizedQuery === normalizedTitle ||
+        collapsedQuery === collapsedTitle ||
+        collapsedTitle.includes(collapsedQuery) ||
+        collapsedQuery.includes(collapsedTitle)
+    ) {
+        return true;
+    }
+
+    const queryTokens = normalizedQuery.split(" ").filter(Boolean);
+    const titleTokens = normalizedTitle.split(" ").filter(Boolean);
+    const requiredQueryTokens = queryTokens.filter((token) => !OPTIONAL_TITLE_MATCH_TOKENS.has(token));
+    const requiredTitleTokens = titleTokens.filter((token) => !OPTIONAL_TITLE_MATCH_TOKENS.has(token));
+    const effectiveQueryTokens = requiredQueryTokens.length ? requiredQueryTokens : queryTokens;
+
+    if (!effectiveQueryTokens.length) {
+        return false;
+    }
+
+    const titleTokenSet = new Set(titleTokens);
+    const requiredMatches = effectiveQueryTokens.filter((token) => titleTokenSet.has(token)).length;
+    if (requiredMatches < effectiveQueryTokens.length) {
+        return false;
+    }
+
+    const queryTokenSet = new Set(queryTokens);
+    const extraRequiredTitleTokens = requiredTitleTokens.filter((token) => !queryTokenSet.has(token));
+
+    return extraRequiredTitleTokens.length < 2;
+}
+
 function collapseNormalizedText(value) {
     return String(value || "").replace(/\s+/g, "");
 }
@@ -673,10 +717,25 @@ const GENERIC_SEARCH_TOKENS = new Set([
     "app",
     "game",
     "games",
-    "idle",
     "mobile",
     "online",
     "rpg"
+]);
+
+const OPTIONAL_TITLE_MATCH_TOKENS = new Set([
+    "a",
+    "an",
+    "and",
+    "app",
+    "for",
+    "game",
+    "games",
+    "mobile",
+    "of",
+    "online",
+    "rpg",
+    "the",
+    "to"
 ]);
 
 
