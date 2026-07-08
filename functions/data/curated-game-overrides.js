@@ -342,6 +342,81 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
+        title: "Poring Rush",
+        packageName: "com.gravity.poringrush.aos",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.gravity.poringrush.aos&hl=en-IN",
+        googlePlayNote: "Package: com.gravity.poringrush.aos (visibility may vary by region)",
+        icon: "https://img.utdstc.com/icon/298/1b4/2981b4842b5326124340ff79bf6228c46048aec801407118bb25d4925fcc26ca:600",
+        summary: "Idle mobile RPG set in the Poring universe.",
+        skipPlayMetadata: true,
+        channels: [
+            {
+                name: "APKPure",
+                url: "https://apkpure.com/poring-rush/com.gravity.poringrush.aos",
+                note: "Android package archive page"
+            },
+            {
+                name: "Uptodown",
+                url: "https://poring-rush.en.uptodown.com/android",
+                note: "Alternative Android listing"
+            },
+            {
+                name: "Facebook",
+                url: "https://www.facebook.com/PoringRush/",
+                note: "Official community page"
+            }
+        ],
+        aliases: [
+            "poring rush",
+            "poring-rush",
+            "com.gravity.poringrush.aos"
+        ]
+    },
+    {
+        title: "Midgard Heroes: Ragnarok Idle",
+        packageName: "com.gravityus.roinfinite.aos",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.gravityus.roinfinite.aos&hl=en-CA",
+        googlePlayNote: "Package: com.gravityus.roinfinite.aos (visibility may vary by region)",
+        appStoreUrl: "https://apps.apple.com/us/app/ragnarok-idle-adventure-plus/id6478286640",
+        appStoreNote: "Current iOS listing",
+        icon: "https://play-lh.googleusercontent.com/5nrHiYa5zB7zmLIjPLOh_w3AyPLVkIhY4XtL7aG5ca5As7uCw_IOUTTOradzIVQJvznZWxZ4POeSdxNrYl_2apE",
+        summary: "Midgard Heroes pre-launch / alternate title linked to the Ragnarok idle listing.",
+        skipPlayMetadata: true,
+        aliases: [
+            "midgard heroes ragnarok idle",
+            "midgard heroes: ragnarok idle",
+            "midgard heroes",
+            "com.gravityus.roinfinite.aos"
+        ]
+    },
+    {
+        title: "Luna Origin",
+        packageName: "com.ultimategame.lunaorigin",
+        officialSite: "https://www.lunaorigin.com/",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.ultimategame.lunaorigin",
+        googlePlayNote: "Package: com.ultimategame.lunaorigin (visibility may vary by region)",
+        icon: "https://img.utdstc.com/icon/dae/305/dae305e7b87cdc5a93bf9a58c59bb7b1659e4dbad04026b5b8d42cb6f905c7a4:600",
+        summary: "Luna Origin regional mobile MMORPG listing.",
+        skipPlayMetadata: true,
+        channels: [
+            {
+                name: "Uptodown",
+                url: "https://luna-origin.en.uptodown.com/android",
+                note: "Alternative Android listing"
+            },
+            {
+                name: "Facebook",
+                url: "https://www.facebook.com/LunaOriginTH/",
+                note: "Official community page"
+            }
+        ],
+        aliases: [
+            "luna origin",
+            "lunaorigin",
+            "com.ultimategame.lunaorigin"
+        ]
+    },
+    {
         title: "12SKY REBORN",
         packageName: "com.ntori.tsreborn",
         officialSite: "https://12skymreborn.ntori.com/",
