@@ -478,6 +478,7 @@ export const CURATED_GAME_OVERRIDES = [
         packageName: "com.ntori.JicheonGlobal",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=com.ntori.JicheonGlobal&hl=en_US",
         googlePlayNote: "Package: com.ntori.JicheonGlobal",
+        icon: "/assets/game-icons/12sky-last-ember.png",
         summary: "Ntori martial arts MMORPG. This alias is pinned so it does not get confused with unrelated apps named The Last Ember.",
         aliases: [
             "12sky last ember",
