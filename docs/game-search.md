@@ -856,10 +856,15 @@ async function runSearch(query) {
     resultMount.textContent = "Searching...";
 
     try {
-        const response = await fetch(`/api/game-search?q=${encodeURIComponent(trimmedQuery)}`, {
+        const requestUrl = new URL("/api/game-search", window.location.origin);
+        requestUrl.searchParams.set("q", trimmedQuery);
+        requestUrl.searchParams.set("_t", String(Date.now()));
+
+        const response = await fetch(requestUrl.toString(), {
             headers: {
                 "Accept": "application/json"
-            }
+            },
+            cache: "no-store"
         });
         const payload = await response.json();
 
