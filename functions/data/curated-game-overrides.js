@@ -376,17 +376,42 @@ export const CURATED_GAME_OVERRIDES = [
         title: "Midgard Heroes: Ragnarok Idle",
         packageName: "com.gravityus.roinfinite.aos",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=com.gravityus.roinfinite.aos&hl=en-CA",
-        googlePlayNote: "Package: com.gravityus.roinfinite.aos (visibility may vary by region)",
-        appStoreUrl: "https://apps.apple.com/us/app/ragnarok-idle-adventure-plus/id6478286640",
+        googlePlayNote: "Package: com.gravityus.roinfinite.aos (Google Play listing was removed on July 27, 2025)",
+        appStoreUrl: "https://apps.apple.com/us/app/midgard-heroes-ragnarok-idle/id6478412049",
         appStoreNote: "Current iOS listing",
-        icon: "https://play-lh.googleusercontent.com/5nrHiYa5zB7zmLIjPLOh_w3AyPLVkIhY4XtL7aG5ca5As7uCw_IOUTTOradzIVQJvznZWxZ4POeSdxNrYl_2apE",
-        summary: "Midgard Heroes pre-launch / alternate title linked to the Ragnarok idle listing.",
+        officialSite: "https://midgardheroes.com/",
+        icon: "https://lh3.googleusercontent.com/F9hp_TRAZl1Qe512zAP4jeI7Ydtf37bbWXLLHKEkA-tERG-EkBufp9lhxDg9z777djpT9wlXcN5Y285wiT4mJtKGlcMHaY4SwJmT=rw",
+        summary: "Delisted Android listing for Midgard Heroes: Ragnarok Idle. The package remains com.gravityus.roinfinite.aos, and the current icon is the black-haired character with gold horns.",
         skipPlayMetadata: true,
+        hideGooglePlay: true,
+        channels: [
+            {
+                name: "AppBrain",
+                url: "https://www.appbrain.com/app/midgard-heroes-ragnarok-idle/com.gravityus.roinfinite.aos",
+                note: "Archived Android listing"
+            }
+        ],
         aliases: [
             "midgard heroes ragnarok idle",
             "midgard heroes: ragnarok idle",
             "midgard heroes",
             "com.gravityus.roinfinite.aos"
+        ]
+    },
+    {
+        title: "ROM: Remember Of Majesty",
+        packageName: "com.kakaogames.rom",
+        officialSite: "https://rom.redlabgames.net/",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.kakaogames.rom&hl=en_US",
+        googlePlayNote: "Package: com.kakaogames.rom",
+        appStoreUrl: "https://apps.apple.com/sg/app/rom-remember-of-majesty/id6450523415",
+        appStoreNote: "Official iOS listing",
+        summary: "Hardcore MMORPG from Redlab Games. This alias is pinned so it does not get confused with ROM: Golden Age.",
+        aliases: [
+            "rom remember of majesty",
+            "rom: remember of majesty",
+            "remember of majesty",
+            "com.kakaogames.rom"
         ]
     },
     {
@@ -446,6 +471,27 @@ export const CURATED_GAME_OVERRIDES = [
             "12sky reborn global",
             "12skymreborn",
             "twelvesky reborn"
+        ]
+    },
+    {
+        title: "12SKY: LAST Ember",
+        packageName: "com.ntori.JicheonGlobal",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.ntori.JicheonGlobal&hl=en_US",
+        googlePlayNote: "Package: com.ntori.JicheonGlobal",
+        summary: "Ntori martial arts MMORPG. This alias is pinned so it does not get confused with unrelated apps named The Last Ember.",
+        aliases: [
+            "12sky last ember",
+            "12sky: last ember",
+            "12 sky last ember",
+            "12 sky: last ember",
+            "com.ntori.jicheonglobal"
+        ],
+        related: [
+            {
+                title: "12SKY REBORN",
+                packageName: "com.ntori.tsreborn",
+                url: "https://play.google.com/store/apps/details?id=com.ntori.tsreborn&hl=en_US&gl=US"
+            }
         ]
     },
     {
