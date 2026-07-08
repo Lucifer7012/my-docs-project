@@ -283,6 +283,10 @@
         width: 88px;
     }
 
+    .result-icon.is-broken {
+        color: transparent;
+    }
+
     .result-title {
         font-size: 1.28rem;
         font-weight: 800;
@@ -794,7 +798,7 @@ function renderResultCard(result) {
     resultMount.innerHTML = `
         <article class="result-card">
             <div class="result-top">
-                <img class="result-icon" src="${escapeHtml(result.icon || "")}" alt="${escapeHtml(result.title)} icon" referrerpolicy="no-referrer">
+                <img class="result-icon" src="${escapeHtml(result.icon || "")}" alt="${escapeHtml(result.title)} icon" referrerpolicy="no-referrer" onerror="this.alt='';this.classList.add('is-broken');">
                 <div>
                     <h2 class="result-title">${escapeHtml(result.title)}</h2>
                     <p class="result-subtitle">Best match for this search${result.matchSource ? ` · Source: ${escapeHtml(result.matchSource)}` : ""}</p>

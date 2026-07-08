@@ -617,7 +617,9 @@ export const CURATED_GAME_OVERRIDES = [
         packageName: "com.studiolb.tamingmaster.global",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=com.studiolb.tamingmaster.global&hl=en_US&gl=US",
         googlePlayNote: "Package: com.studiolb.tamingmaster.global",
+        icon: "/assets/game-icons/taming-master-pet-guardian.png",
         summary: "Official Android listing for Taming Master : Pet Guardian.",
+        skipPlayMetadata: true,
         aliases: [
             "taming master",
             "taming master pet guardian",
@@ -630,7 +632,9 @@ export const CURATED_GAME_OVERRIDES = [
         packageName: "com.blb.aos.siegerumble",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=com.blb.aos.siegerumble&hl=en_US&gl=US",
         googlePlayNote: "Package: com.blb.aos.siegerumble",
+        icon: "/assets/game-icons/siege-rumble.png",
         summary: "Official Android listing for Siege Rumble.",
+        skipPlayMetadata: true,
         aliases: [
             "siege rumble",
             "com.blb.aos.siegerumble"
@@ -643,7 +647,9 @@ export const CURATED_GAME_OVERRIDES = [
         googlePlayNote: "Package: com.ztogames.ppki",
         appStoreUrl: "https://apps.apple.com/us/app/pixel-heroes-idle/id6476479696",
         appStoreNote: "Official iOS listing",
+        icon: "/assets/game-icons/pixel-heroes-idle.png",
         summary: "Official global listing for Pixel Heroes Idle.",
+        skipPlayMetadata: true,
         aliases: [
             "pixel heroes idle",
             "pixelheroes idle",
@@ -652,13 +658,15 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
-        title: "Rogue with the Dead: Idle RPG",
+        title: "ログウィズ / Rogue with the Dead",
         packageName: "net.room6.horizon",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=net.room6.horizon&hl=en_US&gl=US",
         googlePlayNote: "Package: net.room6.horizon",
         appStoreUrl: "https://apps.apple.com/us/app/rogue-with-the-dead-idle-rpg/id1515542137",
         appStoreNote: "Official iOS listing",
-        summary: "Official listing for Rogue with the Dead.",
+        icon: "/assets/game-icons/rogue-with-the-dead-ja.png",
+        summary: "Official listing for Rogue with the Dead, commonly searched in Japanese as ログウィズ.",
+        skipPlayMetadata: true,
         aliases: [
             "rogue with the dead",
             "rogue with the dead idle rpg",
