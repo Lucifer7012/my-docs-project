@@ -611,5 +611,30 @@ export const CURATED_GAME_OVERRIDES = [
                 url: "https://play.google.com/store/apps/details?id=com.aniplex.fategrandorder&hl=en_US&gl=US"
             }
         ]
+    },
+    {
+        title: "ONE PIECE バウンティラッシュ",
+        packageName: "com.bandainamcoent.opbrjp",
+        officialSite: "https://opbr.bn-ent.net/",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.bandainamcoent.opbrjp&hl=ja",
+        googlePlayNote: "Package: com.bandainamcoent.opbrjp (Japan version)",
+        appStoreUrl: "https://apps.apple.com/jp/app/one-piece-%E3%83%90%E3%82%A6%E3%83%B3%E3%83%86%E3%82%A3%E3%83%A9%E3%83%83%E3%82%B7%E3%83%A5/id1322310031",
+        appStoreNote: "Japan App Store",
+        summary: "Official Japan version of ONE PIECE Bounty Rush.",
+        aliases: [
+            "onepieceバウンティラッシュ",
+            "one piece バウンティラッシュ",
+            "onepiece bounty rush",
+            "one piece bounty rush",
+            "opbr",
+            "com.bandainamcoent.opbrjp"
+        ],
+        related: [
+            {
+                title: "ONE PIECE Bounty Rush",
+                packageName: "com.bandainamcoent.opbrww",
+                url: "https://play.google.com/store/apps/details?id=com.bandainamcoent.opbrww&hl=en_US&gl=US"
+            }
+        ]
     }
 ];
