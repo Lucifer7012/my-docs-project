@@ -690,6 +690,65 @@ async function copyTextWithLabel(value, successMessage, button, label) {
     flashButton(button, label);
 }
 
+async function convertBlobToPng(blob) {
+    if (!blob) {
+        throw new Error("Image blob is unavailable.");
+    }
+
+    if (blob.type === "image/png") {
+        return blob;
+    }
+
+    const drawToCanvas = async (drawImage) => {
+        const canvas = document.createElement("canvas");
+        canvas.width = drawImage.width;
+        canvas.height = drawImage.height;
+
+        const context = canvas.getContext("2d");
+        if (!context) {
+            throw new Error("Canvas 2D context is unavailable.");
+        }
+
+        context.drawImage(drawImage, 0, 0);
+
+        return await new Promise((resolve, reject) => {
+            canvas.toBlob((pngBlob) => {
+                if (pngBlob) {
+                    resolve(pngBlob);
+                    return;
+                }
+
+                reject(new Error("PNG conversion failed."));
+            }, "image/png");
+        });
+    };
+
+    if (typeof createImageBitmap === "function") {
+        const bitmap = await createImageBitmap(blob);
+        try {
+            return await drawToCanvas(bitmap);
+        } finally {
+            if (typeof bitmap.close === "function") {
+                bitmap.close();
+            }
+        }
+    }
+
+    const objectUrl = URL.createObjectURL(blob);
+    try {
+        const image = await new Promise((resolve, reject) => {
+            const element = new Image();
+            element.onload = () => resolve(element);
+            element.onerror = () => reject(new Error("Image decode failed."));
+            element.src = objectUrl;
+        });
+
+        return await drawToCanvas(image);
+    } finally {
+        URL.revokeObjectURL(objectUrl);
+    }
+}
+
 async function copyImage(imageUrl, successMessage, fallbackMessage, button) {
     try {
         if (!window.ClipboardItem || !navigator.clipboard || typeof navigator.clipboard.write !== "function") {
@@ -702,9 +761,10 @@ async function copyImage(imageUrl, successMessage, fallbackMessage, button) {
         }
 
         const blob = await response.blob();
+        const clipboardBlob = await convertBlobToPng(blob);
         await navigator.clipboard.write([
             new ClipboardItem({
-                [blob.type || "image/png"]: blob
+                "image/png": clipboardBlob
             })
         ]);
         setStatus("ok", successMessage);
@@ -712,7 +772,6 @@ async function copyImage(imageUrl, successMessage, fallbackMessage, button) {
         flashButton(button);
     } catch (error) {
         await copyTextWithLabel(imageUrl, fallbackMessage, button, "Link copied");
-        console.warn(error);
     }
 }
 
