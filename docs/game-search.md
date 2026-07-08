@@ -1,7 +1,5 @@
 # Game Search Tool
 
-Search a game name and get a result card with the game icon, package name, and direct channel links.
-
 <style>
     .search-shell {
         --ink: #172033;
@@ -87,6 +85,10 @@ Search a game name and get a result card with the game icon, package name, and d
         padding: 22px;
     }
 
+    .search-result-panel {
+        scroll-margin-top: 84px;
+    }
+
     .search-form {
         display: flex;
         flex-wrap: wrap;
@@ -170,6 +172,42 @@ Search a game name and get a result card with the game icon, package name, and d
         cursor: pointer;
         font-size: 0.86rem;
         padding: 8px 12px;
+    }
+
+    .fold-panel {
+        margin-top: 14px;
+    }
+
+    .fold-panel[open] {
+        padding-bottom: 4px;
+    }
+
+    .fold-summary {
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 0.92rem;
+        font-weight: 700;
+        list-style: none;
+        user-select: none;
+    }
+
+    .fold-summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .fold-summary::before {
+        content: "+";
+        display: inline-block;
+        margin-right: 8px;
+        transition: transform 0.18s ease;
+    }
+
+    .fold-panel[open] .fold-summary::before {
+        content: "-";
+    }
+
+    .fold-body {
+        padding-top: 10px;
     }
 
     .status-box {
@@ -490,61 +528,58 @@ Search a game name and get a result card with the game icon, package name, and d
 </style>
 
 <div class="search-shell">
-    <section class="search-hero">
-        <h1 class="search-title">Game Search Tool</h1>
-        <p class="search-subtitle">这个页面现在是 Cloudflare 后端驱动的实时搜索页。输入游戏名后，它会直接搜索 Google Play 网页结果，并补充 App Store、TapTap、APKPure 等渠道入口，再展示图标、包名和链接。</p>
-        <div class="search-badges">
-            <span class="search-badge">Google Play</span>
-            <span class="search-badge">Package Name</span>
-            <span class="search-badge">Game Icon</span>
-            <span class="search-badge">Multi-channel Links</span>
-        </div>
-    </section>
-
     <section class="search-panel">
         <form id="gameSearchForm" class="search-form">
             <input id="gameSearchInput" class="search-input" type="text" placeholder="Try: sol enchant, com.goh.daya.ydonline, night crows" autocomplete="off">
             <button class="search-button" type="submit">Search</button>
             <button id="clearSearchButton" class="ghost-button" type="button">Clear</button>
         </form>
-        <p class="search-helper">搜索逻辑会先找 Google Play 最佳匹配，再补充其他渠道。现在也支持直接输入包名，例如 <code>com.goh.daya.ydonline</code>。这个版本不需要你额外配置 Google 付费 API；图标复制优先复制图片本体，如果浏览器不支持，会自动回退成复制图标链接。</p>
-        <div class="example-row">
-            <button class="example-chip" type="button" data-example="sol enchant">sol enchant</button>
-            <button class="example-chip" type="button" data-example="genshin impact">genshin impact</button>
-            <button class="example-chip" type="button" data-example="night crows">night crows</button>
-            <button class="example-chip" type="button" data-example="pokemon go">pokemon go</button>
-        </div>
+        <details class="fold-panel">
+            <summary class="fold-summary">Search Tips</summary>
+            <div class="fold-body">
+                <p class="search-helper">搜索逻辑会先找 Google Play 最佳匹配，再补充其他渠道。现在也支持直接输入包名，例如 <code>com.goh.daya.ydonline</code>。图标复制优先复制图片本体，如果浏览器不支持，会自动回退成复制图标链接。</p>
+                <div class="example-row">
+                    <button class="example-chip" type="button" data-example="sol enchant">sol enchant</button>
+                    <button class="example-chip" type="button" data-example="genshin impact">genshin impact</button>
+                    <button class="example-chip" type="button" data-example="night crows">night crows</button>
+                    <button class="example-chip" type="button" data-example="pokemon go">pokemon go</button>
+                </div>
+            </div>
+        </details>
     </section>
 
-    <section class="search-result-panel">
+    <section id="searchResultPanel" class="search-result-panel">
         <div id="searchStatus" class="status-box info">Ready. Enter a game name to search.</div>
         <div id="resultMeta" class="result-meta">The API route for this page is <code>/api/game-search?q=...</code>.</div>
         <div id="resultMount" class="empty-state">Search results will appear here.</div>
     </section>
 
-    <section class="search-note-panel">
-        <div class="note-grid">
-            <article class="note-card">
-                <h3>Cloudflare Setup</h3>
-                <ul>
-                    <li>Build command: <code>mkdocs build</code></li>
-                    <li>Build output: <code>site</code></li>
-                    <li>Functions directory: <code>functions/</code></li>
-                </ul>
-            </article>
-            <article class="note-card">
-                <h3>Required Env Vars</h3>
-                <ul>
-                    <li>No extra env vars needed for basic search</li>
-                    <li><code>PYTHON_VERSION</code> is only used for MkDocs build</li>
-                </ul>
-            </article>
-            <article class="note-card">
-                <h3>How It Works</h3>
-                <p>Google Play comes from direct web search parsing. App Store comes from Apple iTunes Search API. TapTap and APKPure are best-effort supplemental channel entries.</p>
-            </article>
+    <details class="search-note-panel fold-panel">
+        <summary class="fold-summary">More Info</summary>
+        <div class="fold-body">
+            <div class="note-grid">
+                <article class="note-card">
+                    <h3>Cloudflare Setup</h3>
+                    <ul>
+                        <li>Build command: <code>mkdocs build</code></li>
+                        <li>Build output: <code>site</code></li>
+                        <li>Functions directory: <code>functions/</code></li>
+                    </ul>
+                </article>
+                <article class="note-card">
+                    <h3>Required Env Vars</h3>
+                    <ul>
+                        <li>No extra env vars needed for basic search</li>
+                        <li><code>PYTHON_VERSION</code> is only used for MkDocs build</li>
+                    </ul>
+                </article>
+                <article class="note-card">
+                    <h3>How It Works</h3>
+                    <p>Google Play comes from direct web search parsing. App Store comes from Apple iTunes Search API. TapTap and APKPure are best-effort supplemental channel entries.</p>
+                </article>
+            </div>
         </div>
-    </section>
+    </details>
 </div>
 <div id="feedbackToast" class="feedback-toast" aria-live="polite"></div>
 
@@ -555,6 +590,7 @@ const clearSearchButton = document.getElementById("clearSearchButton");
 const searchStatus = document.getElementById("searchStatus");
 const resultMeta = document.getElementById("resultMeta");
 const resultMount = document.getElementById("resultMount");
+const resultPanel = document.getElementById("searchResultPanel");
 const feedbackToast = document.getElementById("feedbackToast");
 const exampleChips = Array.from(document.querySelectorAll("[data-example]"));
 let currentResult = null;
@@ -625,6 +661,19 @@ function updateQueryString(query) {
         nextUrl.searchParams.delete("game");
     }
     window.history.replaceState({}, "", nextUrl.toString());
+}
+
+function scrollToResults() {
+    if (!resultPanel) {
+        return;
+    }
+
+    window.requestAnimationFrame(() => {
+        resultPanel.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
 }
 
 async function copyText(value, successMessage, button) {
@@ -762,6 +811,7 @@ async function runSearch(query) {
             resultMeta.textContent = "No aggregated result was found for this query.";
             setStatus("warn", payload.message || "No matching game was found.");
             setEmptyState("No matching game was found. Try another title or a more specific keyword.");
+            scrollToResults();
             return;
         }
 
@@ -771,12 +821,14 @@ async function runSearch(query) {
             : "Search completed.";
         setStatus("ok", payload.message || `Found a best match for "${trimmedQuery}".`);
         renderResultCard(payload.result);
+        scrollToResults();
     } catch (error) {
         currentResult = null;
         console.error(error);
         resultMeta.textContent = "The backend search route returned an error.";
         setStatus("error", error.message || "Search failed.");
         setEmptyState("Search failed. Please retry in a moment or check the Cloudflare function logs.");
+        scrollToResults();
     }
 }
 
