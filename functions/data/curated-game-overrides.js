@@ -613,6 +613,62 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
+        title: "Taming Master : Pet Guardian",
+        packageName: "com.studiolb.tamingmaster.global",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.studiolb.tamingmaster.global&hl=en_US&gl=US",
+        googlePlayNote: "Package: com.studiolb.tamingmaster.global",
+        summary: "Official Android listing for Taming Master : Pet Guardian.",
+        aliases: [
+            "taming master",
+            "taming master pet guardian",
+            "taming master : pet guardian",
+            "com.studiolb.tamingmaster.global"
+        ]
+    },
+    {
+        title: "Siege Rumble",
+        packageName: "com.blb.aos.siegerumble",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.blb.aos.siegerumble&hl=en_US&gl=US",
+        googlePlayNote: "Package: com.blb.aos.siegerumble",
+        summary: "Official Android listing for Siege Rumble.",
+        aliases: [
+            "siege rumble",
+            "com.blb.aos.siegerumble"
+        ]
+    },
+    {
+        title: "Pixel Heroes Idle",
+        packageName: "com.ztogames.ppki",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.ztogames.ppki&hl=en_US&gl=US",
+        googlePlayNote: "Package: com.ztogames.ppki",
+        appStoreUrl: "https://apps.apple.com/us/app/pixel-heroes-idle/id6476479696",
+        appStoreNote: "Official iOS listing",
+        summary: "Official global listing for Pixel Heroes Idle.",
+        aliases: [
+            "pixel heroes idle",
+            "pixelheroes idle",
+            "pixelheroesidle",
+            "com.ztogames.ppki"
+        ]
+    },
+    {
+        title: "Rogue with the Dead: Idle RPG",
+        packageName: "net.room6.horizon",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=net.room6.horizon&hl=en_US&gl=US",
+        googlePlayNote: "Package: net.room6.horizon",
+        appStoreUrl: "https://apps.apple.com/us/app/rogue-with-the-dead-idle-rpg/id1515542137",
+        appStoreNote: "Official iOS listing",
+        summary: "Official listing for Rogue with the Dead.",
+        aliases: [
+            "rogue with the dead",
+            "rogue with the dead idle rpg",
+            "\u30ED\u30FC\u30B0\u30A6\u30A3\u30BA",
+            "\u30ED\u30FC\u30B0\u30A6\u30A3\u30BA\u30C7\u30C3\u30C9",
+            "\u30ED\u30B0\u30A6\u30A3\u30BA",
+            "net.room6.horizon"
+        ]
+    },
+    {
         title: "ONE PIECE バウンティラッシュ",
         packageName: "com.bandainamcoent.opbrjp",
         officialSite: "https://opbr.bn-ent.net/",
