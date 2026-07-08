@@ -313,6 +313,25 @@
         ]
     },
     {
+        title: "TOSM Extreme",
+        packageName: "com.extreme.tosm.th",
+        officialSite: "https://tosm.exe.in.th/",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.extreme.tosm.th&hl=en_US&gl=US",
+        googlePlayNote: "Package: com.extreme.tosm.th (Thailand version)",
+        appStoreUrl: "https://apps.apple.com/th/app/tosm-extreme/id6502505382",
+        appStoreNote: "Thailand App Store",
+        summary: "Official Thailand listing for Tree of Savior M: Extreme, published as TOSM Extreme.",
+        aliases: [
+            "tosm extreme",
+            "tree of savior: tosm extreme",
+            "tree of savior m extreme",
+            "tree of savior m: extreme",
+            "tree of savior m",
+            "tree of savior extreme",
+            "com.extreme.tosm.th"
+        ]
+    },
+    {
         title: "\u963F\u745E\u65AF : \u547D\u904B\u7684\u9078\u64C7\u8005",
         packageName: "com.com2usholdings.arestw.android.google.tw.normal",
         officialSite: "https://www.theares.com.tw/",
