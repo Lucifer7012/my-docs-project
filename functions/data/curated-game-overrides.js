@@ -313,6 +313,26 @@
         ]
     },
     {
+        title: "\u963F\u745E\u65AF : \u547D\u904B\u7684\u9078\u64C7\u8005",
+        packageName: "com.com2usholdings.arestw.android.google.tw.normal",
+        officialSite: "https://www.theares.com.tw/",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.com2usholdings.arestw.android.google.tw.normal&hl=zh_TW&gl=TW",
+        googlePlayNote: "Package: com.com2usholdings.arestw.android.google.tw.normal (Taiwan/HK/MO version)",
+        appStoreUrl: "https://apps.apple.com/tw/app/%E9%98%BF%E7%91%9E%E6%96%AF-%E5%91%BD%E9%81%8B%E7%9A%84%E9%81%B8%E6%93%87%E8%80%85/id6745206397",
+        appStoreNote: "Taiwan App Store",
+        icon: "https://image.winudf.com/v2/image1/Y29tLmNvbTJ1c2hvbGRpbmdzLmFyZXN0dy5hbmRyb2lkLmdvb2dsZS50dy5ub3JtYWxfaWNvbl8xNzU5NDEwMDgyXzAyOA/icon.png?w=140&fakeurl=1",
+        summary: "Official Taiwan/Hong Kong/Macau listing for ARES, shown in Chinese as \u963F\u745E\u65AF : \u547D\u904B\u7684\u9078\u64C7\u8005.",
+        skipPlayMetadata: true,
+        aliases: [
+            "\u963F\u745E\u65AF : \u547D\u904B\u7684\u9078\u64C7\u8005",
+            "\u963F\u745E\u65AF: \u547D\u904B\u7684\u9078\u64C7\u8005",
+            "\u963F\u745E\u65AF\uFF1A\u547D\u904B\u7684\u9078\u64C7\u8005",
+            "\u963F\u745E\u65AF \u547D\u904B\u7684\u9078\u64C7\u8005",
+            "ares \u547D\u904B\u7684\u9078\u64C7\u8005",
+            "com.com2usholdings.arestw.android.google.tw.normal"
+        ]
+    },
+    {
         title: "ArcheAge WAR",
         packageName: "com.kakaogames.aaw",
         officialSite: "https://aw.kakaogames.com/",
