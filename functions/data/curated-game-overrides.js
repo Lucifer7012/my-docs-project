@@ -1,4 +1,4 @@
-export const CURATED_GAME_OVERRIDES = [
+﻿export const CURATED_GAME_OVERRIDES = [
     {
         title: "SOL: enchant",
         packageName: "com.netmarble.sol",
@@ -478,7 +478,7 @@ export const CURATED_GAME_OVERRIDES = [
         packageName: "com.ntori.JicheonGlobal",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=com.ntori.JicheonGlobal&hl=en_US",
         googlePlayNote: "Package: com.ntori.JicheonGlobal",
-        icon: "/assets/game-icons/12sky-last-ember.png",
+        icon: "https://image.winudf.com/v2/image1/Y29tLm50b3JpLkppY2hlb25HbG9iYWxfaWNvbl8xNzI0MTQxMDgzXzA1Ng/icon.png?w=140&fakeurl=1",
         summary: "Ntori martial arts MMORPG. This alias is pinned so it does not get confused with unrelated apps named The Last Ember.",
         aliases: [
             "12sky last ember",
@@ -617,7 +617,7 @@ export const CURATED_GAME_OVERRIDES = [
         packageName: "com.studiolb.tamingmaster.global",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=com.studiolb.tamingmaster.global&hl=en_US&gl=US",
         googlePlayNote: "Package: com.studiolb.tamingmaster.global",
-        icon: "/assets/game-icons/taming-master-pet-guardian.png",
+        icon: "https://image.winudf.com/v2/image1/Y29tLnN0dWRpb2xiLnRhbWluZ21hc3Rlci5nbG9iYWxfaWNvbl8xNjk4MjIzNzUxXzAzNQ/icon.png?w=140&fakeurl=1",
         summary: "Official Android listing for Taming Master : Pet Guardian.",
         skipPlayMetadata: true,
         aliases: [
@@ -632,7 +632,7 @@ export const CURATED_GAME_OVERRIDES = [
         packageName: "com.blb.aos.siegerumble",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=com.blb.aos.siegerumble&hl=en_US&gl=US",
         googlePlayNote: "Package: com.blb.aos.siegerumble",
-        icon: "/assets/game-icons/siege-rumble.png",
+        icon: "https://image.winudf.com/v2/image1/Y29tLmJsYi5hb3Muc2llZ2VydW1ibGVfaWNvbl8xNzUwODcyODUwXzA4Mg/icon.png?w=140&fakeurl=1",
         summary: "Official Android listing for Siege Rumble.",
         skipPlayMetadata: true,
         aliases: [
@@ -647,7 +647,7 @@ export const CURATED_GAME_OVERRIDES = [
         googlePlayNote: "Package: com.ztogames.ppki",
         appStoreUrl: "https://apps.apple.com/us/app/pixel-heroes-idle/id6476479696",
         appStoreNote: "Official iOS listing",
-        icon: "/assets/game-icons/pixel-heroes-idle.png",
+        icon: "https://image.winudf.com/v2/image1/Y29tLnp0b2dhbWVzLnBwa2lfaWNvbl8xNzQ1NjAzNDk1XzAzMw/icon.png?w=140&fakeurl=1",
         summary: "Official global listing for Pixel Heroes Idle.",
         skipPlayMetadata: true,
         aliases: [
@@ -658,14 +658,14 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
-        title: "ログウィズ / Rogue with the Dead",
+        title: "\u30ED\u30B0\u30A6\u30A3\u30BA / Rogue with the Dead",
         packageName: "net.room6.horizon",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=net.room6.horizon&hl=en_US&gl=US",
         googlePlayNote: "Package: net.room6.horizon",
         appStoreUrl: "https://apps.apple.com/us/app/rogue-with-the-dead-idle-rpg/id1515542137",
         appStoreNote: "Official iOS listing",
-        icon: "/assets/game-icons/rogue-with-the-dead-ja.png",
-        summary: "Official listing for Rogue with the Dead, commonly searched in Japanese as ログウィズ.",
+        icon: "https://image.winudf.com/v2/image1/bmV0LnJvb202Lmhvcml6b25faWNvbl8xNzc2MzE1MjQxXzA2MA/icon.png?w=140&fakeurl=1",
+        summary: "Official listing for Rogue with the Dead, commonly searched in Japanese as \u30ED\u30B0\u30A6\u30A3\u30BA.",
         skipPlayMetadata: true,
         aliases: [
             "rogue with the dead",
@@ -677,7 +677,7 @@ export const CURATED_GAME_OVERRIDES = [
         ]
     },
     {
-        title: "ONE PIECE バウンティラッシュ",
+        title: "ONE PIECE \u30D0\u30A6\u30F3\u30C6\u30A3\u30E9\u30C3\u30B7\u30E5",
         packageName: "com.bandainamcoent.opbrjp",
         officialSite: "https://opbr.bn-ent.net/",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=com.bandainamcoent.opbrjp&hl=ja",
@@ -686,8 +686,8 @@ export const CURATED_GAME_OVERRIDES = [
         appStoreNote: "Japan App Store",
         summary: "Official Japan version of ONE PIECE Bounty Rush.",
         aliases: [
-            "onepieceバウンティラッシュ",
-            "one piece バウンティラッシュ",
+            "onepiece\u30D0\u30A6\u30F3\u30C6\u30A3\u30E9\u30C3\u30B7\u30E5",
+            "one piece \u30D0\u30A6\u30F3\u30C6\u30A3\u30E9\u30C3\u30B7\u30E5",
             "onepiece bounty rush",
             "one piece bounty rush",
             "opbr",
