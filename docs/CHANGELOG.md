@@ -55,6 +55,8 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
 ### Fixed
 
+- Restored `Game Search Tool` to the shared MkDocs navigation after hiding it from the source nav also removed the page entry from `https://my-docs-project.pages.dev/game-search/`.
+- Restored the homepage quick link for `Game Search Tool` so the Cloudflare Pages site keeps a direct entry to the live search page.
 - Tightened Google Play fallback title matching so near-name mismatches are rejected instead of being shown as the best result.
 - Reduced stale-result problems by adding cache-busting requests and `_headers` rules for the Game Search page and API route.
 - Fixed icon copy behavior so the UI gives clearer feedback when the browser only allows copying the icon URL.

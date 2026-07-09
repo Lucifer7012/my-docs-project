@@ -37,11 +37,6 @@
 - Source docs, static assets, and Cloudflare Functions are committed on `main`.
 - The live Game Search Tool is deployed through Cloudflare Pages.
 - GitHub Pages remains available as a legacy static publishing target, but the live search API depends on Cloudflare Functions.
-- The GitHub Pages navigation intentionally shows only the four static/help pages:
-  - `Rate Table`
-  - `Upgrade Calculator`
-  - `Date Add Days Calculator`
-  - `Game Support`
 - Latest calculator feature: Date Add Days Calculator.
 - Latest deployed support refactor: the support page now loads games from `docs/data/supported-games.json` in source and `data/supported-games.json` in the published site.
 - Latest support list change: added `MIR4`.
@@ -72,7 +67,6 @@
 - The live search backend lives in `functions/api/game-search.js`.
 - Curated search aliases, package matches, and region overrides live in `functions/data/curated-game-overrides.js`.
 - Cache rules for the Game Search page live in `docs/_headers`.
-- The Game Search Tool is intentionally hidden from the GitHub Pages MkDocs navigation because the live version is meant to be used from `https://my-docs-project.pages.dev/game-search/`.
 
 ## Maintenance Rules
 
