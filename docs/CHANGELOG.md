@@ -28,6 +28,12 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 - Confirmed by calculation that `2026-07-15 07:40:00 + 180 days` returns `2027-01-11 07:40:00`.
 - Rebuilt the MkDocs site so the generated page is available at `site/date-add-days/index.html`.
 - Confirmed the generated site contains the new page title `Date Add Days Calculator`.
+- Rebuilt the MkDocs site with the GitHub Pages navigation limited to four visible pages:
+  - `Rate Table`
+  - `Upgrade Calculator`
+  - `Date Add Days Calculator`
+  - `Game Support`
+- Confirmed the generated GitHub Pages HTML no longer shows `Game Search Tool` in `site/index.html` and `site/support/index.html`.
 
 ### Commits
 
