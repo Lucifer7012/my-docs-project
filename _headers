@@ -1,0 +1,8 @@
+/game-search
+  Cache-Control: no-store, no-cache, must-revalidate
+
+/game-search/
+  Cache-Control: no-store, no-cache, must-revalidate
+
+/api/*
+  Cache-Control: no-store, no-cache, must-revalidate
