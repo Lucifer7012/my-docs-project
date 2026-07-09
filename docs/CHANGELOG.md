@@ -12,12 +12,57 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 - Added a simple datetime tool that calculates the result after adding a number of days to a starting datetime.
 - Pre-filled the page with the example `2026-07-15 07:40:00 + 180 days = 2027-01-11 07:40:00`.
 - Added the new calculator page to the MkDocs navigation and homepage quick links.
+- Added a dedicated `Game Search Tool` page at `docs/game-search.md`.
+- Added a Cloudflare Pages Function backend at `functions/api/game-search.js` with live route `/api/game-search?q=...`.
+- Added a curated override dataset at `functions/data/curated-game-overrides.js` for exact package-name matches, region variants, delisted games, and shorthand aliases.
+- Added direct package-name search support, icon copy actions, icon-link copy actions, and multi-channel download links in search results.
+- Added curated mappings for frequently requested searches including:
+  - `Pixel Heroes Idle`
+  - `Rogue with the Dead`
+  - `ONE PIECE バウンティラッシュ`
+  - `ARES / 阿瑞斯 : 命運的選擇者`
+  - `TOSM Extreme / Tree of Savior M: Extreme`
 
 ### Verification
 
 - Confirmed by calculation that `2026-07-15 07:40:00 + 180 days` returns `2027-01-11 07:40:00`.
 - Rebuilt the MkDocs site so the generated page is available at `site/date-add-days/index.html`.
 - Confirmed the generated site contains the new page title `Date Add Days Calculator`.
+
+### Commits
+
+- `a3280de` - Add date add days calculator page
+- `e5d3491` - Deploy date add days calculator
+- Confirmed the live API returns curated results for:
+  - `Pixel Heroes Idle`
+  - `com.ztogames.ppki`
+  - `阿瑞斯: 命運的選擇者`
+  - `Tree of Savior M: Extreme`
+- Confirmed direct package-name lookup returns the expected curated package match instead of a loose Google Play fallback.
+
+### Changed
+
+- Simplified the Game Search page layout so the search box and results area are the main focus, with helper content collapsed.
+- Updated the search flow so submitting a query scrolls the user directly to the results area.
+- Replaced screenshot-derived local icon files with public-source icons, primarily APKPure/store-hosted icon URLs.
+- Switched the live search deployment workflow from static-only GitHub Pages behavior to Cloudflare Pages with Functions support.
+
+### Fixed
+
+- Tightened Google Play fallback title matching so near-name mismatches are rejected instead of being shown as the best result.
+- Reduced stale-result problems by adding cache-busting requests and `_headers` rules for the Game Search page and API route.
+- Fixed icon copy behavior so the UI gives clearer feedback when the browser only allows copying the icon URL.
+- Fixed several region-version searches that previously returned the wrong global app or no result at all.
+
+### Commits
+
+- `d855165` - Add Cloudflare-backed game search tool
+- `fc24347` - Remove Google CSE dependency from game search
+- `4d60b6a` - Support direct package name search
+- `d7e2522` - Tighten Google Play title matching
+- `607fb25` - Reduce stale cache on game search page
+- `2ff1838` - Add ARES TW curated search mapping
+- `375e153` - Add TOSM Extreme curated search mapping
 
 ## 2026-07-06
 
