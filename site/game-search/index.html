@@ -9,7 +9,7 @@
       
       
       
-        <link rel="prev" href="../calculator/">
+        <link rel="prev" href="../date-add-days/">
       
       
         <link rel="next" href="../support/">
@@ -247,6 +247,33 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../date-add-days/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Date Add Days Calculator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -343,7 +370,6 @@
 
 
 <h1 id="game-search-tool">Game Search Tool</h1>
-<p>Search a game name and get a result card with the game icon, package name, and direct channel links.</p>
 <style>
     .search-shell {
         --ink: #172033;
@@ -427,6 +453,10 @@
         box-shadow: var(--shadow);
         margin-top: 20px;
         padding: 22px;
+    }
+
+    .search-result-panel {
+        scroll-margin-top: 84px;
     }
 
     .search-form {
@@ -514,6 +544,42 @@
         padding: 8px 12px;
     }
 
+    .fold-panel {
+        margin-top: 14px;
+    }
+
+    .fold-panel[open] {
+        padding-bottom: 4px;
+    }
+
+    .fold-summary {
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 0.92rem;
+        font-weight: 700;
+        list-style: none;
+        user-select: none;
+    }
+
+    .fold-summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .fold-summary::before {
+        content: "+";
+        display: inline-block;
+        margin-right: 8px;
+        transition: transform 0.18s ease;
+    }
+
+    .fold-panel[open] .fold-summary::before {
+        content: "-";
+    }
+
+    .fold-body {
+        padding-top: 10px;
+    }
+
     .status-box {
         border-radius: 18px;
         font-size: 0.94rem;
@@ -585,6 +651,10 @@
         height: 88px;
         object-fit: cover;
         width: 88px;
+    }
+
+    .result-icon.is-broken {
+        color: transparent;
     }
 
     .result-title {
@@ -832,61 +902,58 @@
 </style>
 
 <div class="search-shell">
-    <section class="search-hero">
-        <h1 class="search-title">Game Search Tool</h1>
-        <p class="search-subtitle">这个页面现在是 Cloudflare 后端驱动的实时搜索页。输入游戏名后，它会直接搜索 Google Play 网页结果，并补充 App Store、TapTap、APKPure 等渠道入口，再展示图标、包名和链接。</p>
-        <div class="search-badges">
-            <span class="search-badge">Google Play</span>
-            <span class="search-badge">Package Name</span>
-            <span class="search-badge">Game Icon</span>
-            <span class="search-badge">Multi-channel Links</span>
-        </div>
-    </section>
-
     <section class="search-panel">
         <form id="gameSearchForm" class="search-form">
-            <input id="gameSearchInput" class="search-input" type="text" placeholder="Try: sol enchant, genshin, night crows" autocomplete="off">
+            <input id="gameSearchInput" class="search-input" type="text" placeholder="Try: sol enchant, com.goh.daya.ydonline, night crows" autocomplete="off">
             <button class="search-button" type="submit">Search</button>
             <button id="clearSearchButton" class="ghost-button" type="button">Clear</button>
         </form>
-        <p class="search-helper">搜索逻辑会先找 Google Play 最佳匹配，再补充其他渠道。这个版本不需要你额外配置 Google 付费 API；图标复制优先复制图片本体，如果浏览器不支持，会自动回退成复制图标链接。</p>
-        <div class="example-row">
-            <button class="example-chip" type="button" data-example="sol enchant">sol enchant</button>
-            <button class="example-chip" type="button" data-example="genshin impact">genshin impact</button>
-            <button class="example-chip" type="button" data-example="night crows">night crows</button>
-            <button class="example-chip" type="button" data-example="pokemon go">pokemon go</button>
-        </div>
+        <details class="fold-panel">
+            <summary class="fold-summary">Search Tips</summary>
+            <div class="fold-body">
+                <p class="search-helper">搜索逻辑会先找 Google Play 最佳匹配，再补充其他渠道。现在也支持直接输入包名，例如 <code>com.goh.daya.ydonline</code>。图标复制优先复制图片本体，如果浏览器不支持，会自动回退成复制图标链接。</p>
+                <div class="example-row">
+                    <button class="example-chip" type="button" data-example="sol enchant">sol enchant</button>
+                    <button class="example-chip" type="button" data-example="genshin impact">genshin impact</button>
+                    <button class="example-chip" type="button" data-example="night crows">night crows</button>
+                    <button class="example-chip" type="button" data-example="pokemon go">pokemon go</button>
+                </div>
+            </div>
+        </details>
     </section>
 
-    <section class="search-result-panel">
+    <section id="searchResultPanel" class="search-result-panel">
         <div id="searchStatus" class="status-box info">Ready. Enter a game name to search.</div>
         <div id="resultMeta" class="result-meta">The API route for this page is <code>/api/game-search?q=...</code>.</div>
         <div id="resultMount" class="empty-state">Search results will appear here.</div>
     </section>
 
-    <section class="search-note-panel">
-        <div class="note-grid">
-            <article class="note-card">
-                <h3>Cloudflare Setup</h3>
-                <ul>
-                    <li>Build command: <code>mkdocs build</code></li>
-                    <li>Build output: <code>site</code></li>
-                    <li>Functions directory: <code>functions/</code></li>
-                </ul>
-            </article>
-            <article class="note-card">
-                <h3>Required Env Vars</h3>
-                <ul>
-                    <li>No extra env vars needed for basic search</li>
-                    <li><code>PYTHON_VERSION</code> is only used for MkDocs build</li>
-                </ul>
-            </article>
-            <article class="note-card">
-                <h3>How It Works</h3>
-                <p>Google Play comes from direct web search parsing. App Store comes from Apple iTunes Search API. TapTap and APKPure are best-effort supplemental channel entries.</p>
-            </article>
+    <details class="search-note-panel fold-panel">
+        <summary class="fold-summary">More Info</summary>
+        <div class="fold-body">
+            <div class="note-grid">
+                <article class="note-card">
+                    <h3>Cloudflare Setup</h3>
+                    <ul>
+                        <li>Build command: <code>mkdocs build</code></li>
+                        <li>Build output: <code>site</code></li>
+                        <li>Functions directory: <code>functions/</code></li>
+                    </ul>
+                </article>
+                <article class="note-card">
+                    <h3>Required Env Vars</h3>
+                    <ul>
+                        <li>No extra env vars needed for basic search</li>
+                        <li><code>PYTHON_VERSION</code> is only used for MkDocs build</li>
+                    </ul>
+                </article>
+                <article class="note-card">
+                    <h3>How It Works</h3>
+                    <p>Google Play comes from direct web search parsing. App Store comes from Apple iTunes Search API. TapTap and APKPure are best-effort supplemental channel entries.</p>
+                </article>
+            </div>
         </div>
-    </section>
+    </details>
 </div>
 <div id="feedbackToast" class="feedback-toast" aria-live="polite"></div>
 
@@ -897,6 +964,7 @@ const clearSearchButton = document.getElementById("clearSearchButton");
 const searchStatus = document.getElementById("searchStatus");
 const resultMeta = document.getElementById("resultMeta");
 const resultMount = document.getElementById("resultMount");
+const resultPanel = document.getElementById("searchResultPanel");
 const feedbackToast = document.getElementById("feedbackToast");
 const exampleChips = Array.from(document.querySelectorAll("[data-example]"));
 let currentResult = null;
@@ -960,12 +1028,26 @@ function setEmptyState(message) {
 
 function updateQueryString(query) {
     const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.delete("q");
     if (query) {
-        nextUrl.searchParams.set("q", query);
+        nextUrl.searchParams.set("game", query);
     } else {
-        nextUrl.searchParams.delete("q");
+        nextUrl.searchParams.delete("game");
     }
     window.history.replaceState({}, "", nextUrl.toString());
+}
+
+function scrollToResults() {
+    if (!resultPanel) {
+        return;
+    }
+
+    window.requestAnimationFrame(() => {
+        resultPanel.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
 }
 
 async function copyText(value, successMessage, button) {
@@ -973,6 +1055,72 @@ async function copyText(value, successMessage, button) {
     setStatus("ok", successMessage);
     showToast(successMessage);
     flashButton(button);
+}
+
+async function copyTextWithLabel(value, successMessage, button, label) {
+    await navigator.clipboard.writeText(value);
+    setStatus("ok", successMessage);
+    showToast(successMessage);
+    flashButton(button, label);
+}
+
+async function convertBlobToPng(blob) {
+    if (!blob) {
+        throw new Error("Image blob is unavailable.");
+    }
+
+    if (blob.type === "image/png") {
+        return blob;
+    }
+
+    const drawToCanvas = async (drawImage) => {
+        const canvas = document.createElement("canvas");
+        canvas.width = drawImage.width;
+        canvas.height = drawImage.height;
+
+        const context = canvas.getContext("2d");
+        if (!context) {
+            throw new Error("Canvas 2D context is unavailable.");
+        }
+
+        context.drawImage(drawImage, 0, 0);
+
+        return await new Promise((resolve, reject) => {
+            canvas.toBlob((pngBlob) => {
+                if (pngBlob) {
+                    resolve(pngBlob);
+                    return;
+                }
+
+                reject(new Error("PNG conversion failed."));
+            }, "image/png");
+        });
+    };
+
+    if (typeof createImageBitmap === "function") {
+        const bitmap = await createImageBitmap(blob);
+        try {
+            return await drawToCanvas(bitmap);
+        } finally {
+            if (typeof bitmap.close === "function") {
+                bitmap.close();
+            }
+        }
+    }
+
+    const objectUrl = URL.createObjectURL(blob);
+    try {
+        const image = await new Promise((resolve, reject) => {
+            const element = new Image();
+            element.onload = () => resolve(element);
+            element.onerror = () => reject(new Error("Image decode failed."));
+            element.src = objectUrl;
+        });
+
+        return await drawToCanvas(image);
+    } finally {
+        URL.revokeObjectURL(objectUrl);
+    }
 }
 
 async function copyImage(imageUrl, successMessage, fallbackMessage, button) {
@@ -987,17 +1135,17 @@ async function copyImage(imageUrl, successMessage, fallbackMessage, button) {
         }
 
         const blob = await response.blob();
+        const clipboardBlob = await convertBlobToPng(blob);
         await navigator.clipboard.write([
             new ClipboardItem({
-                [blob.type || "image/png"]: blob
+                "image/png": clipboardBlob
             })
         ]);
         setStatus("ok", successMessage);
         showToast(successMessage);
         flashButton(button);
     } catch (error) {
-        await copyText(imageUrl, fallbackMessage, button);
-        console.warn(error);
+        await copyTextWithLabel(imageUrl, fallbackMessage, button, "Link copied");
     }
 }
 
@@ -1020,7 +1168,7 @@ function renderResultCard(result) {
     resultMount.innerHTML = `
         <article class="result-card">
             <div class="result-top">
-                <img class="result-icon" src="${escapeHtml(result.icon || "")}" alt="${escapeHtml(result.title)} icon" referrerpolicy="no-referrer">
+                <img class="result-icon" src="${escapeHtml(result.icon || "")}" alt="${escapeHtml(result.title)} icon" referrerpolicy="no-referrer" onerror="this.alt='';this.classList.add('is-broken');">
                 <div>
                     <h2 class="result-title">${escapeHtml(result.title)}</h2>
                     <p class="result-subtitle">Best match for this search${result.matchSource ? ` · Source: ${escapeHtml(result.matchSource)}` : ""}</p>
@@ -1078,10 +1226,15 @@ async function runSearch(query) {
     resultMount.textContent = "Searching...";
 
     try {
-        const response = await fetch(`/api/game-search?q=${encodeURIComponent(trimmedQuery)}`, {
+        const requestUrl = new URL("/api/game-search", window.location.origin);
+        requestUrl.searchParams.set("q", trimmedQuery);
+        requestUrl.searchParams.set("_t", String(Date.now()));
+
+        const response = await fetch(requestUrl.toString(), {
             headers: {
                 "Accept": "application/json"
-            }
+            },
+            cache: "no-store"
         });
         const payload = await response.json();
 
@@ -1096,6 +1249,7 @@ async function runSearch(query) {
             resultMeta.textContent = "No aggregated result was found for this query.";
             setStatus("warn", payload.message || "No matching game was found.");
             setEmptyState("No matching game was found. Try another title or a more specific keyword.");
+            scrollToResults();
             return;
         }
 
@@ -1105,12 +1259,14 @@ async function runSearch(query) {
             : "Search completed.";
         setStatus("ok", payload.message || `Found a best match for "${trimmedQuery}".`);
         renderResultCard(payload.result);
+        scrollToResults();
     } catch (error) {
         currentResult = null;
         console.error(error);
         resultMeta.textContent = "The backend search route returned an error.";
         setStatus("error", error.message || "Search failed.");
         setEmptyState("Search failed. Please retry in a moment or check the Cloudflare function logs.");
+        scrollToResults();
     }
 }
 
@@ -1155,7 +1311,12 @@ resultMount.addEventListener("click", async (event) => {
                 showToast("This result does not include an icon.");
                 return;
             }
-            await copyImage(currentResult.icon, "Icon copied to clipboard.", "Icon link copied to clipboard.", trigger);
+            await copyImage(
+                currentResult.icon,
+                "Icon copied to clipboard.",
+                "The browser blocked direct image copy, so the icon link was copied instead.",
+                trigger
+            );
             return;
         }
 
@@ -1186,8 +1347,12 @@ resultMount.addEventListener("click", async (event) => {
     }
 });
 
-const initialQuery = new URLSearchParams(window.location.search).get("q") || "";
+const initialParams = new URLSearchParams(window.location.search);
+const initialQuery = initialParams.get("game") || initialParams.get("q") || "";
 if (initialQuery) {
+    if (initialParams.get("q")) {
+        updateQueryString(initialQuery);
+    }
     searchInput.value = initialQuery;
     runSearch(initialQuery);
 }

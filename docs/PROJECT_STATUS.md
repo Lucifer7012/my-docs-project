@@ -18,25 +18,29 @@
   - supports Standard and Promotion rates
   - enforces minimum 2 days remaining before upgrade
   - can merge upgraded target-device time with an existing target-device expiry time
+- Date Add Days Calculator:
+  - calculates a new datetime after adding a number of days to a starting datetime
+  - accepts `YYYY-MM-DD HH:MM:SS` input
+  - includes the example `2026-07-15 07:40:00 + 180 days = 2027-01-11 07:40:00`
 - Game Support page with a searchable compatibility list loaded from a dedicated JSON data file.
 
 ## Current Deployment State
 
 - Calculator source and generated site files are committed on `main`.
 - Calculator public site files are deployed to `gh-pages`.
-- Latest deployed calculator feature: merge upgraded target expiry with existing target expiry.
+- Latest calculator feature: Date Add Days Calculator.
 - Latest deployed support refactor: the support page now loads games from `docs/data/supported-games.json` in source and `data/supported-games.json` in the published site.
 - Latest support list change: added `MIR4`.
-- Latest related commits:
-  - `dec36a9` on `main` - refactor game support data source
-  - `794ae37` on `gh-pages` - deploy game support JSON data source
+- Latest related work:
+  - source page: `docs/date-add-days.md`
+  - generated page: `site/date-add-days/index.html`
 - Project maintenance docs are stored in `docs/` but excluded from the public MkDocs site build.
 
 ## Known Local State
 
 - The supported games list now lives in `docs/data/supported-games.json`.
 - `docs/support.md` now contains only the page UI and search logic.
-- No unrelated local project changes are expected after the latest support-page deployment.
+- The Date Add Days Calculator source now lives in `docs/date-add-days.md`.
 
 ## Maintenance Rules
 

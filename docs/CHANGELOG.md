@@ -4,6 +4,21 @@ This file records feature changes, fixes, verification, and deployment notes for
 
 Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
+## 2026-07-09
+
+### Added
+
+- Added a new `Date Add Days Calculator` page at `docs/date-add-days.md`.
+- Added a simple datetime tool that calculates the result after adding a number of days to a starting datetime.
+- Pre-filled the page with the example `2026-07-15 07:40:00 + 180 days = 2027-01-11 07:40:00`.
+- Added the new calculator page to the MkDocs navigation and homepage quick links.
+
+### Verification
+
+- Confirmed by calculation that `2026-07-15 07:40:00 + 180 days` returns `2027-01-11 07:40:00`.
+- Rebuilt the MkDocs site so the generated page is available at `site/date-add-days/index.html`.
+- Confirmed the generated site contains the new page title `Date Add Days Calculator`.
+
 ## 2026-07-06
 
 ### Changed
