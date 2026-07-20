@@ -56,6 +56,7 @@
   - package-name search support
   - cache-reduction headers and request timestamping
   - replacement of screenshot-derived icons with public icon sources
+  - expanded curated Vietnam martial-arts/MMORPG mappings for local-title searches
 - Project maintenance docs are stored in `docs/` but excluded from the public MkDocs site build.
 
 ## Known Local State
@@ -67,6 +68,7 @@
 - The live search backend lives in `functions/api/game-search.js`.
 - Curated search aliases, package matches, and region overrides live in `functions/data/curated-game-overrides.js`.
 - Cache rules for the Game Search page live in `docs/_headers`.
+- The curated override list now includes additional Vietnam hot-game aliases such as `Kiem Chi Giang Ho: Khai Thien`, `Tan Thien Long Mobile`, `Thien Long Bat Bo VNG`, and `Giang Ho: Bat Phai Phan Tranh`.
 
 ## Maintenance Rules
 

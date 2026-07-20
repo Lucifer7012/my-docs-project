@@ -114,6 +114,50 @@
         ]
     },
     {
+        title: "Tân Thiên Long Mobile",
+        packageName: "com.gs2.ttl3dmb",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.gs2.ttl3dmb&hl=vi&gl=VN",
+        googlePlayNote: "Package: com.gs2.ttl3dmb (Vietnam version)",
+        summary: "Official Vietnam listing for Tân Thiên Long Mobile.",
+        aliases: [
+            "tân thiên long mobile",
+            "tan thien long mobile",
+            "ttlm",
+            "com.gs2.ttl3dmb"
+        ]
+    },
+    {
+        title: "Thiên Long Bát Bộ VNG",
+        packageName: "vng.games.thienlong.tlbb3d.kiemhiep",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=vng.games.thienlong.tlbb3d.kiemhiep&hl=vi&gl=VN",
+        googlePlayNote: "Package: vng.games.thienlong.tlbb3d.kiemhiep (Vietnam version)",
+        summary: "Official Vietnam listing for Thiên Long Bát Bộ VNG.",
+        aliases: [
+            "thiên long bát bộ vng",
+            "thien long bat bo vng",
+            "thiên long bát bộ",
+            "thien long bat bo",
+            "tlbb vng",
+            "vng.games.thienlong.tlbb3d.kiemhiep"
+        ]
+    },
+    {
+        title: "Thiên Long Bát Bộ 2 - VNG",
+        packageName: "vng.games.thienlong.kiemhiep3d.mobile",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=vng.games.thienlong.kiemhiep3d.mobile&hl=vi&gl=VN",
+        googlePlayNote: "Package: vng.games.thienlong.kiemhiep3d.mobile (Vietnam version)",
+        summary: "Official Vietnam listing for Thiên Long Bát Bộ 2 - VNG.",
+        aliases: [
+            "thiên long bát bộ 2",
+            "thien long bat bo 2",
+            "thiên long bát bộ 2 vng",
+            "thien long bat bo 2 vng",
+            "tlbb2",
+            "tlbb 2",
+            "vng.games.thienlong.kiemhiep3d.mobile"
+        ]
+    },
+    {
         title: "Garena Li\u00ean Qu\u00e2n Mobile",
         packageName: "com.garena.game.kgvn",
         aliases: [
@@ -130,6 +174,48 @@
                 packageName: "com.levelinfinite.sgameGlobal",
                 url: "https://play.google.com/store/apps/details?id=com.levelinfinite.sgameGlobal&hl=en_US&gl=US"
             }
+        ]
+    },
+    {
+        title: "Giang Hồ: Bát Phái Phân Tranh",
+        packageName: "com.vtcmobile.ghbp",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.vtcmobile.ghbp&hl=vi&gl=VN",
+        googlePlayNote: "Package: com.vtcmobile.ghbp (Vietnam version)",
+        summary: "Official Vietnam listing for Giang Hồ: Bát Phái Phân Tranh.",
+        aliases: [
+            "giang hồ bát phái phân tranh",
+            "giang ho bat phai phan tranh",
+            "giang hồ",
+            "giang ho",
+            "com.vtcmobile.ghbp"
+        ]
+    },
+    {
+        title: "Nhất Kiếm Giang Hồ Mobile",
+        packageName: "vn.funtap.nhatkiemgiangho",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=vn.funtap.nhatkiemgiangho&hl=vi&gl=VN",
+        googlePlayNote: "Package: vn.funtap.nhatkiemgiangho (Vietnam version)",
+        summary: "Official Vietnam listing for Nhất Kiếm Giang Hồ Mobile.",
+        aliases: [
+            "nhất kiếm giang hồ mobile",
+            "nhat kiem giang ho mobile",
+            "nhất kiếm giang hồ",
+            "nhat kiem giang ho",
+            "vn.funtap.nhatkiemgiangho"
+        ]
+    },
+    {
+        title: "Giang Hồ Kỳ Ngộ - Vplay",
+        packageName: "vn.vplay.batluongnhan.t030a",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=vn.vplay.batluongnhan.t030a&hl=vi&gl=VN",
+        googlePlayNote: "Package: vn.vplay.batluongnhan.t030a (Vietnam version)",
+        summary: "Official Vietnam listing for Giang Hồ Kỳ Ngộ - Vplay.",
+        aliases: [
+            "giang hồ kỳ ngộ",
+            "giang ho ky ngo",
+            "giang hồ kỳ ngộ vplay",
+            "giang ho ky ngo vplay",
+            "vn.vplay.batluongnhan.t030a"
         ]
     },
     {

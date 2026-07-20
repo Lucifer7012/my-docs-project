@@ -4,6 +4,31 @@ This file records feature changes, fixes, verification, and deployment notes for
 
 Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
+## 2026-07-20
+
+### Added
+
+- Added another batch of curated Vietnam martial-arts/MMORPG mappings for the Game Search Tool, including:
+  - `Kiem Chi Giang Ho: Khai Thien`
+  - `Tan Thien Long Mobile`
+  - `Thien Long Bat Bo VNG`
+  - `Thien Long Bat Bo 2 - VNG`
+  - `Giang Ho: Bat Phai Phan Tranh`
+  - `Nhat Kiem Giang Ho Mobile`
+  - `Giang Ho Ky Ngo - Vplay`
+
+### Verification
+
+- Confirmed local curated matching works for representative queries including:
+  - `Kiem Chi Giang Ho`
+  - `kiem chi giang ho`
+  - `Tan Thien Long Mobile`
+  - `Thien Long Bat Bo 2`
+  - `Nhat Kiem Giang Ho`
+  - `giang ho ky ngo`
+  - `com.xyvn.az`
+  - `com.vtcmobile.ghbp`
+
 ## 2026-07-09
 
 ### Added
@@ -19,8 +44,8 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 - Added curated mappings for frequently requested searches including:
   - `Pixel Heroes Idle`
   - `Rogue with the Dead`
-  - `ONE PIECE バウンティラッシュ`
-  - `ARES / 阿瑞斯 : 命運的選擇者`
+  - `ONE PIECE Bounty Rush`
+  - `ARES / Ares TW`
   - `TOSM Extreme / Tree of Savior M: Extreme`
 
 ### Verification
@@ -28,21 +53,10 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 - Confirmed by calculation that `2026-07-15 07:40:00 + 180 days` returns `2027-01-11 07:40:00`.
 - Rebuilt the MkDocs site so the generated page is available at `site/date-add-days/index.html`.
 - Confirmed the generated site contains the new page title `Date Add Days Calculator`.
-- Rebuilt the MkDocs site with the GitHub Pages navigation limited to four visible pages:
-  - `Rate Table`
-  - `Upgrade Calculator`
-  - `Date Add Days Calculator`
-  - `Game Support`
-- Confirmed the generated GitHub Pages HTML no longer shows `Game Search Tool` in `site/index.html` and `site/support/index.html`.
-
-### Commits
-
-- `a3280de` - Add date add days calculator page
-- `e5d3491` - Deploy date add days calculator
 - Confirmed the live API returns curated results for:
   - `Pixel Heroes Idle`
   - `com.ztogames.ppki`
-  - `阿瑞斯: 命運的選擇者`
+  - `Ares TW / Chinese-region title`
   - `Tree of Savior M: Extreme`
 - Confirmed direct package-name lookup returns the expected curated package match instead of a loose Google Play fallback.
 
@@ -88,11 +102,11 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
 - Updated the Game Support data list:
   - removed `Free fire`
-  - added `Pokémon Champions`
+  - added `Pokemon Champions`
 
 ### Verification
 
-- Confirmed `docs/data/supported-games.json` and `site/data/supported-games.json` now contain `Pokémon Champions`.
+- Confirmed `docs/data/supported-games.json` and `site/data/supported-games.json` now contain `Pokemon Champions`.
 - Confirmed neither file contains `Free fire`.
 
 ## 2026-06-25
@@ -116,6 +130,27 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
 - `dec36a9` - Refactor game support data source
 - `794ae37` - Deploy game support JSON data source
+
+## 2026-05-27
+
+### Added
+
+- Added supported games to the Game Support compatibility list:
+  - `Let's Go Legends`
+  - `Zeny Classic`
+  - `rasalas`
+  - `Royale`
+
+### Verification
+
+- Confirmed the supported games array syntax is valid.
+- Rebuilt the MkDocs site so the generated support page and search index include the updated game list.
+- Excluded project maintenance records from the public MkDocs build with `exclude_docs`.
+
+### Commits
+
+- `4c7dc7c` - Update supported games list
+- `615644b` - Deploy supported games update
 
 ## 2026-05-20
 
@@ -155,24 +190,3 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 - `96686bd` - Deploy calculator expiry mode
 - `53182fd` - Add target expiry merge calculator
 - `3a451ee` - Deploy target expiry merge calculator
-
-## 2026-05-27
-
-### Added
-
-- Added supported games to the Game Support compatibility list:
-  - `Let's Go Legends(레츠고레전드)`
-  - `Zeny Classic`
-  - `rasalas/라살라스`
-  - `Royale`
-
-### Verification
-
-- Confirmed the supported games array syntax is valid.
-- Rebuilt the MkDocs site so the generated support page and search index include the updated game list.
-- Excluded project maintenance records from the public MkDocs build with `exclude_docs`.
-
-### Commits
-
-- `4c7dc7c` - Update supported games list
-- `615644b` - Deploy supported games update
