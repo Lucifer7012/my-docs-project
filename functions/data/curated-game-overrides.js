@@ -332,6 +332,24 @@
         ]
     },
     {
+        title: "Ki\u1EBFm Ch\u1EC9 Giang H\u1ED3: Khai Thi\u00EAn",
+        packageName: "com.xyvn.az",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.xyvn.az&hl=vi&gl=VN",
+        googlePlayNote: "Package: com.xyvn.az (Vietnam version)",
+        appStoreUrl: "https://apps.apple.com/vn/app/ki%E1%BA%BFm-ch%E1%BB%89-giang-h%E1%BB%93-khai-thi%C3%AAn/id6761166974",
+        appStoreNote: "Vietnam App Store",
+        summary: "Official Vietnam listing for Ki\u1EBFm Ch\u1EC9 Giang H\u1ED3: Khai Thi\u00EAn.",
+        aliases: [
+            "ki\u1ebfm ch\u1ec9 giang h\u1ed3",
+            "ki\u1ebfm ch\u1ec9 giang h\u1ed3 khai thi\u00ean",
+            "ki\u1ebfm chi giang h\u1ed3",
+            "ki\u1ebfm chi giang h\u1ed3 khai thi\u00ean",
+            "kiem chi giang ho",
+            "kiem chi giang ho khai thien",
+            "com.xyvn.az"
+        ]
+    },
+    {
         title: "\u963F\u745E\u65AF : \u547D\u904B\u7684\u9078\u64C7\u8005",
         packageName: "com.com2usholdings.arestw.android.google.tw.normal",
         officialSite: "https://www.theares.com.tw/",
