@@ -6,7 +6,7 @@
 - Local path: `C:\Users\OgCloud\Desktop\my-docs-project`
 - GitHub repository: `Lucifer7012/my-docs-project`
 - Primary public site: `https://my-docs-project.pages.dev/`
-- Legacy static site: `https://lucifer7012.github.io/my-docs-project/`
+- Legacy GitHub Pages redirect URL: `https://lucifer7012.github.io/my-docs-project/`
 - Source branch: `main`
 - GitHub Pages branch: `gh-pages`
 
@@ -36,7 +36,7 @@
 
 - Source docs, static assets, and Cloudflare Functions are committed on `main`.
 - The live Game Search Tool is deployed through Cloudflare Pages.
-- GitHub Pages remains available as a legacy static publishing target, but the live search API depends on Cloudflare Functions.
+- GitHub Pages now serves as a legacy redirect entry point to the Cloudflare Pages site instead of a separately maintained static copy.
 - Latest calculator feature: Date Add Days Calculator.
 - Latest deployed support refactor: the support page now loads games from `docs/data/supported-games.json` in source and `data/supported-games.json` in the published site.
 - Latest support list change: split the combined CookieRun entry into three separate titles and added `DK Mobile:Reborn`, `Albion Online - Sandbox MMORPG`, `Evil Sword`, `chaos world`, `CookieRun: OvenSmash`, `CookieRun Classic`, `SOL: enchant`, `Kingshot`, and `Whiteout Survival`.

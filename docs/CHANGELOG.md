@@ -23,12 +23,14 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
     - `SOL: enchant`
     - `Kingshot`
     - `Whiteout Survival`
+- Replaced the legacy GitHub Pages site behavior with redirect entry pages that send visitors to the primary Cloudflare Pages site at `https://my-docs-project.pages.dev/`.
 
 ### Verification
 
 - Confirmed `docs/data/supported-games.json` and `site/data/supported-games.json` both contain the three separate CookieRun titles.
 - Confirmed both files contain all nine newly added supported games.
 - Confirmed neither file still contains the old combined CookieRun entry.
+- Confirmed the legacy GitHub Pages URLs now use redirect pages so old links can forward to the matching `pages.dev` route.
 
 ## 2026-07-20
 
