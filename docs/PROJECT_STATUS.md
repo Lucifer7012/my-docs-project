@@ -39,7 +39,7 @@
 - GitHub Pages remains available as a legacy static publishing target, but the live search API depends on Cloudflare Functions.
 - Latest calculator feature: Date Add Days Calculator.
 - Latest deployed support refactor: the support page now loads games from `docs/data/supported-games.json` in source and `data/supported-games.json` in the published site.
-- Latest support list change: added `MIR4`.
+- Latest support list change: split the combined CookieRun entry into three separate titles and added `DK Mobile:Reborn`, `Albion Online - Sandbox MMORPG`, `Evil Sword`, `chaos world`, `CookieRun: OvenSmash`, `CookieRun Classic`, `SOL: enchant`, `Kingshot`, and `Whiteout Survival`.
 - Latest related work:
   - source page: `docs/date-add-days.md`
   - generated page: `site/date-add-days/index.html`

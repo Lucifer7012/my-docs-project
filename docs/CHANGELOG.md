@@ -4,6 +4,32 @@ This file records feature changes, fixes, verification, and deployment notes for
 
 Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
+## 2026-07-21
+
+### Changed
+
+- Updated the Game Support compatibility list:
+  - split the combined CookieRun entry into:
+    - `CookieRun India: Party Game`
+    - `Cookierun：tower of adventures`
+    - `Cookie Run: Kingdom`
+  - added:
+    - `DK Mobile:Reborn`
+    - `Albion Online - Sandbox MMORPG`
+    - `Evil Sword`
+    - `chaos world`
+    - `CookieRun: OvenSmash`
+    - `CookieRun Classic`
+    - `SOL: enchant`
+    - `Kingshot`
+    - `Whiteout Survival`
+
+### Verification
+
+- Confirmed `docs/data/supported-games.json` and `site/data/supported-games.json` both contain the three separate CookieRun titles.
+- Confirmed both files contain all nine newly added supported games.
+- Confirmed neither file still contains the old combined CookieRun entry.
+
 ## 2026-07-20
 
 ### Added
