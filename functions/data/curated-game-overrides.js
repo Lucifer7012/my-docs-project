@@ -219,6 +219,28 @@
         ]
     },
     {
+        title: "MU LOK",
+        packageName: "com.worldmuonline.worldmu",
+        officialSite: "https://memu.gmvnn.com/",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.worldmuonline.worldmu&hl=vi&gl=VN",
+        googlePlayNote: "Package: com.worldmuonline.worldmu (visibility may vary by region)",
+        channels: [
+            {
+                name: "APKPure",
+                url: "https://apkpure.com/mu-lok/com.worldmuonline.worldmu",
+                note: "APKPure listing"
+            }
+        ],
+        summary: "Vietnam-published MU LOK listing associated with GMVNN and the memu.gmvnn.com site.",
+        aliases: [
+            "mu lok",
+            "mulok",
+            "memu.gmvnn.com",
+            "gmvnn mu lok",
+            "com.worldmuonline.worldmu"
+        ]
+    },
+    {
         title: "Free Fire Thailand",
         packageName: "com.dts.freefireth",
         aliases: [
