@@ -222,8 +222,8 @@
         title: "MU LOK",
         packageName: "com.worldmuonline.worldmu",
         officialSite: "https://memu.gmvnn.com/",
+        hideGooglePlay: true,
         googlePlayUrl: "https://play.google.com/store/apps/details?id=com.worldmuonline.worldmu&hl=vi&gl=VN",
-        googlePlayNote: "Package: com.worldmuonline.worldmu (visibility may vary by region)",
         channels: [
             {
                 name: "APKPure",
