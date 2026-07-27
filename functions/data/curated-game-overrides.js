@@ -219,6 +219,24 @@
         ]
     },
     {
+        title: "CookieRun India: Party Game",
+        packageName: "com.krafton.crci",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.krafton.crci&hl=en_US&gl=US",
+        googlePlayNote: "Package: com.krafton.crci",
+        icon: "https://play-lh.googleusercontent.com/G1ACkY2Q_oF3Bj_dBlUns2seAOm9WMxG1H6FuFuOFthQl9a8GuUgZzUWQJrUa-hK1ltL2HemC5N8m3pueSfanmQ",
+        summary: "Join the Cookie Party Run! Play the sweetest online running game",
+        skipPlayMetadata: true,
+        aliases: [
+            "cookierun india",
+            "cookierun india party game",
+            "cookie run india",
+            "cookie run india party game",
+            "cookierun india: party game",
+            "cookie run india: party game",
+            "com.krafton.crci"
+        ]
+    },
+    {
         title: "MU LOK",
         packageName: "com.worldmuonline.worldmu",
         officialSite: "https://memu.gmvnn.com/",
