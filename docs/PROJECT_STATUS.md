@@ -39,7 +39,7 @@
 - GitHub Pages now serves as a legacy redirect entry point to the Cloudflare Pages site instead of a separately maintained static copy.
 - Latest calculator feature: Date Add Days Calculator.
 - Latest deployed support refactor: the support page now loads games from `docs/data/supported-games.json` in source and `data/supported-games.json` in the published site.
-- Latest support list change: split the combined CookieRun entry into three separate titles and added `DK Mobile:Reborn`, `Albion Online - Sandbox MMORPG`, `Evil Sword`, `chaos world`, `CookieRun: OvenSmash`, `CookieRun Classic`, `SOL: enchant`, `Kingshot`, and `Whiteout Survival`.
+- Latest support list change: renamed `Three Kingdoms All-star : Idle` to `Three Kingdoms All-Star : RPG`.
 - Latest related work:
   - source page: `docs/date-add-days.md`
   - generated page: `site/date-add-days/index.html`
