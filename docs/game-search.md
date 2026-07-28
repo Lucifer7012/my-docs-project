@@ -1,5 +1,7 @@
 # Game Search Tool
 
+<!-- search-page-refresh: 2026-07-28 -->
+
 <style>
     .search-shell {
         --ink: #172033;
