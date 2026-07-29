@@ -4,6 +4,16 @@ This file records feature changes, fixes, verification, and deployment notes for
 
 Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
+## 2026-07-29
+
+### Changed
+
+- Added `SoulGuardians 2 PLUS - GranAge` to the Game Support compatibility list.
+
+### Verification
+
+- Confirmed `docs/data/supported-games.json` and `site/data/supported-games.json` both contain `SoulGuardians 2 PLUS - GranAge`.
+
 ## 2026-07-27
 
 ### Changed
