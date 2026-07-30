@@ -37,21 +37,6 @@
         ]
     },
     {
-        title: "WOM: Chaos",
-        packageName: "com.womonline.chaosl",
-        officialSite: "https://mu.world/",
-        appStoreUrl: "https://mu.world/ios/",
-        appStoreNote: "Official iOS page",
-        aliases: [
-            "world of miracle",
-            "wom",
-            "wom chaos",
-            "world of miracle chaos",
-            "mu.world",
-            "com.womonline.chaosl"
-        ]
-    },
-    {
         title: "Roblox VN",
         packageName: "com.roblox.client.vnggames",
         aliases: [
