@@ -4,6 +4,20 @@ This file records feature changes, fixes, verification, and deployment notes for
 
 Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
+## 2026-07-30
+
+### Fixed
+
+- Added a curated global `Roblox` mapping so searching `roblox` no longer depends on a live Google Play search response.
+- Changed the Game Search backend so Google Play search `429` and temporary `5xx` responses degrade gracefully instead of returning a full-page search error.
+
+### Verification
+
+- Confirmed the curated override list now includes:
+  - `Roblox`
+  - package `com.roblox.client`
+- Confirmed the backend no longer throws an error immediately when the Google Play search endpoint responds with `429`.
+
 ## 2026-07-29
 
 ### Changed

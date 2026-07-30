@@ -19,6 +19,24 @@
         ]
     },
     {
+        title: "Roblox",
+        packageName: "com.roblox.client",
+        officialSite: "https://www.roblox.com/mobile",
+        appStoreUrl: "https://apps.apple.com/us/app/roblox/id431946152",
+        appStoreNote: "Official iOS page",
+        aliases: [
+            "roblox",
+            "com.roblox.client"
+        ],
+        related: [
+            {
+                title: "Roblox VN",
+                packageName: "com.roblox.client.vnggames",
+                url: "https://play.google.com/store/apps/details?id=com.roblox.client.vnggames&hl=vi&gl=VN"
+            }
+        ]
+    },
+    {
         title: "Roblox VN",
         packageName: "com.roblox.client.vnggames",
         aliases: [

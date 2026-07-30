@@ -254,6 +254,10 @@ async function searchGooglePlayCandidates(query) {
         });
 
         if (!response.ok) {
+            if (response.status === 429 || response.status >= 500) {
+                continue;
+            }
+
             throw new Error(`Google Play search request failed: ${response.status}`);
         }
 

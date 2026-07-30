@@ -57,6 +57,8 @@
   - cache-reduction headers and request timestamping
   - replacement of screenshot-derived icons with public icon sources
   - expanded curated Vietnam martial-arts/MMORPG mappings for local-title searches
+  - curated global `Roblox` fallback to avoid live Play-search failures on the plain `roblox` query
+  - graceful fallback when Google Play search returns `429` or temporary `5xx` errors
 - Project maintenance docs are stored in `docs/` but excluded from the public MkDocs site build.
 
 ## Known Local State
@@ -69,6 +71,7 @@
 - Curated search aliases, package matches, and region overrides live in `functions/data/curated-game-overrides.js`.
 - Cache rules for the Game Search page live in `docs/_headers`.
 - The curated override list now includes additional Vietnam hot-game aliases such as `Kiem Chi Giang Ho: Khai Thien`, `Tan Thien Long Mobile`, `Thien Long Bat Bo VNG`, and `Giang Ho: Bat Phai Phan Tranh`.
+- The curated override list now also includes a stable global `Roblox` entry for `com.roblox.client`.
 
 ## Maintenance Rules
 
