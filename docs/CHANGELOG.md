@@ -10,12 +10,16 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
 - Added a curated global `Roblox` mapping so searching `roblox` no longer depends on a live Google Play search response.
 - Changed the Game Search backend so Google Play search `429` and temporary `5xx` responses degrade gracefully instead of returning a full-page search error.
+- Added a curated `WOM: Chaos` / `World of Miracle` mapping so searches like `world of miracle`, `wom`, and `com.womonline.chaosl` no longer drift to unrelated `miracle` app results.
 
 ### Verification
 
 - Confirmed the curated override list now includes:
   - `Roblox`
   - package `com.roblox.client`
+- Confirmed the curated override list now includes:
+  - `WOM: Chaos`
+  - package `com.womonline.chaosl`
 - Confirmed the backend no longer throws an error immediately when the Google Play search endpoint responds with `429`.
 
 ## 2026-07-29

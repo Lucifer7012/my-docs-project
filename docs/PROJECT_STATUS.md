@@ -59,6 +59,7 @@
   - expanded curated Vietnam martial-arts/MMORPG mappings for local-title searches
   - curated global `Roblox` fallback to avoid live Play-search failures on the plain `roblox` query
   - graceful fallback when Google Play search returns `429` or temporary `5xx` errors
+  - curated `WOM: Chaos` alias mapping so `world of miracle` and `wom` resolve to `com.womonline.chaosl` instead of unrelated `miracle` apps
 - Project maintenance docs are stored in `docs/` but excluded from the public MkDocs site build.
 
 ## Known Local State
@@ -72,6 +73,7 @@
 - Cache rules for the Game Search page live in `docs/_headers`.
 - The curated override list now includes additional Vietnam hot-game aliases such as `Kiem Chi Giang Ho: Khai Thien`, `Tan Thien Long Mobile`, `Thien Long Bat Bo VNG`, and `Giang Ho: Bat Phai Phan Tranh`.
 - The curated override list now also includes a stable global `Roblox` entry for `com.roblox.client`.
+- The curated override list now also includes `WOM: Chaos` with aliases for `World of Miracle`, `WOM`, and package `com.womonline.chaosl`.
 
 ## Maintenance Rules
 
