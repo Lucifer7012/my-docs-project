@@ -1,5 +1,7 @@
 import { CURATED_GAME_OVERRIDES } from "../data/curated-game-overrides.js";
 
+// Deployment marker: 2026-08-05 rasalas refresh
+
 const GOOGLE_PLAY_HOST = "play.google.com";
 const APPLE_SEARCH_URL = "https://itunes.apple.com/search";
 
