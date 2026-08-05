@@ -55,6 +55,50 @@
         ]
     },
     {
+        title: "Rasalas",
+        packageName: "com.lepor.aos.rasalas.asean",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.lepor.aos.rasalas.asean&hl=en_US&gl=US",
+        googlePlayNote: "Package: com.lepor.aos.rasalas.asean (Global version)",
+        officialSite: "https://rasalas.game.onstove.com/",
+        icon: "https://play-lh.googleusercontent.com/GVCDmGSDayA5_XGGXMh_k6I83m8CBHgCqmAYPDYeeNfb0cGliG-1oUF-1y96z23kmxIMNV-fqWTJlhVpFZVW1Q",
+        summary: "Global Rasalas MMORPG listing by Lepor Games Co.,Ltd.",
+        skipPlayMetadata: true,
+        aliases: [
+            "rasalas",
+            "com.lepor.aos.rasalas.asean"
+        ],
+        related: [
+            {
+                title: "라살라스",
+                packageName: "com.itoxi.aos.rasalas",
+                url: "https://play.google.com/store/apps/details?id=com.itoxi.aos.rasalas&hl=ko&gl=KR"
+            }
+        ]
+    },
+    {
+        title: "라살라스",
+        packageName: "com.itoxi.aos.rasalas",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.itoxi.aos.rasalas&hl=ko&gl=KR",
+        googlePlayNote: "Package: com.itoxi.aos.rasalas (Korean version)",
+        officialSite: "https://www.rasalaskr.com/",
+        icon: "https://play-lh.googleusercontent.com/J3aMqYNaJtn1PO957dUw4L6_9vu8OTlm3izJnQPP0p_szLy4r_GSOFuiDTAqiRLtKMr1v-fF3pRtjjkLFNZp",
+        summary: "Korean Rasalas MMORPG listing by Playworks. Corporation.",
+        skipPlayMetadata: true,
+        aliases: [
+            "라살라스",
+            "rasalas kr",
+            "rasalas korea",
+            "com.itoxi.aos.rasalas"
+        ],
+        related: [
+            {
+                title: "Rasalas",
+                packageName: "com.lepor.aos.rasalas.asean",
+                url: "https://play.google.com/store/apps/details?id=com.lepor.aos.rasalas.asean&hl=en_US&gl=US"
+            }
+        ]
+    },
+    {
         title: "PUBG Mobile VN",
         packageName: "com.vng.pubgmobile",
         aliases: [

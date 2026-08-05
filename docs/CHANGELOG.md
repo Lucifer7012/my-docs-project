@@ -4,6 +4,19 @@ This file records feature changes, fixes, verification, and deployment notes for
 
 Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
+## 2026-08-05
+
+### Fixed
+
+- Added curated `Rasalas` and `라살라스` mappings so both names resolve to their intended Google Play packages instead of failing live lookup.
+- Hardened the Game Search backend so network-level fetch failures against Google Play, DuckDuckGo, or the App Store degrade gracefully instead of returning a `500` error.
+
+### Verification
+
+- Confirmed `rasalas` resolves to `Rasalas` with package `com.lepor.aos.rasalas.asean`.
+- Confirmed `라살라스` resolves to `라살라스` with package `com.itoxi.aos.rasalas`.
+- Confirmed a missing query now returns a no-result response instead of `fetch failed`.
+
 ## 2026-07-30
 
 ### Fixed

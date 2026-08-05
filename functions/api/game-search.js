@@ -247,11 +247,17 @@ async function searchGooglePlayCandidates(query) {
 
     for (const searchTerm of buildSearchQueryVariants(query)) {
         const searchUrl = `https://${GOOGLE_PLAY_HOST}/store/search?q=${encodeURIComponent(searchTerm)}&c=apps&hl=en_US&gl=US`;
-        const response = await fetch(searchUrl, {
-            headers: {
-                "accept-language": "en-US,en;q=0.9"
-            }
-        });
+        let response;
+
+        try {
+            response = await fetch(searchUrl, {
+                headers: {
+                    "accept-language": "en-US,en;q=0.9"
+                }
+            });
+        } catch {
+            continue;
+        }
 
         if (!response.ok) {
             if (response.status === 429 || response.status >= 500) {
@@ -308,12 +314,18 @@ async function searchWebDiscoveredPlayPackageIds(query) {
 
     for (const searchTerm of buildSearchQueryVariants(query)) {
         const webSearchUrl = `https://duckduckgo.com/html/?q=${encodeURIComponent(searchTerm)}`;
-        const response = await fetch(webSearchUrl, {
-            headers: {
-                "accept-language": "en-US,en;q=0.9",
-                "user-agent": "Mozilla/5.0"
-            }
-        });
+        let response;
+
+        try {
+            response = await fetch(webSearchUrl, {
+                headers: {
+                    "accept-language": "en-US,en;q=0.9",
+                    "user-agent": "Mozilla/5.0"
+                }
+            });
+        } catch {
+            continue;
+        }
 
         if (!response.ok) {
             continue;
@@ -486,11 +498,17 @@ async function resolveBestGooglePlayResult(query, candidates) {
 }
 
 async function fetchPlayMetadata(playUrl) {
-    const response = await fetch(playUrl, {
-        headers: {
-            "accept-language": "en-US,en;q=0.9"
-        }
-    });
+    let response;
+
+    try {
+        response = await fetch(playUrl, {
+            headers: {
+                "accept-language": "en-US,en;q=0.9"
+            }
+        });
+    } catch {
+        return {};
+    }
 
     if (!response.ok) {
         return {};
@@ -514,11 +532,17 @@ async function searchAppStore(query) {
     requestUrl.searchParams.set("country", "us");
     requestUrl.searchParams.set("limit", "5");
 
-    const response = await fetch(requestUrl.toString(), {
-        headers: {
-            "Accept": "application/json"
-        }
-    });
+    let response;
+
+    try {
+        response = await fetch(requestUrl.toString(), {
+            headers: {
+                "Accept": "application/json"
+            }
+        });
+    } catch {
+        return null;
+    }
 
     if (!response.ok) {
         return null;
