@@ -76,6 +76,10 @@
 - The curated override list now also includes a stable global `Roblox` entry for `com.roblox.client`.
 - The curated override list now also includes `Rasalas` (`com.lepor.aos.rasalas.asean`) and `라살라스` (`com.itoxi.aos.rasalas`).
 
+### Latest Follow-up
+
+- Added `카발RED` (`com.estgames.cabalr.kr.ls`) as a Korean-title-only curated mapping.
+
 ## Maintenance Rules
 
 - For every future project change, update:

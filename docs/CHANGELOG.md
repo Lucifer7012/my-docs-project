@@ -17,6 +17,14 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 - Confirmed `라살라스` resolves to `라살라스` with package `com.itoxi.aos.rasalas`.
 - Confirmed a missing query now returns a no-result response instead of `fetch failed`.
 
+### Follow-up
+
+- Limited the `카발RED` mapping to the Korean title only, while keeping package `com.estgames.cabalr.kr.ls`.
+
+### Follow-up Verification
+
+- Confirmed `카발RED` resolves to package `com.estgames.cabalr.kr.ls`.
+
 ## 2026-07-30
 
 ### Fixed

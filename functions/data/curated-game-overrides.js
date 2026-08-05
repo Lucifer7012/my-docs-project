@@ -821,6 +821,30 @@
         ]
     },
     {
+        title: "카발RED",
+        packageName: "com.estgames.cabalr.kr.ls",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.estgames.cabalr.kr.ls&hl=ko&gl=KR",
+        googlePlayNote: "Package: com.estgames.cabalr.kr.ls (Korean version)",
+        aliases: [
+            "카발red",
+            "카발 red",
+            "카발RED",
+            "com.estgames.cabalr.kr.ls"
+        ],
+        related: [
+            {
+                title: "Cabal: Infinite Combo (SEA)",
+                packageName: "com.estgames.cm.sa",
+                url: "https://play.google.com/store/apps/details?id=com.estgames.cm.sa&hl=en_US&gl=US"
+            },
+            {
+                title: "Cabal : Infinite Combo",
+                packageName: "com.estgames.cm.tha",
+                url: "https://play.google.com/store/apps/details?id=com.estgames.cm.tha&hl=en_US&gl=US"
+            }
+        ]
+    },
+    {
         title: "Fate/Grand Order",
         packageName: "com.aniplex.fategrandorder",
         aliases: [
