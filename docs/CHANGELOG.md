@@ -4,6 +4,17 @@ This file records feature changes, fixes, verification, and deployment notes for
 
 Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
+## 2026-08-13
+
+### Fixed
+
+- Added a curated Thailand title mapping for package `com.thedragons.and` so the full game title now resolves the same result as package-name search.
+
+### Verification
+
+- Confirmed `com.thedragons.and` resolves to package `com.thedragons.and`.
+- Confirmed the full Thailand title resolves to the same curated result instead of falling back to no match.
+
 ## 2026-08-05
 
 ### Fixed

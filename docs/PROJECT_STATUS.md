@@ -80,6 +80,10 @@
 
 - Added `카발RED` (`com.estgames.cabalr.kr.ls`) as a Korean-title-only curated mapping.
 
+### Latest Follow-up
+
+- Added `เทียนหลง Origin - ปลุกยุทธภพ` (`com.thedragons.and`) so title search and package search return the same game.
+
 ## Maintenance Rules
 
 - For every future project change, update:

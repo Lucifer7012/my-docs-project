@@ -176,6 +176,24 @@
         ]
     },
     {
+        title: "เทียนหลง Origin - ปลุกยุทธภพ",
+        packageName: "com.thedragons.and",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.thedragons.and&hl=th&gl=TH",
+        googlePlayNote: "Package: com.thedragons.and (Thailand version)",
+        officialSite: "https://thedragons.9ring.com/",
+        appStoreUrl: "https://apps.apple.com/th/app/%E0%B9%80%E0%B8%97-%E0%B8%A2%E0%B8%99%E0%B8%AB%E0%B8%A5%E0%B8%87-origin-%E0%B8%9B%E0%B8%A5-%E0%B8%81%E0%B8%A2-%E0%B8%97%E0%B8%98%E0%B8%A0%E0%B8%9E/id6770785598?l=th",
+        appStoreNote: "Thailand App Store",
+        summary: "Thailand mobile MMORPG release for Tian Long Origin by 9RING.",
+        skipPlayMetadata: true,
+        aliases: [
+            "เทียนหลง origin - ปลุกยุทธภพ",
+            "เทียนหลง origin",
+            "ปลุกยุทธภพ",
+            "thedragons",
+            "com.thedragons.and"
+        ]
+    },
+    {
         title: "Tân Thiên Long Mobile",
         packageName: "com.gs2.ttl3dmb",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=com.gs2.ttl3dmb&hl=vi&gl=VN",
