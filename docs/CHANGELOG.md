@@ -9,11 +9,13 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 ### Fixed
 
 - Added a curated Thailand title mapping for package `com.thedragons.and` so the full game title now resolves the same result as package-name search.
+- Cleaned up the Game Search page by keeping the useful initial `?game=` search handling while removing accidental mojibake text.
 
 ### Verification
 
 - Confirmed `com.thedragons.and` resolves to package `com.thedragons.and`.
 - Confirmed the full Thailand title resolves to the same curated result instead of falling back to no match.
+- Confirmed the Game Search page no longer contains the accidental mojibake strings from the earlier local edit.
 
 ## 2026-08-05
 

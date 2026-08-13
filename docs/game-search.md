@@ -543,7 +543,7 @@
         <details class="fold-panel">
             <summary class="fold-summary">Search Tips</summary>
             <div class="fold-body">
-                <p class="search-helper">搜索逻辑会先找 Google Play 最佳匹配，再补充其他渠道。现在也支持直接输入包名，例如 <code>com.goh.daya.ydonline</code>。图标复制优先复制图片本体，如果浏览器不支持，会自动回退成复制图标链接。</p>
+                <p class="search-helper">Search checks curated aliases and package names first, then falls back to Google Play and other channels. You can also enter a package name directly, for example <code>com.goh.daya.ydonline</code>. Icon copy tries to copy the image first, then falls back to the icon link if the browser blocks image copy.</p>
                 <div class="example-row">
                     <button class="example-chip" type="button" data-example="sol enchant">sol enchant</button>
                     <button class="example-chip" type="button" data-example="genshin impact">genshin impact</button>
@@ -979,13 +979,34 @@ resultMount.addEventListener("click", async (event) => {
     }
 });
 
+function normalizeInitialQuery(query) {
+    return String(query || "")
+        .replace(/\+/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+async function runInitialSearch(query) {
+    const normalizedQuery = normalizeInitialQuery(query);
+    if (!normalizedQuery) {
+        return;
+    }
+
+    searchInput.value = normalizedQuery;
+    await runSearch(normalizedQuery);
+
+    if (!currentResult && normalizedQuery !== query) {
+        searchInput.value = query;
+        await runSearch(query);
+    }
+}
+
 const initialParams = new URLSearchParams(window.location.search);
 const initialQuery = initialParams.get("game") || initialParams.get("q") || "";
 if (initialQuery) {
     if (initialParams.get("q")) {
         updateQueryString(initialQuery);
     }
-    searchInput.value = initialQuery;
-    runSearch(initialQuery);
+runInitialSearch(initialQuery);
 }
 </script>
