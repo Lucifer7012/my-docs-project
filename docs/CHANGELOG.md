@@ -4,18 +4,36 @@ This file records feature changes, fixes, verification, and deployment notes for
 
 Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
+## 2026-09-09
+
+### Added
+
+- Added a curated Thailand mapping for `กระบี่เย้ยยุทธจักร3` / `Swordsman 3` with package `com.expup.swordsman3th`.
+- Added title, package, Google Play, and official-site support for this mapping.
+
+### Fixed
+
+- Cleaned localized Google Play title suffixes such as `- แอปพลิเคชันใน Google Play` from displayed result titles.
+
+### Verification
+
+- Confirmed `กระบี่เย้ยยุทธจักร3`, `Swordsman 3`, and `com.expup.swordsman3th` all return package `com.expup.swordsman3th`.
+- Confirmed `node --check functions/api/game-search.js` passes.
+
 ## 2026-08-13
 
 ### Fixed
 
 - Added a curated Thailand title mapping for package `com.thedragons.and` so the full game title now resolves the same result as package-name search.
 - Cleaned up the Game Search page by keeping the useful initial `?game=` search handling while removing accidental mojibake text.
+- Added a curated Thailand title mapping for `กระบี่เย้ยยุทธจักร3` / `Swordsman 3` with package `com.expup.swordsman3th`.
 
 ### Verification
 
 - Confirmed `com.thedragons.and` resolves to package `com.thedragons.and`.
 - Confirmed the full Thailand title resolves to the same curated result instead of falling back to no match.
 - Confirmed the Game Search page no longer contains the accidental mojibake strings from the earlier local edit.
+- Confirmed `กระบี่เย้ยยุทธจักร3`, `Swordsman 3`, and `com.expup.swordsman3th` resolve to the same curated result.
 
 ## 2026-08-05
 

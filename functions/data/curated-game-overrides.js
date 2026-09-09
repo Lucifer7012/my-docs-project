@@ -194,6 +194,23 @@
         ]
     },
     {
+        title: "กระบี่เย้ยยุทธจักร3",
+        packageName: "com.expup.swordsman3th",
+        googlePlayUrl: "https://play.google.com/store/apps/details?id=com.expup.swordsman3th&hl=th&gl=TH",
+        googlePlayNote: "Package: com.expup.swordsman3th (Thailand version)",
+        officialSite: "https://swordsman3.com/",
+        summary: "Thailand mobile martial-arts MMORPG release by EXP UP COMPANY LIMITED.",
+        aliases: [
+            "กระบี่เย้ยยุทธจักร3",
+            "กระบี่เย้ยยุทธจักร 3",
+            "swordsman 3",
+            "swordsman3",
+            "swordsman 3 th",
+            "swordsman3 th",
+            "com.expup.swordsman3th"
+        ]
+    },
+    {
         title: "Tân Thiên Long Mobile",
         packageName: "com.gs2.ttl3dmb",
         googlePlayUrl: "https://play.google.com/store/apps/details?id=com.gs2.ttl3dmb&hl=vi&gl=VN",

@@ -584,7 +584,7 @@ function readMetaContent(html, attrName, attrValue) {
 
 function cleanPlayTitle(value) {
     return String(value || "")
-        .replace(/\s*-\s*(Apps on Google Play|Google Play 앱|Google Play \S+)\s*$/i, "")
+        .replace(/\s*-\s*(Apps on Google Play|Google Play 앱|Google Play \S+|[^-]{0,120}Google Play)\s*$/iu, "")
         .trim();
 }
 

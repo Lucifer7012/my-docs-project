@@ -84,6 +84,11 @@
 
 - Added `เทียนหลง Origin - ปลุกยุทธภพ` (`com.thedragons.and`) so title search and package search return the same game.
 
+### Latest Search Mapping
+
+- Added `กระบี่เย้ยยุทธจักร3` / `Swordsman 3` with package `com.expup.swordsman3th`.
+- Added localized Google Play title suffix cleanup for cleaner result titles.
+
 ## Maintenance Rules
 
 - For every future project change, update:
