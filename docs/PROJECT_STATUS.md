@@ -77,6 +77,7 @@
 - The curated override list now also includes `Rasalas` (`com.lepor.aos.rasalas.asean`) and `라살라스` (`com.itoxi.aos.rasalas`).
 - Live fallback search now checks multiple Play markets and requires title, package, description, or an explicit regional signal before accepting a result.
 - Package lookup keeps a direct Google Play URL for delisted or region-hidden packages and only uses archive metadata when the archive URL contains the same package.
+- External store and archive requests use bounded timeouts; package archive discovery runs in parallel to keep unavailable listings responsive.
 
 ### Latest Follow-up
 

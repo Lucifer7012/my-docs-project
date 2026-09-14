@@ -13,12 +13,14 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 - Kept the Google Play package URL available for package searches even when the listing is unavailable in every checked region.
 - Required archive search results to match the requested package before using their title or icon metadata.
 - Tightened curated alias matching so short or embedded words do not accidentally select another curated game.
+- Added bounded external fetches and parallel archive discovery so package searches do not hang on unavailable stores.
 
 ### Verification
 
 - Confirmed `카발RED`, `Swordsman 3`, `กระบี่เย้ยยุทธจักร3`, `เทียนหลง Origin - ปลุกยุทธภพ`, `poring-rush`, `com.ztogames.ppki`, `com.ntori.tsmoriginth`, `RagnarokVReturns`, and `ROBLOX` still resolve correctly.
 - Confirmed `FGO` no longer resolves to the unrelated `FGA` package.
 - Confirmed `node --check functions/api/game-search.js` and `git diff --check` pass.
+- Confirmed an unavailable package lookup returns in about two seconds locally instead of approaching the previous 30-second timeout.
 
 ## 2026-09-09
 

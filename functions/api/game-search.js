@@ -4,6 +4,7 @@ import { CURATED_GAME_OVERRIDES } from "../data/curated-game-overrides.js";
 
 const GOOGLE_PLAY_HOST = "play.google.com";
 const APPLE_SEARCH_URL = "https://itunes.apple.com/search";
+const EXTERNAL_FETCH_TIMEOUT_MS = 6000;
 
 // Play search is country-scoped. Search several markets so regional listings
 // are not hidden by the US result set.
@@ -367,7 +368,7 @@ async function fetchPlaySearchBatch({ locale, searchTerm }) {
     const searchUrl = `https://${GOOGLE_PLAY_HOST}/store/search?q=${encodeURIComponent(searchTerm)}&c=apps&hl=${encodeURIComponent(locale.hl)}&gl=${encodeURIComponent(locale.gl)}`;
 
     try {
-        const response = await fetch(searchUrl, {
+        const response = await fetchWithTimeout(searchUrl, {
             headers: {
                 "accept-language": `${locale.language},en;q=0.8`
             }
@@ -401,7 +402,7 @@ async function searchWebDiscoveredPlayPackageIds(query) {
         let response;
 
         try {
-            response = await fetch(webSearchUrl, {
+            response = await fetchWithTimeout(webSearchUrl, {
                 headers: {
                     "accept-language": "en-US,en;q=0.9",
                     "user-agent": "Mozilla/5.0"
@@ -648,7 +649,7 @@ async function fetchPlayMetadata(playUrl) {
     let response;
 
     try {
-        response = await fetch(playUrl, {
+        response = await fetchWithTimeout(playUrl, {
             headers: {
                 "accept-language": "en-US,en;q=0.9"
             }
@@ -676,8 +677,12 @@ async function fetchArchivePackageMetadata(packageName) {
         `https://www.appbrain.com/search?q=${encodeURIComponent(packageName)}`
     ]);
 
-    for (const searchTerm of [packageName, `site:apkpure.com ${packageName}`, `site:appbrain.com ${packageName}`]) {
-        const response = await fetchText(`https://duckduckgo.com/html/?q=${encodeURIComponent(searchTerm)}`);
+    const searchResponses = await Promise.all(
+        [packageName, `site:apkpure.com ${packageName}`, `site:appbrain.com ${packageName}`]
+            .map((searchTerm) => fetchText(`https://duckduckgo.com/html/?q=${encodeURIComponent(searchTerm)}`))
+    );
+
+    for (const response of searchResponses) {
         if (!response) {
             continue;
         }
@@ -774,7 +779,7 @@ async function fetchPageMetadata(url) {
 
 async function fetchText(url) {
     try {
-        const response = await fetch(url, {
+        const response = await fetchWithTimeout(url, {
             headers: {
                 "accept-language": "en-US,en;q=0.8",
                 "user-agent": "Mozilla/5.0"
@@ -783,6 +788,20 @@ async function fetchText(url) {
         return response.ok ? await response.text() : "";
     } catch {
         return "";
+    }
+}
+
+async function fetchWithTimeout(url, options = {}, timeoutMs = EXTERNAL_FETCH_TIMEOUT_MS) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+    try {
+        return await fetch(url, {
+            ...options,
+            signal: controller.signal
+        });
+    } finally {
+        clearTimeout(timeoutId);
     }
 }
 
@@ -827,7 +846,7 @@ async function searchAppStore(query, country = "US") {
     let response;
 
     try {
-        response = await fetch(requestUrl.toString(), {
+        response = await fetchWithTimeout(requestUrl.toString(), {
             headers: {
                 "Accept": "application/json"
             }
