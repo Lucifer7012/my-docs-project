@@ -75,10 +75,17 @@
 - The curated override list now includes additional Vietnam hot-game aliases such as `Kiem Chi Giang Ho: Khai Thien`, `Tan Thien Long Mobile`, `Thien Long Bat Bo VNG`, and `Giang Ho: Bat Phai Phan Tranh`.
 - The curated override list now also includes a stable global `Roblox` entry for `com.roblox.client`.
 - The curated override list now also includes `Rasalas` (`com.lepor.aos.rasalas.asean`) and `라살라스` (`com.itoxi.aos.rasalas`).
+- Live fallback search now checks multiple Play markets and requires title, package, description, or an explicit regional signal before accepting a result.
+- Package lookup keeps a direct Google Play URL for delisted or region-hidden packages and only uses archive metadata when the archive URL contains the same package.
 
 ### Latest Follow-up
 
 - Added `카발RED` (`com.estgames.cabalr.kr.ls`) as a Korean-title-only curated mapping.
+
+### Latest Search Reliability Fix
+
+- Removed rank-only acronym acceptance that could turn `FGO` into the unrelated `FGA` app.
+- Tightened curated alias containment matching and archive package verification.
 
 ### Latest Follow-up
 

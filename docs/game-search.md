@@ -260,6 +260,11 @@
         position: relative;
     }
 
+    .result-list {
+        display: grid;
+        gap: 16px;
+    }
+
     .result-card::before {
         background: linear-gradient(90deg, #0f62fe 0%, #06b6d4 100%);
         content: "";
@@ -600,6 +605,7 @@ const resultPanel = document.getElementById("searchResultPanel");
 const feedbackToast = document.getElementById("feedbackToast");
 const exampleChips = Array.from(document.querySelectorAll("[data-example]"));
 let currentResult = null;
+let currentResults = [];
 let toastTimer = null;
 
 function escapeHtml(value) {
@@ -781,7 +787,7 @@ async function copyImage(imageUrl, successMessage, fallbackMessage, button) {
     }
 }
 
-function renderResultCard(result) {
+function renderResultCardMarkup(result, resultIndex) {
     const summary = result.summary
         ? `<div class="summary-box">${escapeHtml(result.summary)}</div>`
         : "";
@@ -796,9 +802,8 @@ function renderResultCard(result) {
         `
         : "";
 
-    resultMount.className = "";
-    resultMount.innerHTML = `
-        <article class="result-card">
+    return `
+        <article class="result-card" data-result-index="${resultIndex}">
             <div class="result-top">
                 <img class="result-icon" src="${escapeHtml(result.icon || "")}" alt="${escapeHtml(result.title)} icon" referrerpolicy="no-referrer" onerror="this.alt='';this.classList.add('is-broken');">
                 <div>
@@ -840,11 +845,17 @@ function renderResultCard(result) {
     `;
 }
 
+function renderResultCards(results) {
+    resultMount.className = "result-list";
+    resultMount.innerHTML = results.map((result, index) => renderResultCardMarkup(result, index)).join("");
+}
+
 async function runSearch(query) {
     const trimmedQuery = query.trim();
 
     if (!trimmedQuery) {
         currentResult = null;
+        currentResults = [];
         updateQueryString("");
         resultMeta.textContent = "The API route for this page is /api/game-search?q=....";
         setStatus("info", "Ready. Enter a game name to search.");
@@ -878,6 +889,7 @@ async function runSearch(query) {
 
         if (!payload.result) {
             currentResult = null;
+            currentResults = [];
             resultMeta.textContent = "No aggregated result was found for this query.";
             setStatus("warn", payload.message || "No matching game was found.");
             setEmptyState("No matching game was found. Try another title or a more specific keyword.");
@@ -885,15 +897,19 @@ async function runSearch(query) {
             return;
         }
 
-        currentResult = payload.result;
+        currentResults = Array.isArray(payload.results) && payload.results.length
+            ? payload.results
+            : [payload.result];
+        currentResult = currentResults[0];
         resultMeta.textContent = payload.generatedAt
             ? `Updated at ${new Date(payload.generatedAt).toLocaleString()}`
             : "Search completed.";
         setStatus("ok", payload.message || `Found a best match for "${trimmedQuery}".`);
-        renderResultCard(payload.result);
+        renderResultCards(currentResults);
         scrollToResults();
     } catch (error) {
         currentResult = null;
+        currentResults = [];
         console.error(error);
         resultMeta.textContent = "The backend search route returned an error.";
         setStatus("error", error.message || "Search failed.");
@@ -926,25 +942,29 @@ resultMount.addEventListener("click", async (event) => {
         return;
     }
 
+    const resultCard = trigger.closest("[data-result-index]");
+    const resultIndex = resultCard ? Number(resultCard.dataset.resultIndex) : 0;
+    const selectedResult = currentResults[resultIndex] || currentResult;
+
     try {
         if (trigger.dataset.copy === "package") {
-            if (!currentResult.packageName) {
+            if (!selectedResult.packageName) {
                 setStatus("warn", "This result does not include a package name.");
                 showToast("This result does not include a package name.");
                 return;
             }
-            await copyText(currentResult.packageName, "Package name copied.", trigger);
+            await copyText(selectedResult.packageName, "Package name copied.", trigger);
             return;
         }
 
         if (trigger.dataset.copy === "icon") {
-            if (!currentResult.icon) {
+            if (!selectedResult.icon) {
                 setStatus("warn", "This result does not include an icon.");
                 showToast("This result does not include an icon.");
                 return;
             }
             await copyImage(
-                currentResult.icon,
+                selectedResult.icon,
                 "Icon copied to clipboard.",
                 "The browser blocked direct image copy, so the icon link was copied instead.",
                 trigger
@@ -953,18 +973,18 @@ resultMount.addEventListener("click", async (event) => {
         }
 
         if (trigger.dataset.copy === "icon-link") {
-            if (!currentResult.icon) {
+            if (!selectedResult.icon) {
                 setStatus("warn", "This result does not include an icon link.");
                 showToast("This result does not include an icon link.");
                 return;
             }
-            await copyText(currentResult.icon, "Icon link copied.", trigger);
+            await copyText(selectedResult.icon, "Icon link copied.", trigger);
             return;
         }
 
         if (trigger.dataset.copy === "channel") {
             const channelIndex = Number(trigger.dataset.channelIndex);
-            const channel = currentResult.channels[channelIndex];
+            const channel = selectedResult.channels[channelIndex];
             if (!channel) {
                 setStatus("warn", "This channel link is unavailable.");
                 showToast("This channel link is unavailable.");
