@@ -14,6 +14,7 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 - Required archive search results to match the requested package before using their title or icon metadata.
 - Tightened curated alias matching so short or embedded words do not accidentally select another curated game.
 - Added bounded external fetches and parallel archive discovery so package searches do not hang on unavailable stores.
+- Added a shorter timeout budget for package metadata, archive, and App Store fallbacks so unknown or delisted package searches return promptly.
 
 ### Verification
 
@@ -21,6 +22,7 @@ Do not record API keys, passwords, tokens, cookies, or other secrets here.
 - Confirmed `FGO` no longer resolves to the unrelated `FGA` package.
 - Confirmed `node --check functions/api/game-search.js` and `git diff --check` pass.
 - Confirmed an unavailable package lookup returns in about two seconds locally instead of approaching the previous 30-second timeout.
+- Confirmed the package lookup path remains responsive when `com.ntori.tsmoriginth` has no discoverable public metadata.
 
 ## 2026-09-09
 

@@ -78,6 +78,7 @@
 - Live fallback search now checks multiple Play markets and requires title, package, description, or an explicit regional signal before accepting a result.
 - Package lookup keeps a direct Google Play URL for delisted or region-hidden packages and only uses archive metadata when the archive URL contains the same package.
 - External store and archive requests use bounded timeouts; package archive discovery runs in parallel to keep unavailable listings responsive.
+- Package lookups use a shorter timeout budget than normal name searches so missing or delisted packages do not hold the page open.
 
 ### Latest Follow-up
 

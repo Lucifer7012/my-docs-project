@@ -5,6 +5,7 @@ import { CURATED_GAME_OVERRIDES } from "../data/curated-game-overrides.js";
 const GOOGLE_PLAY_HOST = "play.google.com";
 const APPLE_SEARCH_URL = "https://itunes.apple.com/search";
 const EXTERNAL_FETCH_TIMEOUT_MS = 6000;
+const PACKAGE_LOOKUP_TIMEOUT_MS = 2500;
 
 // Play search is country-scoped. Search several markets so regional listings
 // are not hidden by the US result set.
@@ -442,7 +443,7 @@ async function resolveDirectPackageLookup(packageName) {
         rankPlayLocales(packageName).map(async (locale) => ({
             locale,
             url: buildPlayDetailsUrl(packageName, locale),
-            metadata: await fetchPlayMetadata(buildPlayDetailsUrl(packageName, locale))
+            metadata: await fetchPlayMetadata(buildPlayDetailsUrl(packageName, locale), PACKAGE_LOOKUP_TIMEOUT_MS)
         }))
     );
     const playCandidate = packageCandidates.find((candidate) =>
@@ -457,7 +458,7 @@ async function resolveDirectPackageLookup(packageName) {
     // the user. Return an archive-backed or package-only result instead of
     // dropping the lookup completely.
 
-    const appStoreMatch = await searchAppStore(title, playCandidate?.locale?.gl || "US");
+    const appStoreMatch = await searchAppStore(title, playCandidate?.locale?.gl || "US", PACKAGE_LOOKUP_TIMEOUT_MS);
     const channels = dedupeChannels([
         {
             name: "Google Play",
@@ -645,7 +646,7 @@ async function resolveGooglePlayResults(query, candidates) {
     return unique;
 }
 
-async function fetchPlayMetadata(playUrl) {
+async function fetchPlayMetadata(playUrl, timeoutMs = EXTERNAL_FETCH_TIMEOUT_MS) {
     let response;
 
     try {
@@ -653,7 +654,7 @@ async function fetchPlayMetadata(playUrl) {
             headers: {
                 "accept-language": "en-US,en;q=0.9"
             }
-        });
+        }, timeoutMs);
     } catch {
         return {};
     }
@@ -679,7 +680,7 @@ async function fetchArchivePackageMetadata(packageName) {
 
     const searchResponses = await Promise.all(
         [packageName, `site:apkpure.com ${packageName}`, `site:appbrain.com ${packageName}`]
-            .map((searchTerm) => fetchText(`https://duckduckgo.com/html/?q=${encodeURIComponent(searchTerm)}`))
+            .map((searchTerm) => fetchText(`https://duckduckgo.com/html/?q=${encodeURIComponent(searchTerm)}`, PACKAGE_LOOKUP_TIMEOUT_MS))
     );
 
     for (const response of searchResponses) {
@@ -696,7 +697,7 @@ async function fetchArchivePackageMetadata(packageName) {
 
     const pages = await Promise.all([...urls].slice(0, 6).map(async (url) => ({
         url,
-        metadata: await fetchPageMetadata(url)
+        metadata: await fetchPageMetadata(url, PACKAGE_LOOKUP_TIMEOUT_MS)
     })));
     const match = pages.find((page) =>
         isArchiveUrlForPackage(page.url, packageName) &&
@@ -760,8 +761,8 @@ async function searchArchiveResults(query) {
     return matches.slice(0, 5);
 }
 
-async function fetchPageMetadata(url) {
-    const html = await fetchText(url);
+async function fetchPageMetadata(url, timeoutMs = EXTERNAL_FETCH_TIMEOUT_MS) {
+    const html = await fetchText(url, timeoutMs);
     if (!html) {
         return {};
     }
@@ -777,14 +778,14 @@ async function fetchPageMetadata(url) {
     };
 }
 
-async function fetchText(url) {
+async function fetchText(url, timeoutMs = EXTERNAL_FETCH_TIMEOUT_MS) {
     try {
         const response = await fetchWithTimeout(url, {
             headers: {
                 "accept-language": "en-US,en;q=0.8",
                 "user-agent": "Mozilla/5.0"
             }
-        });
+        }, timeoutMs);
         return response.ok ? await response.text() : "";
     } catch {
         return "";
@@ -834,7 +835,7 @@ function readHtmlTitle(html) {
     return match ? decodeHtml(match[1]).replace(/\s+/g, " ").trim() : "";
 }
 
-async function searchAppStore(query, country = "US") {
+async function searchAppStore(query, country = "US", timeoutMs = EXTERNAL_FETCH_TIMEOUT_MS) {
     const queryTokens = normalizeText(query).split(" ").filter(Boolean);
     const significantTokens = queryTokens.filter((token) => !GENERIC_SEARCH_TOKENS.has(token));
     const requestUrl = new URL(APPLE_SEARCH_URL);
@@ -850,7 +851,7 @@ async function searchAppStore(query, country = "US") {
             headers: {
                 "Accept": "application/json"
             }
-        });
+        }, timeoutMs);
     } catch {
         return null;
     }
