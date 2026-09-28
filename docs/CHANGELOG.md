@@ -4,6 +4,18 @@ This file records feature changes, fixes, verification, and deployment notes for
 
 Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
+## 2026-09-28
+
+### Changed
+
+- Updated the Game Support compatibility list with the latest supplied game names.
+- Consolidated the Night Crows entries so all variants are listed together.
+- Removed duplicate list entries while preserving the requested display names.
+
+### Verification
+
+- Confirmed `docs/data/supported-games.json` and `site/data/supported-games.json` contain the same 91-game list.
+
 ## 2026-09-14
 
 ### Fixed
