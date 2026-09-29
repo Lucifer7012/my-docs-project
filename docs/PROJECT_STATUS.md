@@ -86,6 +86,8 @@
 
 ### Latest Search Reliability Fix
 
+- Name-search archive results now retain a Google Play package link with unverified-availability wording and correctly show their archive source (2026-09-29).
+- Archive channel regressions can be run with `node --test tests/game-search-archive.test.mjs`.
 - Removed rank-only acronym acceptance that could turn `FGO` into the unrelated `FGA` app.
 - Tightened curated alias containment matching and archive package verification.
 

@@ -4,6 +4,20 @@ This file records feature changes, fixes, verification, and deployment notes for
 
 Do not record API keys, passwords, tokens, cookies, or other secrets here.
 
+## 2026-09-29
+
+### Fixed
+
+- Added the Google Play package link to name-search archive results while retaining the archive listing. Generated links explicitly mark store availability as unverified.
+- Corrected archive result provenance so third-party metadata is no longer labeled as Google Play Web Search.
+
+### Verification
+
+- Confirmed `com.hybeim.architect` has accessible Google Play detail pages in KR and US, titled `Architect: Land of Exiles` / `아키텍트: 랜드 오브 엑자일`.
+- Passed three offline regressions covering archive fallback with no Play candidates, archive fallback after candidate rejection, and a live Play result without duplicate links.
+- Passed `node --check functions/api/game-search.js`.
+- A live full-title search returned no result during diagnosis; archive discovery remains dependent on upstream search availability. This change fixes channel construction when an archive result is returned.
+
 ## 2026-09-28
 
 ### Changed

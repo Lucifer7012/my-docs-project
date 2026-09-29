@@ -224,7 +224,15 @@ export async function onRequestGet(context) {
 
 function buildLiveResult(entry) {
     const title = cleanPlayTitle(entry.title || entry.packageName);
+    const isArchiveResult = Boolean(entry.archiveUrl);
     const channels = dedupeChannels([
+        isArchiveResult && isLikelyPackageName(entry.packageName)
+            ? {
+                name: "Google Play",
+                url: buildPlayDetailsUrl(entry.packageName, entry.locale || PLAY_LOCALES[0]),
+                note: "Package link; availability on Google Play has not been verified."
+            }
+            : null,
         {
             name: entry.sourceName || "Google Play",
             url: entry.url,
@@ -263,7 +271,9 @@ function buildLiveResult(entry) {
         packageName: entry.packageName,
         icon: entry.icon || (entry.appStoreMatch ? entry.appStoreMatch.artworkUrl512 : null),
         summary: summarizeText(entry.description || ""),
-        matchSource: entry.locale ? `Google Play ${entry.locale.gl} Search` : "Google Play Web Search",
+        matchSource: isArchiveResult
+            ? entry.sourceName || "Archive Listing"
+            : entry.locale ? `Google Play ${entry.locale.gl} Search` : "Google Play Web Search",
         channels,
         related: entry.related || []
     };
